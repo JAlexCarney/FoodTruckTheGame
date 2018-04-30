@@ -79,50 +79,53 @@ Play.prototype = {
 		
 		// load divider
 		this.divider = this.add.sprite(0, 502, 'atlas', 'divider');
+		this.physics.arcade.enable(this.divider);
 		this.divider.enableBody = true;
+		this.divider.body.immovable = true;
 	},
 
 	update: function() {
 		// run game loop
 		// collide player two with Divide
-		leftHitDivider = game.physics.arcade.collide(this.leftPaw, this.divider);
-		rightHitDivider = game.physics.arcade.collide(this.rightPaw, this.divider);
+		var leftHitDivider = game.physics.arcade.collide(this.leftPaw, this.divider);
+		var rightHitDivider = game.physics.arcade.collide(this.rightPaw, this.divider);
+		var pawCollision = game.physics.arcade.collide(this.leftPaw, this.rightPaw);
 		// movement controls.
 			// left paw
 		if(game.input.keyboard.isDown(Phaser.Keyboard.W)){
 			this.leftPaw.body.velocity.y = -750;
-			console.log('moving Up!');
+			//console.log('moving Up!');
 		}else if(game.input.keyboard.isDown(Phaser.Keyboard.S)){
 			this.leftPaw.body.velocity.y = 750;
-			console.log('moving Down!');
+			//console.log('moving Down!');
 		}else{
 			this.leftPaw.body.velocity.y = 0;
 		}
 		if(game.input.keyboard.isDown(Phaser.Keyboard.A)){
 			this.leftPaw.body.velocity.x = -750;
-			console.log('moving Left!');
+			//console.log('moving Left!');
 		}else if(game.input.keyboard.isDown(Phaser.Keyboard.D)){
 			this.leftPaw.body.velocity.x = 750;
-			console.log('moving right!');
+			//console.log('moving right!');
 		}else{
 			this.leftPaw.body.velocity.x = 0;
 		}
 			// right paw
 		if(game.input.keyboard.isDown(Phaser.Keyboard.I)){
 			this.rightPaw.body.velocity.y = -750;
-			console.log('moving Up!');
+			//console.log('moving Up!');
 		}else if(game.input.keyboard.isDown(Phaser.Keyboard.K)){
 			this.rightPaw.body.velocity.y = 750;
-			console.log('moving Down!');
+			//console.log('moving Down!');
 		}else{
 			this.rightPaw.body.velocity.y = 0;
 		}
 		if(game.input.keyboard.isDown(Phaser.Keyboard.J)){
 			this.rightPaw.body.velocity.x = -750;
-			console.log('moving Left!');
+			//console.log('moving Left!');
 		}else if(game.input.keyboard.isDown(Phaser.Keyboard.L)){
 			this.rightPaw.body.velocity.x = 750;
-			console.log('moving right!');
+			//console.log('moving right!');
 		}else{
 			this.rightPaw.body.velocity.x = 0;
 		}
