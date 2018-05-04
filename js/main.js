@@ -57,12 +57,12 @@ Play.prototype = {
 		game.stage.backgroundColor = "#ffffff";
 		// add lower background
 		// load top
-		this.add.sprite(0, 0, 'atlas', 'backdrop');
-		customer = this.add.sprite(0, 0, 'atlas', 'customer');
+		//this.add.sprite(0, 0, 'atlas', 'backdrop');
+		customer = this.add.sprite(0, 0, 'atlas', 'customer_bird');
 		customer.scale.setTo(0.8,0.8);
 		this.add.sprite(200, 10, 'atlas', 'chatBubble');
 		this.add.sprite(0, 384, 'atlas', 'topCounter');
-		this.add.sprite(600, 50, 'atlas', '120 cash register');
+		this.add.sprite(600, 50, 'atlas', 'cashRegister');
 		// load bottom
 		this.add.sprite(0, 512, 'atlas', 'counter');
 		
