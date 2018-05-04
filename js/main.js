@@ -9,6 +9,8 @@ Boot.prototype = {
 		// load assets into cache
 			// load texture atlas
 		game.load.atlas('atlas', 'assets/img/spritesheet.png', 'assets/img/sprites.json');
+			// load menu backdrop
+		game.load.image('menuBackdrop', 'assets/img/menuBackdrop.png');
 	},
 	
 	create: function() {
@@ -30,11 +32,14 @@ Menu.prototype = {
 	
 	create: function() {
 		// place assets and initialize variables
+		game.add.image(0,0,'menuBackdrop');
 	},
 
 	update: function() {
 		// run game loop
-		game.state.start('Play');
+		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+			game.state.start('Play');
+		}
 	}
 }
 
@@ -56,7 +61,8 @@ Play.prototype = {
 		// add lower background
 		// load top
 		this.add.sprite(0, 0, 'atlas', 'backdrop');
-		this.add.sprite(0, 0, 'atlas', 'lizard');
+		customer = this.add.sprite(0, 0, 'atlas', 'customer');
+		customer.scale.setTo(0.8,0.8);
 		this.add.sprite(200, 10, 'atlas', 'chatBubble');
 		this.add.sprite(0, 384, 'atlas', 'topCounter');
 		this.add.sprite(600, 50, 'atlas', '120 cash register');
@@ -65,17 +71,28 @@ Play.prototype = {
 		
 		// create player 2's paws
 			// left paw
-		this.leftPaw = this.add.sprite(20, 640, 'atlas', '120 open paw');
-		this.leftPaw.anchor.x = 1;
-		this.leftPaw.scale.setTo(-1,1);
+		this.leftPaw = new Paw(game, true, 20,600);
+		game.add.existing(this.leftPaw);
+			//right Paw
+		this.rightPaw = new Paw(game, false, 720,600);
+		game.add.existing(this.rightPaw);
+		
+		
+			// left paw
+		/*this.leftPaw = this.add.sprite(20, 640, 'atlas', 'CookPawOpen');
 		this.leftPaw.enableBody = true;
 		game.physics.arcade.enable(this.leftPaw);
+		this.leftPaw.body.setSize(216, 236, 20, 20);
+		this.leftPaw.anchor.x = 1;
+		this.leftPaw.scale.setTo(-1,1);
 		this.leftPaw.body.collideWorldBounds = true;
 			// right paw
-		this.rightPaw = this.add.sprite(748, 640, 'atlas', '120 open paw');
+		this.rightPaw = this.add.sprite(748, 640, 'atlas', 'CookPawOpen');
 		this.rightPaw.enableBody = true;
 		this.physics.arcade.enable(this.rightPaw);
+		this.rightPaw.body.setSize(216, 236, 20, 20);
 		this.rightPaw.body.collideWorldBounds = true;
+		*/
 		
 		// load divider
 		this.divider = this.add.sprite(0, 502, 'atlas', 'divider');
@@ -85,51 +102,13 @@ Play.prototype = {
 	},
 
 	update: function() {
+		
 		// run game loop
 		// collide player two with Divide
 		var leftHitDivider = game.physics.arcade.collide(this.leftPaw, this.divider);
 		var rightHitDivider = game.physics.arcade.collide(this.rightPaw, this.divider);
 		var pawCollision = game.physics.arcade.collide(this.leftPaw, this.rightPaw);
-		// movement controls.
-			// left paw
-		if(game.input.keyboard.isDown(Phaser.Keyboard.W)){
-			this.leftPaw.body.velocity.y = -750;
-			//console.log('moving Up!');
-		}else if(game.input.keyboard.isDown(Phaser.Keyboard.S)){
-			this.leftPaw.body.velocity.y = 750;
-			//console.log('moving Down!');
-		}else{
-			this.leftPaw.body.velocity.y = 0;
-		}
-		if(game.input.keyboard.isDown(Phaser.Keyboard.A)){
-			this.leftPaw.body.velocity.x = -750;
-			//console.log('moving Left!');
-		}else if(game.input.keyboard.isDown(Phaser.Keyboard.D)){
-			this.leftPaw.body.velocity.x = 750;
-			//console.log('moving right!');
-		}else{
-			this.leftPaw.body.velocity.x = 0;
-		}
-			// right paw
-		if(game.input.keyboard.isDown(Phaser.Keyboard.I)){
-			this.rightPaw.body.velocity.y = -750;
-			//console.log('moving Up!');
-		}else if(game.input.keyboard.isDown(Phaser.Keyboard.K)){
-			this.rightPaw.body.velocity.y = 750;
-			//console.log('moving Down!');
-		}else{
-			this.rightPaw.body.velocity.y = 0;
-		}
-		if(game.input.keyboard.isDown(Phaser.Keyboard.J)){
-			this.rightPaw.body.velocity.x = -750;
-			//console.log('moving Left!');
-		}else if(game.input.keyboard.isDown(Phaser.Keyboard.L)){
-			this.rightPaw.body.velocity.x = 750;
-			//console.log('moving right!');
-		}else{
-			this.rightPaw.body.velocity.x = 0;
-		}
-
+	
 	}
 }
 
