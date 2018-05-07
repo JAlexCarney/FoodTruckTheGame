@@ -58,8 +58,8 @@ Play.prototype = {
 		// add lower background
 		// load top
 		//this.add.sprite(0, 0, 'atlas', 'backdrop');
-		customer = this.add.sprite(0, 0, 'atlas', 'customer_bird');
-		customer.scale.setTo(0.8,0.8);
+		customer = new Customer(game, game.rnd.integerInRange(0,3));
+		game.add.existing(customer);
 		this.add.sprite(200, 10, 'atlas', 'chatBubble');
 		this.add.sprite(0, 384, 'atlas', 'topCounter');
 		this.add.sprite(600, 50, 'atlas', 'cashRegister');
