@@ -2,7 +2,7 @@ var Paw = function (game, isLeftHand, x, y){
 	// call sprite constructor
 	Phaser.Sprite.call(this, game, x, y, 'atlas', 'CookPawOpen');
 	game.physics.enable(this, Phaser.Physics.ARCADE);
-	this.body.setSize(216, 236, 20, 20);
+	this.body.setSize(206, 226, 20, 30);
 	this.body.collideWorldBounds = true;
 
 	//give custom properties
@@ -62,5 +62,9 @@ Paw.prototype.update = function(){
 		}else{
 			this.body.velocity.x = 0;
 		}
+	}
+	// keep it on the bottum screen
+	if(this.y <= 490){
+		this.y = 490;
 	}
 }
