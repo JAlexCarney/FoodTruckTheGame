@@ -12,8 +12,24 @@ Play.prototype = {
 		// add lower background
 		// load top
 		//this.add.sprite(0, 0, 'atlas', 'backdrop');
-		customer = new Customer(game, game.rnd.integerInRange(0,3));
-		game.add.existing(customer);
+		var changeCustomer = function(){
+			//make sure the customer changes every time.
+			do{
+				this.customerType = game.rnd.integerInRange(0,3);
+				console.log(this.customerType + '' + this.customer.type)
+			}while(this.customerType == this.customer.type)
+			// remove the old customer
+			this.customer.kill();
+			// create a new customer
+			this.customer = new Customer(game, this.customerType);
+			game.add.existing(this.customer);	
+			this.customer.inputEnabled = true;
+			this.customer.events.onInputDown.add(changeCustomer, this);
+		}
+		this.customer = new Customer(game, game.rnd.integerInRange(0,3));
+		game.add.existing(this.customer);
+		this.customer.inputEnabled = true;
+		this.customer.events.onInputDown.add(changeCustomer, this);
 		this.txt = this.add.sprite(256, 0, 'atlas', 'TextBox');
 		this.txt.scale.setTo(2.5,1.5);
 		this.add.sprite(0, 384, 'atlas', 'topCounter');

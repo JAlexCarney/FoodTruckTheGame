@@ -7,7 +7,7 @@ Menu.prototype = {
 		var startGame = function(){
 			game.state.start('Play');
 		};
-		this.start = game.add.image( 250, 300,'atlas', 'button_start');
+		this.start = game.add.sprite( 250, 300,'atlas', 'button_start');
 		this.start.scale.setTo(.5,.5);
 		this.start.inputEnabled = true;
 		this.start.events.onInputDown.add(startGame, this);
