@@ -11,7 +11,7 @@ Play.prototype = {
 		game.stage.backgroundColor = "#ffffff";
 		// add lower background
 		// load top
-			//this.add.sprite(0, 0, 'atlas', 'backdrop');
+		this.add.sprite(0, 0, 'atlas', 'top screen');
 		var changeCustomer = function(){
 			//make sure the customer changes every time.
 			do{
@@ -55,10 +55,10 @@ Play.prototype = {
 		this.knife.anchor = new PIXI.Point(0.5, 0.5);
 			// create player 2's paws
 			// left paw
-		this.leftPaw = new Paw(game, true, 20,600);
+		this.leftPaw = new Paw(game, true, 20,800);
 		game.add.existing(this.leftPaw);
 			// right Paw
-		this.rightPaw = new Paw(game, false, 720,600);
+		this.rightPaw = new Paw(game, false, 720,800);
 		game.add.existing(this.rightPaw);
 		
 		// load divider
