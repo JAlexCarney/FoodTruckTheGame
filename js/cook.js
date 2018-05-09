@@ -7,7 +7,8 @@ var Paw = function (game, isLeftHand, x, y){
 	//this.scale.setTo(0.75);
 	this.alpha = 0.5;
 	this.anchor = new PIXI.Point(0.5, 0.5);
-
+	this.drag = 50;
+	
 	//give custom properties
 	this.isLeft = isLeftHand;
 	this.isHolding = false;
@@ -36,6 +37,10 @@ Paw.prototype.update = function(){
 		}else if(game.input.keyboard.isDown(Phaser.Keyboard.S)){
 			this.body.velocity.y = 750;
 			//console.log('moving Down!');
+		}else if(this.body.velocity.y > 0){
+			this.body.velocity.y -= this.drag;
+		}else if(this.body.velocity.y < 0){
+			this.body.velocity.y += this.drag;
 		}else{
 			this.body.velocity.y = 0;
 		}
@@ -45,22 +50,20 @@ Paw.prototype.update = function(){
 		}else if(game.input.keyboard.isDown(Phaser.Keyboard.D)){
 			this.body.velocity.x = 750;
 			//console.log('moving right!');
+		}else if(this.body.velocity.x > 0){
+			this.body.velocity.x -= this.drag;
+		}else if(this.body.velocity.x < 0){
+			this.body.velocity.x += this.drag;
 		}else{
 			this.body.velocity.x = 0;
 		}
 			// grabbing
-		if(game.input.keyboard.justPressed(Phaser.Keyboard.E)){
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.E) && this.isHolding === false && this.overlap){
 			this.loadTexture('atlas', 'CookPawClosed');
-			if(this.overlap){
-				console.log('grabed knife with left paw');	
-				this.isHolding = true;
-			}
-		}
-		if(game.input.keyboard.upDuration(Phaser.Keyboard.E)){
-			this.loadTexture('atlas', 'CookPawOpen');	
-			if(this.isHolding){
-				this.isHolding = false;
-			}
+			this.isHolding = true;
+		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.E)){
+			this.loadTexture('atlas', 'CookPawOpen');
+			this.isHolding = false;
 		}
 	// right paw
 	}else{
@@ -71,6 +74,10 @@ Paw.prototype.update = function(){
 		}else if(game.input.keyboard.isDown(Phaser.Keyboard.K) || game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
 			this.body.velocity.y = 750;
 			//console.log('moving Down!');
+		}else if(this.body.velocity.y > 0){
+			this.body.velocity.y -= this.drag;
+		}else if(this.body.velocity.y < 0){
+			this.body.velocity.y += this.drag;
 		}else{
 			this.body.velocity.y = 0;
 		}
@@ -80,26 +87,24 @@ Paw.prototype.update = function(){
 		}else if(game.input.keyboard.isDown(Phaser.Keyboard.L) || game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
 			this.body.velocity.x = 750;
 			//console.log('moving right!');
+		}else if(this.body.velocity.x > 0){
+			this.body.velocity.x -= this.drag;
+		}else if(this.body.velocity.x < 0){
+			this.body.velocity.x += this.drag;
 		}else{
 			this.body.velocity.x = 0;
 		}
 			//grabbing
-		if(game.input.keyboard.justPressed(Phaser.Keyboard.U)){
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.U) && this.isHolding === false && this.overlap){
 			this.loadTexture('atlas', 'CookPawClosed');
-			if(this.overlap){
-				console.log('grabed knife with right paw');
-				this.isHolding = true;
-			}
-		}
-		if(game.input.keyboard.upDuration(Phaser.Keyboard.U)){
+			this.isHolding = true;
+		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.U)){
 			this.loadTexture('atlas', 'CookPawOpen');
-			if(this.isHolding){
-				this.isHolding = false;
-			}
+			this.isHolding = false;
 		}
 	}
 	// keep it on the bottum screen
-	if(this.y <= 490){
-		this.y = 490;
+	if(this.y <= 620){
+		this.y = 620;
 	}
 }
