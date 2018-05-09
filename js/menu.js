@@ -13,7 +13,7 @@ Menu.prototype = {
 		this.start.events.onInputDown.add(startGame, this);
 		// place a button
 		var openControls = function(){
-			game.state.start('Play');
+			game.state.start('Controls');
 		};
 		this.controls = game.add.sprite( 450, 300,'atlas', 'button_controls');
 		this.controls.scale.setTo(.5,.5);
@@ -21,9 +21,9 @@ Menu.prototype = {
 		this.controls.events.onInputDown.add(openControls, this);
 		// place a button
 		var openOptions = function(){
-			game.state.start('Play');
+			game.state.start('Controls');
 		};
-		this.options = game.add.sprite( 650, 300,'atlas', 'button_options');
+		this.options = game.add.sprite( 650, 300,'atlas', 'button_controls');
 		this.options.scale.setTo(.5,.5);
 		this.options.inputEnabled = true;
 		this.options.events.onInputDown.add(openOptions, this);

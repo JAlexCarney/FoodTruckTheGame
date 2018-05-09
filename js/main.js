@@ -6,6 +6,7 @@ window.onload = function(){
 	game = new Phaser.Game(1024, 1024, Phaser.AUTO);
 	game.state.add('Boot', Boot);
 	game.state.add('Menu', Menu);
+	game.state.add('Controls', Controls);
 	game.state.add('Play', Play);
 	game.state.add('Over', Over);
 	game.state.start('Boot');
