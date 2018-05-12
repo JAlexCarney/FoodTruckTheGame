@@ -29,7 +29,7 @@ Menu.prototype = {
 		var openCredits = function(){
 			//play select noise upon clicking button
 			this.selectNoise.play('', 0, 1, false);
-			game.state.start('Controls');
+			game.state.start('Credits');
 		};
 		this.options = game.add.sprite( 700, 300,'atlas', 'button_credits');
 		this.options.inputEnabled = true;
