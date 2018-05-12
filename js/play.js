@@ -1,12 +1,12 @@
 var Play = function(game){};
 Play.prototype = {
-	
+
 	create: function() {
 		// place assets and initialize variables
 		
 		// enable physics
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		
+
 		// set appropriate background color
 		game.stage.backgroundColor = "#ffffff";
 		// add lower background
@@ -21,7 +21,7 @@ Play.prototype = {
 			this.customer.kill();
 			// create a new customer
 			this.customer = new Customer(game, this.customerType);
-			game.add.existing(this.customer);	
+			game.add.existing(this.customer);
 			this.customer.inputEnabled = true;
 			this.customer.events.onInputDown.add(changeCustomer, this);
 		}
@@ -29,7 +29,7 @@ Play.prototype = {
 		game.add.existing(this.customer);
 		this.customer.inputEnabled = true;
 		this.customer.events.onInputDown.add(changeCustomer, this);
-		
+
 			// create the speech bubble
 		this.txt = this.add.sprite(256, 0, 'atlas', 'TextBox');
 		this.txt.scale.setTo(2.5,1.5);
@@ -40,12 +40,12 @@ Play.prototype = {
 		this.order.setTextBounds(30, 10, 290, 374);
 		this.order.wordWrap = true;
 		this.order.wordWrapWidth = 290;
-		
+
 			// add the counter and register (currently decorative : P)
 		this.add.sprite(0, 384, 'atlas', 'topCounter');
 		this.add.sprite(600, 50, 'atlas', 'cashRegisterTempDisplay');
 		this.add.sprite(600, 50, 'atlas', 'cashRegister');
-		
+
 		// load bottom
 			// background
 		this.add.sprite(0, 512, 'atlas', 'counter');
@@ -60,15 +60,21 @@ Play.prototype = {
 			// right Paw
 		this.rightPaw = new Paw(game, false, 720,600);
 		game.add.existing(this.rightPaw);
-		
+
 		// load divider
 		this.divider = this.add.sprite(0, 502, 'atlas', 'divider');
 		this.physics.arcade.enable(this.divider);
 		this.divider.enableBody = true;
 		this.divider.body.immovable = true;
+
+    // add audio
+		this.ambientNoise = game.add.audio('ambientNoise');
 	},
 
 	update: function() {
+
+		//play ambient noise
+		this.ambientNoise.play('',0, .25, true);
 
 		// collide player two with Divide
 		var leftHitDivider = game.physics.arcade.collide(this.leftPaw, this.divider);
