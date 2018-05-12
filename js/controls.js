@@ -3,6 +3,9 @@ var Controls = function(game){};
 Controls.prototype = {
 	
 	create: function() {
+		//load UIselect noise
+		this.selectNoise = game.add.audio('select');
+		
 		//set background color of this stage to white
 		game.stage.backgroundColor = "#ffffff";
 		
@@ -15,17 +18,17 @@ Controls.prototype = {
 		
 		var openMenu = function(){
 			game.state.start('Menu');
+			this.selectNoise.play('', 0, 1, false);
 		};
-		this.controls = game.add.sprite(405, 150,'atlas', 'button_start');
-		this.controls.scale.setTo(.5,.5);
+		this.controls = game.add.sprite(405, 100,'atlas', 'button_menu');
 		this.controls.inputEnabled = true;
 		this.controls.events.onInputDown.add(openMenu, this);
 		
 		var openStart = function(){
 			game.state.start('Play');
+			this.selectNoise.play('', 0, 1, false);
 		};
-		this.controls = game.add.sprite(610, 150,'atlas', 'button_start');
-		this.controls.scale.setTo(.5,.5);
+		this.controls = game.add.sprite(710, 100,'atlas', 'button_play');
 		this.controls.inputEnabled = true;
 		this.controls.events.onInputDown.add(openStart, this);
 	

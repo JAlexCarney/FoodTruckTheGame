@@ -9,7 +9,22 @@ Play.prototype = {
 
 		// set appropriate background color
 		game.stage.backgroundColor = "#ffffff";
-		// add lower background
+		
+		// load bottom
+			// background
+		this.add.sprite(0, 512, 'atlas', 'counter');
+			// knife
+		this.knife = game.add.sprite(512, 700, 'atlas', 'knife');
+		game.physics.enable(this.knife, Phaser.Physics.ARCADE);
+		this.knife.anchor = new PIXI.Point(0.5, 0.5);
+			// create player 2's paws
+			// left paw
+		this.leftPaw = new Paw(game, true, 20,800);
+		game.add.existing(this.leftPaw);
+			// right Paw
+		this.rightPaw = new Paw(game, false, 720,800);
+		game.add.existing(this.rightPaw);
+
 		// load top
 		this.add.sprite(0, 0, 'atlas', 'top screen');
 		var changeCustomer = function(){
@@ -46,21 +61,6 @@ Play.prototype = {
 		this.add.sprite(600, 50, 'atlas', 'cashRegisterTempDisplay');
 		this.add.sprite(600, 50, 'atlas', 'cashRegister');
 
-		// load bottom
-			// background
-		this.add.sprite(0, 512, 'atlas', 'counter');
-			// knife
-		this.knife = game.add.sprite(512, 700, 'atlas', 'knife');
-		game.physics.enable(this.knife, Phaser.Physics.ARCADE);
-		this.knife.anchor = new PIXI.Point(0.5, 0.5);
-			// create player 2's paws
-			// left paw
-		this.leftPaw = new Paw(game, true, 20,800);
-		game.add.existing(this.leftPaw);
-			// right Paw
-		this.rightPaw = new Paw(game, false, 720,800);
-		game.add.existing(this.rightPaw);
-
 		// load divider
 		this.divider = this.add.sprite(0, 502, 'atlas', 'divider');
 		this.physics.arcade.enable(this.divider);
@@ -69,12 +69,13 @@ Play.prototype = {
 
     // add audio
 		this.ambientNoise = game.add.audio('ambientNoise');
+	//play ambient noise
+		this.ambientNoise.play('',0, .25, true);
 	},
 
 	update: function() {
 
-		//play ambient noise
-		this.ambientNoise.play('',0, .25, true);
+		
 
 		// collide player two with Divide
 		var leftHitDivider = game.physics.arcade.collide(this.leftPaw, this.divider);
