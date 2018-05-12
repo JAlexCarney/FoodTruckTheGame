@@ -13,6 +13,8 @@ var Paw = function (game, isLeftHand, x, y){
 	this.isLeft = isLeftHand;
 	this.isHolding = false;
 	this.overlap = false;
+	//load grab noise
+	this.grabNoise = game.add.audio('grab');
 	
 	if(isLeftHand){
 		this.anchor.x = 1;
@@ -25,7 +27,6 @@ var Paw = function (game, isLeftHand, x, y){
 Paw.prototype = Object.create(Phaser.Sprite.prototype);
 // since we used Object.create, we need to explicitly set the constructor
 Paw.prototype.constructor = Paw;
-
 Paw.prototype.update = function(){
 	// movement controls.
 		// left paw
@@ -60,6 +61,7 @@ Paw.prototype.update = function(){
 			// grabbing
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.E) && this.isHolding === false && this.overlap){
 			this.loadTexture('atlas', 'CookPawClosed');
+			this.grabNoise.play();
 			this.isHolding = true;
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.E)){
 			this.loadTexture('atlas', 'CookPawOpen');
@@ -97,6 +99,7 @@ Paw.prototype.update = function(){
 			//grabbing
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.U) && this.isHolding === false && this.overlap){
 			this.loadTexture('atlas', 'CookPawClosed');
+			this.grabNoise.play();
 			this.isHolding = true;
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.U)){
 			this.loadTexture('atlas', 'CookPawOpen');

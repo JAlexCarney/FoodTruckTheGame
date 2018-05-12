@@ -18,7 +18,7 @@ window.onload = function(){
 var Boot = function(game){};
 Boot.prototype = {
 	init: function() {
-		// don't allow losing browser focus to halt game.
+		// keep game running when not active browser.
 		this.stage.disableVisibilityChange = true;
 	},
 	
@@ -56,14 +56,14 @@ Preload.prototype = {
 		  //ambient noise
 		game.load.audio('ambientNoise', 'assets/audio/tokyoSupermarket.ogg');
 		  //load UI select SFX
-		game.load.audio('select', 'assets/audio/UIselect.wav');
+		game.load.audio('select', 'assets/audio/UIselect.ogg');
+		  // grab sound
+		game.load.audio('grab', 'assets/audio/grab.ogg');
 	},
 	
 	update: function() {
 		// wait for first ogg to properly decode
-		if(this.cache.isSoundDecoded('ambientNoise')) {
-			this.state.start('Menu');
-		}
+		this.state.start('Menu');
 	} 
 }
 // end of nathans code addaption
