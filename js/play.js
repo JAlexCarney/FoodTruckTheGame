@@ -30,7 +30,7 @@ Play.prototype = {
 		var changeCustomer = function(){
 			//make sure the customer changes every time.
 			do{
-				this.customerType = game.rnd.integerInRange(0,3);
+				this.customerType = game.rnd.integerInRange(0,6);
 			}while(this.customerType == this.customer.type)
 			// remove the old customer
 			this.customer.kill();
@@ -40,7 +40,7 @@ Play.prototype = {
 			this.customer.inputEnabled = true;
 			this.customer.events.onInputDown.add(changeCustomer, this);
 		}
-		this.customer = new Customer(game, game.rnd.integerInRange(0,3));
+		this.customer = new Customer(game, game.rnd.integerInRange(0,6));
 		game.add.existing(this.customer);
 		this.customer.inputEnabled = true;
 		this.customer.events.onInputDown.add(changeCustomer, this);

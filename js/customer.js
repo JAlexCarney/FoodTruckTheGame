@@ -12,6 +12,15 @@ var Customer = function(game, type){
 	}else if(type == 3){
 		Phaser.Sprite.call(this, game, 0, -128, 'atlas', 'customer_axolotl');
 		console.log("axolotl");
+	}else if(type == 4){
+		Phaser.Sprite.call(this, game, 0, -128, 'atlas', 'customer_bat');
+		console.log("bat");
+	}else if(type == 5){
+		Phaser.Sprite.call(this, game, 0, -128, 'atlas', 'customer_shark');
+		console.log("shark");
+	}else if(type == 6){
+		Phaser.Sprite.call(this, game, 0, -128, 'atlas', 'customer_mouse');
+		console.log("mouse");
 	}
 	this.type = type;
 }

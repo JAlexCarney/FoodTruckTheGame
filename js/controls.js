@@ -32,12 +32,5 @@ Controls.prototype = {
 		this.controls.inputEnabled = true;
 		this.controls.events.onInputDown.add(openStart, this);
 	
-	},
-	
-	update: function() {
-		// replace with button later
-		if(game.input.keyboard.justPressed(Phaser.Keyboard.M)){
-			game.state.start('Menu');
-		}
 	}
 }
