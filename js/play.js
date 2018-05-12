@@ -4,6 +4,14 @@ Play.prototype = {
 	create: function() {
 		// place assets and initialize variables
 		
+		// add audio
+		this.ambientNoise = game.add.audio('ambientNoise');
+		//play ambient noise
+		this.ambientNoise.play('',0, .25, true);
+		
+		//load UIselect noise
+		this.selectNoise = game.add.audio('select');
+		
 		// enable physics
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -27,6 +35,7 @@ Play.prototype = {
 
 		// load top
 		this.add.sprite(0, 0, 'atlas', 'top screen');
+
 		var changeCustomer = function(){
 			//make sure the customer changes every time.
 			do{
@@ -44,7 +53,7 @@ Play.prototype = {
 		game.add.existing(this.customer);
 		this.customer.inputEnabled = true;
 		this.customer.events.onInputDown.add(changeCustomer, this);
-
+		
 			// create the speech bubble
 		this.txt = this.add.sprite(256, 0, 'atlas', 'TextBox');
 		this.txt.scale.setTo(2.5,1.5);
@@ -60,17 +69,22 @@ Play.prototype = {
 		this.add.sprite(0, 384, 'atlas', 'topCounter');
 		this.add.sprite(600, 50, 'atlas', 'cashRegisterTempDisplay');
 		this.add.sprite(600, 50, 'atlas', 'cashRegister');
+		
+			//back to menu 
+		var openMenu = function(){
+			game.state.start('Menu');
+			this.ambientNoise.destroy();
+			this.selectNoise.play('', 0, 1, false);
+		};
+		this.controls = game.add.sprite(750, -10,'atlas', 'button_menu');
+		this.controls.inputEnabled = true;
+		this.controls.events.onInputDown.add(openMenu, this);
 
 		// load divider
 		this.divider = this.add.sprite(0, 502, 'atlas', 'divider');
 		this.physics.arcade.enable(this.divider);
 		this.divider.enableBody = true;
 		this.divider.body.immovable = true;
-
-    // add audio
-		this.ambientNoise = game.add.audio('ambientNoise');
-	//play ambient noise
-		this.ambientNoise.play('',0, .25, true);
 	},
 
 	update: function() {
