@@ -21,6 +21,13 @@ Boot.prototype = {
 		game.load.atlas('atlas', 'assets/img/spritesheet.png', 'assets/img/sprites.json');
 			// load menu backdrop
 		game.load.image('menuBackdrop', 'assets/img/menuBackdrop.png');
+
+		//load audio files
+		  //ambient noise
+		game.load.audio('ambientNoise', 'assets/audio/tokyoSupermarket.ogg');
+		  //load UI select SFX
+		game.load.audio('select', 'assets/audio/UIselect.wav');
+
 	},
 
 	update: function() {
@@ -31,11 +38,11 @@ Boot.prototype = {
 
 var Over = function(game){};
 Over.prototype = {
-	
+
 	preload: function() {
 		// load assets into cache
 	},
-	
+
 	create: function() {
 		// place assets
 	},
