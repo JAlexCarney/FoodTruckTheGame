@@ -9,6 +9,7 @@ window.onload = function(){
 	game.state.add('Controls', Controls);
 	game.state.add('Play', Play);
 	game.state.add('Over', Over);
+	game.state.add('Credits', Credits);
 	game.state.start('Boot');
 }
 
