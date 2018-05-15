@@ -21,11 +21,18 @@ Play.prototype = {
 		// load bottom
 			// background
 		this.add.sprite(0, 512, 'atlas', 'counter');
+			// cucumber
+		this.salmon = game.add.sprite(400, 700, 'atlas', 'salmon_whole');
+		game.physics.enable(this.salmon, Phaser.Physics.ARCADE);
+		this.salmonIsChopped = false;
+		this.salmon.anchor = new PIXI.Point(0.5, 0.5);
+		this.salmon.scale.setTo(0.5);
 			// knife
-		this.knife = game.add.sprite(512, 700, 'atlas', 'knife');
+		this.knife = game.add.sprite(712, 700, 'atlas', 'knife');
 		game.physics.enable(this.knife, Phaser.Physics.ARCADE);
 		this.knife.anchor = new PIXI.Point(0.5, 0.5);
-			// create player 2's paws
+		this.knife.scale.setTo(1.5);
+		// create player 2's paws
 			// left paw
 		this.leftPaw = new Paw(game, true, 20,800);
 		game.add.existing(this.leftPaw);
@@ -67,8 +74,8 @@ Play.prototype = {
 
 			// add the counter and register (currently decorative : P)
 		this.add.sprite(0, 384, 'atlas', 'topCounter');
-		this.add.sprite(600, 50, 'atlas', 'cashRegisterTempDisplay');
-		this.add.sprite(600, 50, 'atlas', 'cashRegister');
+		this.add.sprite(600, 75, 'atlas', 'cashRegisterTempDisplay');
+		this.add.sprite(600, 75, 'atlas', 'cashRegister');
 		
 			//back to menu 
 		var openMenu = function(){
@@ -94,17 +101,25 @@ Play.prototype = {
 		// collide player two with Divide
 		var leftHitDivider = game.physics.arcade.collide(this.leftPaw, this.divider);
 		var rightHitDivider = game.physics.arcade.collide(this.rightPaw, this.divider);
-		var pawCollision = game.physics.arcade.collide(this.leftPaw, this.rightPaw);
+		// collide player two with knife
 		this.rightPaw.overlap = game.physics.arcade.overlap(this.knife, this.rightPaw);
 		this.leftPaw.overlap = game.physics.arcade.overlap(this.knife, this.leftPaw);
-
+		// collide knife with 
+		if(!this.salmonIsChopped && (this.rightPaw.isHolding || this.leftPaw.isHolding)){
+			var chop = game.physics.arcade.overlap(this.salmon, this.knife);
+			if(chop){
+				this.salmon.loadTexture('atlas', 'salmon_cut');
+				this.salmonIsChopped = true;
+			}
+		}
+		
 		// knife pick up mechanic
 		if(this.rightPaw.isHolding){
-			this.knife.x = this.rightPaw.x;
-			this.knife.y = this.rightPaw.y;
+			this.knife.x = this.rightPaw.x - 32;
+			this.knife.y = this.rightPaw.y - 100;
 		}else if(this.leftPaw.isHolding){
-			this.knife.x = this.leftPaw.x + 128;
-			this.knife.y = this.leftPaw.y;
+			this.knife.x = this.leftPaw.x + 128 - 32;
+			this.knife.y = this.leftPaw.y - 100;
 		}
 	}
 }
