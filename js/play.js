@@ -62,8 +62,8 @@ Play.prototype = {
 		this.customer.events.onInputDown.add(changeCustomer, this);
 		
 			// create the speech bubble
-		this.txt = this.add.sprite(256, 0, 'atlas', 'TextBox');
-		this.txt.scale.setTo(2.5,1.5);
+		this.txt = this.add.sprite(256, 96, 'atlas', 'TextBox');
+		this.txt.scale.setTo(2.5,0.75);
 			// font style
 		this.orderStyle = { font: 'bold 35px Courier New', fill: '#000000', align: "center",  boundsAlignH: "center", boundsAlignV: "middle"};
 			// text inside of speech bubble
@@ -72,8 +72,13 @@ Play.prototype = {
 		this.order.wordWrap = true;
 		this.order.wordWrapWidth = 290;
 
-			// add the counter and register (currently decorative : P)
-		this.add.sprite(0, 384, 'atlas', 'topCounter');
+			// add the counter
+		this.topCounter = this.add.sprite(0, 384, 'atlas', 'topCounter');
+		game.physics.enable(this.topCounter);
+		this.topCounter.body.setSize(1024, 64, 0, 64);
+		this.topCounter.body.immovable = true;
+		
+			// add the register (currently decorative : P)
 		this.add.sprite(600, 75, 'atlas', 'cashRegisterTempDisplay');
 		this.add.sprite(600, 75, 'atlas', 'cashRegister');
 		
@@ -87,6 +92,10 @@ Play.prototype = {
 		this.controls.inputEnabled = true;
 		this.controls.events.onInputDown.add(openMenu, this);
 
+			// add an instance of the money prefab
+		this.money = new Money(game, 100, 200);
+		game.add.existing(this.money);
+		
 		// load divider
 		this.divider = this.add.sprite(0, 502, 'atlas', 'divider');
 		this.physics.arcade.enable(this.divider);
@@ -96,15 +105,15 @@ Play.prototype = {
 
 	update: function() {
 
-		
-
 		// collide player two with Divide
 		var leftHitDivider = game.physics.arcade.collide(this.leftPaw, this.divider);
 		var rightHitDivider = game.physics.arcade.collide(this.rightPaw, this.divider);
+
 		// collide player two with knife
 		this.rightPaw.overlap = game.physics.arcade.overlap(this.knife, this.rightPaw);
 		this.leftPaw.overlap = game.physics.arcade.overlap(this.knife, this.leftPaw);
-		// collide knife with 
+
+		// collide knife with salmon 
 		if(!this.salmonIsChopped && (this.rightPaw.isHolding || this.leftPaw.isHolding)){
 			var chop = game.physics.arcade.overlap(this.salmon, this.knife);
 			if(chop){
@@ -112,6 +121,9 @@ Play.prototype = {
 				this.salmonIsChopped = true;
 			}
 		}
+		
+		// collide money with counter
+		game.physics.arcade.collide(this.topCounter, this.money);
 		
 		// knife pick up mechanic
 		if(this.rightPaw.isHolding){
