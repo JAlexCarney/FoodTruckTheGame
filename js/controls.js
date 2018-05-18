@@ -16,6 +16,12 @@ Controls.prototype = {
 		game.add.text(15, 450, 'The cook uses WASD to move the left paw and\nIJKL to move the right paw and uses E and U\nto pick up items.', {fill: '#000', font: '50px curior new'});
 		game.add.text(405, 300, 'The cashier clicks on\ncustomers to take their orders', {fill: '#000', font: '50px curior new'});
 		
+		// load divider
+		//doesn't need any physics, since it is just a visual to aid the players in understanding the splitscreen mechanics
+		this.divider = this.add.sprite(0, 502, 'atlas', 'divider_dotted');
+
+	},
+		
 		var openMenu = function(){
 			game.state.start('Menu');
 			this.selectNoise.play('', 0, 1, false);
