@@ -68,9 +68,13 @@ Play.prototype = {
 		//temporarily disabling changing customers with clicking on them
 	  //this.customer.events.onInputDown.add(changeCustomer, this);
 
+		//add timer and start the timer
+		customerTimer = game.time.create(false);
+		customerTimer.start();
+
 		//switch customer every 3-ish minutes
 		customerTimer.repeat(180000, repeatCount, changeCustomer, this);
-		
+
 			// create the speech bubble
 		this.txt = this.add.sprite(256, 96, 'atlas', 'TextBox');
 		this.txt.scale.setTo(2.5,0.75);
@@ -111,6 +115,9 @@ Play.prototype = {
 		this.physics.arcade.enable(this.divider);
 		this.divider.enableBody = true;
 		this.divider.body.immovable = true;
+
+		//load "chop" noise
+		this.chopNoise = game.add.audio('grab');
 	},
 
 	update: function() {
@@ -129,6 +136,8 @@ Play.prototype = {
 			if(chop){
 				this.salmon.loadTexture('atlas', 'salmon_cut');
 				this.salmonIsChopped = true;
+				//play "chop" noise
+				this.chopNoise.play('', 0, 1, false);
 			}
 		}
 
