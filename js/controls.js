@@ -20,7 +20,6 @@ Controls.prototype = {
 		//doesn't need any physics, since it is just a visual to aid the players in understanding the splitscreen mechanics
 		this.divider = this.add.sprite(0, 502, 'atlas', 'divider_dotted');
 
-	},
 		
 		var openMenu = function(){
 			game.state.start('Menu');
