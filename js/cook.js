@@ -13,11 +13,12 @@ var Paw = function (game, isLeftHand, x, y){
 	this.isLeft = isLeftHand;
 	this.isHolding = false;
 	this.overlap = false;
+	this.overlapObject = null;
+	this.heldObject = null;
 	//load grab noise
 	this.grabNoise = game.add.audio('grab');
 	
 	if(isLeftHand){
-		this.anchor.x = 1;
 		this.scale.setTo(-1,1);
 	}
 }
@@ -58,15 +59,25 @@ Paw.prototype.update = function(){
 		}else{
 			this.body.velocity.x = 0;
 		}
-			// grabbing
+		
+					// grabbing
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.E) && this.isHolding === false && this.overlap){
 			this.loadTexture('atlas', 'CookPawClosed');
 			this.grabNoise.play();
 			this.isHolding = true;
+			if(this.overlapObject != null){
+				this.heldObject = this.overlapObject;
+				this.heldObject.isHeldByLeft = true;
+			}
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.E)){
 			this.loadTexture('atlas', 'CookPawOpen');
 			this.isHolding = false;
+			if(this.heldObject != null){
+				this.heldObject.isHeldByLeft = false;
+			}
+			this.heldObject = null;
 		}
+
 	// right paw
 	}else{
 			// movement
@@ -96,18 +107,31 @@ Paw.prototype.update = function(){
 		}else{
 			this.body.velocity.x = 0;
 		}
-			//grabbing
+		
+			// grabbing
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.U) && this.isHolding === false && this.overlap){
 			this.loadTexture('atlas', 'CookPawClosed');
 			this.grabNoise.play();
 			this.isHolding = true;
+			if(this.overlapObject != null){
+				this.heldObject = this.overlapObject;
+				this.heldObject.isHeldByRight = true;
+			}
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.U)){
 			this.loadTexture('atlas', 'CookPawOpen');
 			this.isHolding = false;
+			if(this.heldObject != null){
+				this.heldObject.isHeldByRight = false;
+			}
+			this.heldObject = null;
 		}
 	}
+	
 	// keep it on the bottum screen
 	if(this.y <= 620){
 		this.y = 620;
 	}
+	// keep paw on top of food
+	game.world.bringToTop(this);
+	this.overlap = false
 }
