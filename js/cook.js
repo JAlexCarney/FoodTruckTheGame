@@ -2,10 +2,10 @@ var Paw = function (game, isLeftHand, x, y){
 	// call sprite constructor
 	Phaser.Sprite.call(this, game, x, y, 'atlas', 'CookPawOpen');
 	game.physics.enable(this, Phaser.Physics.ARCADE);
-	this.body.setSize(206, 226, 20, 30);
+	this.body.setSize(206, 206, 20, 20);
 	this.body.collideWorldBounds = true;
 	//this.scale.setTo(0.75);
-	this.alpha = 0.5;
+	this.alpha = 0.7;
 	this.anchor = new PIXI.Point(0.5, 0.5);
 	this.drag = 50;
 	

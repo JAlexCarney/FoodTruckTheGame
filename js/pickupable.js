@@ -11,14 +11,15 @@ var Pickupable = function(game, type, x, y){
 		
 		// physics
 		game.physics.enable(this, Phaser.Physics.ARCADE);
+		this.body.setSize(35, 100, 82, 200);
 		this.anchor = new PIXI.Point(0.5, 0.5);
 		this.scale.setTo(1.5);
 		
 		// properties
 		this.leftOffsetX = -32;
-		this.leftOffsetY = -100;
+		this.leftOffsetY = -140;
 		this.rightOffsetX = -32;
-		this.rightOffsetY = -100;
+		this.rightOffsetY = -140;
 		
 	} else if (type == 'salmon'){
 		
@@ -27,6 +28,7 @@ var Pickupable = function(game, type, x, y){
 		
 		// physics
 		game.physics.enable(this, Phaser.Physics.ARCADE);
+		this.body.setSize(450, 215, 65, 95);
 		this.anchor = new PIXI.Point(0.5, 0.5);
 		this.scale.setTo(0.5);
 		

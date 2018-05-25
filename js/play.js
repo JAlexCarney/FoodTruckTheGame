@@ -26,6 +26,11 @@ Play.prototype = {
 			// background
 		this.add.sprite(0, 512, 'atlas', 'counter');
 			
+			// cutting board
+		board = this.add.sprite(256, 512, 'atlas', 'cutting board');
+		board.rotation = Math.PI / 2;
+		board.scale.setTo(.5,.5);
+			
 			// create player 2's paws
 				// left paw
 		leftPaw = new Paw(game, true, 20,800);
@@ -82,7 +87,9 @@ Play.prototype = {
 		
 			// add the register (currently decorative : P)
 		this.add.sprite(600, 75, 'atlas', 'cashRegisterTempDisplay');
-		this.add.sprite(600, 75, 'atlas', 'cashRegister');
+		this.register = this.add.sprite(600, 75, 'atlas', 'cashRegister_closed');
+		game.physics.enable(this.register);
+		this.register.body.immovable = true;
 		
 			//back to menu 
 		var openMenu = function(){
@@ -143,5 +150,14 @@ Play.prototype = {
 		// collide money with counter
 		game.physics.arcade.collide(this.topCounter, this.money);
 		
+		// money in register (on hover)
+		if(game.physics.arcade.overlap(this.register, this.money)){
+			this.register.loadTexture('atlas', 'cashRegister_open');
+			if(this.money.beingHeld == false){
+				this.money.kill();
+			}
+		}else{
+			this.register.loadTexture('atlas', 'cashRegister_closed');
+		}
 	}
 }
