@@ -11,7 +11,7 @@ var Pickupable = function(game, type, x, y){
 		
 		// physics
 		game.physics.enable(this, Phaser.Physics.ARCADE);
-		this.body.setSize(35, 100, 82, 200);
+		this.body.setSize(35, 300, 82, 0);
 		this.anchor = new PIXI.Point(0.5, 0.5);
 		this.scale.setTo(1.5);
 		
@@ -28,12 +28,46 @@ var Pickupable = function(game, type, x, y){
 		
 		// physics
 		game.physics.enable(this, Phaser.Physics.ARCADE);
-		this.body.setSize(450, 215, 65, 95);
+		this.body.setSize(225, 110, 32, 50);
 		this.anchor = new PIXI.Point(0.5, 0.5);
-		this.scale.setTo(0.5);
 		
 		// properties
 		this.salmonIsChopped = false;
+	} else if (type == 'seaweed'){
+		// constructor
+		Phaser.Sprite.call(this, game, x, y, 'atlas', 'seaweed');
+		
+		// physics
+		game.physics.enable(this, Phaser.Physics.ARCADE);
+		this.anchor = new PIXI.Point(0.5, 0.5);
+		this.rotation = Math.PI / 2;
+		
+		// properties
+			//N/A
+	} else if (type == 'cucumber'){
+		// constructor
+		Phaser.Sprite.call(this, game, x, y, 'atlas', 'cucumber_whole');
+		
+		// physics
+		game.physics.enable(this, Phaser.Physics.ARCADE);
+		this.anchor = new PIXI.Point(0.5, 0.5);
+		
+		// properties
+		this.cucumberIsChopped = false;
+	} else if (type = 'rice_raw'){
+		// constructor
+		Phaser.Sprite.call(this, game, x, y, 'atlas', 'rice bag');
+		
+		// physics
+		game.physics.enable(this, Phaser.Physics.ARCADE);
+		this.scale.setTo(0.5);
+		this.anchor = new PIXI.Point(0.5, 0.5);
+		
+		// properties
+			//N/A
+		
+	} else if (type = 'rice_cooked'){
+		
 	}
 	this.type = type;
 	this.isHeldByRight = false;

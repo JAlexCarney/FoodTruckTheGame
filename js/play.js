@@ -27,9 +27,13 @@ Play.prototype = {
 		this.add.sprite(0, 512, 'atlas', 'counter');
 			
 			// cutting board
-		board = this.add.sprite(256, 512, 'atlas', 'cutting board');
-		board.rotation = Math.PI / 2;
-		board.scale.setTo(.5,.5);
+		this.board = this.add.sprite(256, 512, 'atlas', 'cutting board');
+		this.board.rotation = Math.PI / 2;
+		
+			// Rice pot
+		this.ricePot = this.add.sprite(768, 522, 'atlas', 'pot_empty');
+		this.ricePot.scale.setTo(0.6);
+		game.physics.enable(this.ricePot, Phaser.Physics.ARCADE);
 			
 			// create player 2's paws
 				// left paw
@@ -39,9 +43,17 @@ Play.prototype = {
 		rightPaw = new Paw(game, false, 720,800);
 		game.add.existing(rightPaw);
 			
+			// seaweed
+		this.seaweed = new Pickupable(game, 'seaweed', 200, 800);
+		game.add.existing(this.seaweed);
+			
 			// salmon
 		this.salmon = new Pickupable(game, 'salmon', 400, 700);
 		game.add.existing(this.salmon);
+		
+			// rice
+		this.rice = new Pickupable(game, 'rice_raw', 756, 800);
+		game.add.existing(this.rice);
 		
 			// knife
 		this.knife = new Pickupable(game, 'knife', 712, 700);
@@ -119,6 +131,25 @@ Play.prototype = {
 		var rightHitDivider = game.physics.arcade.collide(rightPaw, this.divider);
 		
 		// collide player with food
+			// seaweed
+		if(game.physics.arcade.overlap(this.seaweed, rightPaw)){
+			rightPaw.overlap = true;
+			rightPaw.overlapObject = this.seaweed;
+		}
+		if(game.physics.arcade.overlap(this.seaweed, leftPaw)){
+			leftPaw.overlap = true;
+			leftPaw.overlapObject = this.seaweed;
+		}
+			// rice
+		if(game.physics.arcade.overlap(this.rice, rightPaw)){
+			rightPaw.overlap = true;
+			rightPaw.overlapObject = this.rice;
+		}
+		if(game.physics.arcade.overlap(this.rice, leftPaw)){
+			leftPaw.overlap = true;
+			leftPaw.overlapObject = this.rice;
+		}
+			// salmon
 		if(game.physics.arcade.overlap(this.salmon, rightPaw)){
 			rightPaw.overlap = true;
 			rightPaw.overlapObject = this.salmon;
@@ -144,6 +175,14 @@ Play.prototype = {
 			if(chop && !(this.salmon.isHeldByRight || this.salmon.isHeldByLeft) && (this.knife.isHeldByRight || this.knife.isHeldByLeft)){
 				this.salmon.loadTexture('atlas', 'salmon_cut');
 				this.salmonIsChopped = true;
+			}
+		}
+		
+		// collide rice with rice pot
+		if(!this.rice.isHeldByRight && !this.rice.isHeldByLeft){
+			if(game.physics.arcade.overlap(this.rice, this.ricePot)){
+				this.rice.kill();
+				this.ricePot.loadTexture('atlas', 'pot_rice');
 			}
 		}
 		

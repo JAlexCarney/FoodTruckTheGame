@@ -2,6 +2,11 @@ var Controls = function(game){};
 
 Controls.prototype = {
 	
+	init: function(prePlay) {
+			this.isPrePlay = prePlay;
+			console.log(this.isPrePlay);
+	},
+	
 	create: function() {
 		//load UIselect noise
 		this.selectNoise = game.add.audio('select');
@@ -21,21 +26,29 @@ Controls.prototype = {
 		this.divider = this.add.sprite(0, 502, 'atlas', 'divider_dotted');
 
 		
-		var openMenu = function(){
-			game.state.start('Menu');
-			this.selectNoise.play('', 0, 1, false);
-		};
-		this.controls = game.add.sprite(405, 100,'atlas', 'button_menu');
-		this.controls.inputEnabled = true;
-		this.controls.events.onInputDown.add(openMenu, this);
+		if(this.isPrePlay == false){
+			var openMenu = function(){
+				game.state.start('Menu');
+				this.selectNoise.play('', 0, 1, false);
+			};
+			this.controls = game.add.sprite(405, 100,'atlas', 'button_menu');
+			this.controls.inputEnabled = true;
+			this.controls.events.onInputDown.add(openMenu, this);
 		
-		var openStart = function(){
-			game.state.start('Play');
-			this.selectNoise.play('', 0, 1, false);
-		};
-		this.controls = game.add.sprite(710, 100,'atlas', 'button_play');
-		this.controls.inputEnabled = true;
-		this.controls.events.onInputDown.add(openStart, this);
-	
+			var openStart = function(){
+				game.state.start('Play');
+				this.selectNoise.play('', 0, 1, false);
+			};
+			this.controls = game.add.sprite(710, 100,'atlas', 'button_play');
+			this.controls.inputEnabled = true;
+			this.controls.events.onInputDown.add(openStart, this);
+		} else {
+			timer = game.time.create(true);
+			event = timer.add(Phaser.Timer.SECOND * 5, this.cont, this);
+			timer.start();
+		}
+	},
+	cont: function() {
+		game.state.start('Play');
 	}
 }
