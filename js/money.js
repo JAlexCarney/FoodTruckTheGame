@@ -35,12 +35,11 @@ Money.prototype.constructor = Money;
 
 Money.prototype.update = function(){
 	// make money follow mouse while being held
-	if(this.beingHeld && game.input.mousePointer.y < 400){
+	if(this.beingHeld){
 		this.x = game.input.mousePointer.x;
-		this.y = game.input.mousePointer.y;
-		// attempt to make money mantain velocity of mouse
-		//this.body.velocity.x = game.input.mousePointer.movementX;
-		//this.body.velocity.y = game.input.mousePointer.movementY;
+		if(game.input.mousePointer.y < 420){
+			this.y = game.input.mousePointer.y;
+		}
 	}
 	// make money always apear on top
 	game.world.bringToTop(this);

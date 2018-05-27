@@ -1,9 +1,5 @@
 body {
-	font-family: Helvetica;
 	background-color: #000000;
-}
-
-h3 {
-	margin: 1px;
-	color: #ffffff;
+	margin: 0px auto;
+	width: 1024px;
 }
