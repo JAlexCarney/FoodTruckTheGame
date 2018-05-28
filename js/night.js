@@ -32,7 +32,7 @@ Night.prototype = {
 		this.divider = this.add.sprite(0, 502, 'spritesheet', 'divider');
 		
 		//add text
-		this.txt = game.add.text(256, 256, "Day" + day + "You made money! Continue", this.orderStyle);
+		this.txt = game.add.text(256, 256, "Day" + day + "You made money! Continue");
 		this.txt.setTextBounds(30, 10, 290, 374);
 		this.txt.wordWrap = true;
 		this.txt.wordWrapWidth = 290;
