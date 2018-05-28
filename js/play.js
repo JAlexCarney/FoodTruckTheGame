@@ -1,3 +1,7 @@
+// cook's paws are temporarly going to be globals so they can be seen by the pickupables pre-fab
+var leftPaw;
+var rightPaw;
+
 var Play = function(game){};
 Play.prototype = {
 
@@ -7,7 +11,7 @@ Play.prototype = {
 		// add audio
 		this.ambientNoise = game.add.audio('ambientNoise');
 		//play ambient noise
-		this.ambientNoise.play('',0, .25, true);
+		this.ambientNoise.play('',0, .15, true);
 		
 		//load UIselect noise
 		this.selectNoise = game.add.audio('select');
@@ -21,24 +25,39 @@ Play.prototype = {
 		// load bottom
 			// background
 		this.add.sprite(0, 512, 'atlas', 'counter');
-			// cucumber
-		this.salmon = game.add.sprite(400, 700, 'atlas', 'salmon_whole');
-		game.physics.enable(this.salmon, Phaser.Physics.ARCADE);
-		this.salmonIsChopped = false;
-		this.salmon.anchor = new PIXI.Point(0.5, 0.5);
-		this.salmon.scale.setTo(0.5);
+			
+			// cutting board
+		this.board = this.add.sprite(256, 512, 'atlas', 'cutting board');
+		this.board.rotation = Math.PI / 2;
+		
+			// Rice pot
+		this.ricePot = this.add.sprite(768, 522, 'atlas', 'pot_empty');
+		this.ricePot.scale.setTo(0.6);
+		game.physics.enable(this.ricePot, Phaser.Physics.ARCADE);
+			
+			// create player 2's paws
+				// left paw
+		leftPaw = new Paw(game, true, 20,800);
+		game.add.existing(leftPaw);
+				// right Paw
+		rightPaw = new Paw(game, false, 720,800);
+		game.add.existing(rightPaw);
+			
+			// seaweed
+		this.seaweed = new Pickupable(game, 'seaweed', 200, 800);
+		game.add.existing(this.seaweed);
+			
+			// salmon
+		this.salmon = new Pickupable(game, 'salmon', 400, 700);
+		game.add.existing(this.salmon);
+		
+			// rice
+		this.rice = new Pickupable(game, 'rice_raw', 756, 800);
+		game.add.existing(this.rice);
+		
 			// knife
-		this.knife = game.add.sprite(712, 700, 'atlas', 'knife');
-		game.physics.enable(this.knife, Phaser.Physics.ARCADE);
-		this.knife.anchor = new PIXI.Point(0.5, 0.5);
-		this.knife.scale.setTo(1.5);
-		// create player 2's paws
-			// left paw
-		this.leftPaw = new Paw(game, true, 20,800);
-		game.add.existing(this.leftPaw);
-			// right Paw
-		this.rightPaw = new Paw(game, false, 720,800);
-		game.add.existing(this.rightPaw);
+		this.knife = new Pickupable(game, 'knife', 712, 700);
+		game.add.existing(this.knife);
 
 		// load top
 		this.add.sprite(0, 0, 'atlas', 'top screen');
@@ -75,12 +94,14 @@ Play.prototype = {
 			// add the counter
 		this.topCounter = this.add.sprite(0, 384, 'atlas', 'topCounter');
 		game.physics.enable(this.topCounter);
-		this.topCounter.body.setSize(1024, 64, 0, 64);
+		this.topCounter.body.setSize(1024, 44, 0, 84);
 		this.topCounter.body.immovable = true;
 		
 			// add the register (currently decorative : P)
 		this.add.sprite(600, 75, 'atlas', 'cashRegisterTempDisplay');
-		this.add.sprite(600, 75, 'atlas', 'cashRegister');
+		this.register = this.add.sprite(600, 75, 'atlas', 'cashRegister_closed');
+		game.physics.enable(this.register);
+		this.register.body.immovable = true;
 		
 			//back to menu 
 		var openMenu = function(){
@@ -106,32 +127,76 @@ Play.prototype = {
 	update: function() {
 
 		// collide player two with Divide
-		var leftHitDivider = game.physics.arcade.collide(this.leftPaw, this.divider);
-		var rightHitDivider = game.physics.arcade.collide(this.rightPaw, this.divider);
-
+		var leftHitDivider = game.physics.arcade.collide(leftPaw, this.divider);
+		var rightHitDivider = game.physics.arcade.collide(rightPaw, this.divider);
+		
+		// collide player with food
+			// seaweed
+		if(game.physics.arcade.overlap(this.seaweed, rightPaw)){
+			rightPaw.overlap = true;
+			rightPaw.overlapObject = this.seaweed;
+		}
+		if(game.physics.arcade.overlap(this.seaweed, leftPaw)){
+			leftPaw.overlap = true;
+			leftPaw.overlapObject = this.seaweed;
+		}
+			// rice
+		if(game.physics.arcade.overlap(this.rice, rightPaw)){
+			rightPaw.overlap = true;
+			rightPaw.overlapObject = this.rice;
+		}
+		if(game.physics.arcade.overlap(this.rice, leftPaw)){
+			leftPaw.overlap = true;
+			leftPaw.overlapObject = this.rice;
+		}
+			// salmon
+		if(game.physics.arcade.overlap(this.salmon, rightPaw)){
+			rightPaw.overlap = true;
+			rightPaw.overlapObject = this.salmon;
+		}
+		if(game.physics.arcade.overlap(this.salmon, leftPaw)){
+			leftPaw.overlap = true;
+			leftPaw.overlapObject = this.salmon;
+		}
+		
 		// collide player two with knife
-		this.rightPaw.overlap = game.physics.arcade.overlap(this.knife, this.rightPaw);
-		this.leftPaw.overlap = game.physics.arcade.overlap(this.knife, this.leftPaw);
+		if(game.physics.arcade.overlap(this.knife, rightPaw)){
+			rightPaw.overlap = true;
+			rightPaw.overlapObject = this.knife;
+		}
+		if(game.physics.arcade.overlap(this.knife, leftPaw)){
+			leftPaw.overlap = true;
+			leftPaw.overlapObject = this.knife;
+		}
 
 		// collide knife with salmon 
-		if(!this.salmonIsChopped && (this.rightPaw.isHolding || this.leftPaw.isHolding)){
+		if(!this.salmonIsChopped && (rightPaw.isHolding || leftPaw.isHolding)){
 			var chop = game.physics.arcade.overlap(this.salmon, this.knife);
-			if(chop){
+			if(chop && !(this.salmon.isHeldByRight || this.salmon.isHeldByLeft) && (this.knife.isHeldByRight || this.knife.isHeldByLeft)){
 				this.salmon.loadTexture('atlas', 'salmon_cut');
 				this.salmonIsChopped = true;
+			}
+		}
+		
+		// collide rice with rice pot
+		if(!this.rice.isHeldByRight && !this.rice.isHeldByLeft){
+			if(game.physics.arcade.overlap(this.rice, this.ricePot)){
+				this.rice.kill();
+				this.ricePot.loadTexture('atlas', 'pot_rice');
 			}
 		}
 		
 		// collide money with counter
 		game.physics.arcade.collide(this.topCounter, this.money);
 		
-		// knife pick up mechanic
-		if(this.rightPaw.isHolding){
-			this.knife.x = this.rightPaw.x - 32;
-			this.knife.y = this.rightPaw.y - 100;
-		}else if(this.leftPaw.isHolding){
-			this.knife.x = this.leftPaw.x + 128 - 32;
-			this.knife.y = this.leftPaw.y - 100;
+		// money in register (on hover)
+		if(game.physics.arcade.overlap(this.register, this.money)){
+			this.register.loadTexture('atlas', 'cashRegister_open');
+			if(this.money.beingHeld == false){
+				this.money.kill();
+			}
+		}else{
+			this.register.loadTexture('atlas', 'cashRegister_closed');
 		}
 	}
 }

@@ -1,6 +1,7 @@
 // create the game object with a...
 // resolution (1:2 rectangle)
 var game;
+var day;
 
 window.onload = function(){
 	game = new Phaser.Game(1024, 1024, Phaser.AUTO);
@@ -8,10 +9,14 @@ window.onload = function(){
 	game.state.add('Boot', Boot);
 	game.state.add('Menu', Menu);
 	game.state.add('Controls', Controls);
+	game.state.add('Night', Night);
 	game.state.add('Play', Play);
 	game.state.add('Over', Over);
 	game.state.add('Credits', Credits);
 	game.state.start('Boot');
+	
+	//set the global day variable so that it can be accessed from any state
+	day = 1;
 }
 
 // Boot and preloader adapted from nathans source code on asset loading (assets03.js). 

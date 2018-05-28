@@ -10,7 +10,8 @@ Menu.prototype = {
 		var startGame = function(){
 			//play select noise upon clicking button
 			this.selectNoise.play('', 0, 1, false);
-			game.state.start('Play');
+			// start play by first showing controls
+			game.state.start('Controls', true, false, true);
 		};
 		// place a button
 		this.start = game.add.sprite( 100, 300,'atlas', 'button_play');
@@ -20,7 +21,7 @@ Menu.prototype = {
 		var openControls = function(){
 			//play select noise upon clicking button
 			this.selectNoise.play('', 0, 1, false);
-			game.state.start('Controls');
+			game.state.start('Controls', true, false, false);
 		};
 		this.controls = game.add.sprite( 400, 300,'atlas', 'button_controls');
 		this.controls.inputEnabled = true;
