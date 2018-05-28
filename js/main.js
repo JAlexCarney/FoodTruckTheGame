@@ -56,7 +56,7 @@ Preload.prototype = {
 		game.load.atlas('atlas', 'assets/img/spritesheet.png', 'assets/img/sprites.json');
 			// load menu backdrop
 		game.load.image('menuBackdrop', 'assets/img/menuBackdrop.png');
-
+		
 		//load audio files
 		  //ambient noise
 		game.load.audio('ambientNoise', 'assets/audio/tokyoSupermarket.ogg');

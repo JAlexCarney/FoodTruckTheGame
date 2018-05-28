@@ -26,6 +26,8 @@ Credits.prototype = {
 		this.controls = game.add.sprite(700, 50,'atlas', 'button_menu');
 		this.controls.inputEnabled = true;
 		this.controls.events.onInputDown.add(openMenu, this);
+		
+		game.add.image(700, 178, 'atlas', 'credits chibis');
 	
 	},
 }
