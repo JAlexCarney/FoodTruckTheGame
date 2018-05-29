@@ -7,8 +7,7 @@ Night.prototype = {
 		// load texture atlas
 		game.load.atlas('newspaper', 'assets/img/newspaper.png', 'assets/img/newspaper.json');
 		game.load.atlas('spritesheet', 'assets/img/spritesheet.png', 'assets/img/sprites.json');
-		//for testing
-		//game.load.image('ipad with paw', 'assets/img/ipad with paw.png');
+		game.load.image('ipad with paw', 'assets/img/ipad with paw.png');
 	
 	},
 	
@@ -24,8 +23,7 @@ Night.prototype = {
 		this.add.sprite(0, 0, 'spritesheet', 'counter');
 		
 		//add the ipad to the top half of the screen
-		//this.add.sprite(0, 0, 'ipad with paw'); //for testing
-		this.add.sprite(0, 0, 'spritesheet', 'ipad with paw');
+		this.add.sprite(0, 0, 'ipad with paw');
 		
 		// load divider
 		//doesn't need any physics, since it is just a visual to aid the players in understanding the splitscreen mechanics
