@@ -7,7 +7,7 @@ var Play = function(game){
 
 	this.TEXT_X = 150;//dialog text x-position
 	this.TEXT_Y = 30;//dialog text y-position
-	this.TEXT_STYLE = { font: 'bold 24px Courier New', fill: '#000000', align:
+	this.TEXT_STYLE = { font: 'bold 12px Courier New', fill: '#000000', align:
 	 "center",  boundsAlignH: "center", boundsAlignV: "middle"
 }; //text style inside of speech bubble
 	this.TEXT_MAX_WIDTH = 290; //max width of text within box
@@ -37,7 +37,7 @@ var Play = function(game){
 	//when we have an order system that detects recipe completion,
 	  //will have:
 		//timer to time an order
-		//variable that keeps track if they get it right (true) or wrong(false)
+		//variable that keeps track if they get it right (true) or wrong(false) ??
 };
 Play.prototype = {
 
@@ -197,7 +197,7 @@ Play.prototype = {
 		this.nextText.text = '';
 
 		//if no more lines left to read in this convo,
-		//or if a customer is Donezo
+		//or if a customer is "Donezo"
 		// jump to next conversation/customer
 		if(this.dialogLine > this.dialog[this.dialogConvo].length-1 ||
 		  this.customerDonezo) {
@@ -223,7 +223,7 @@ Play.prototype = {
 			if(this.dialog[this.dialogConvo][this.dialogLine]['newCustomer']) {
 				//and if last customer exists
 				if(this.dialogLastCustomer) {
-					//take them off onscreen to the right
+					//take them off screen to the right
 					  //keep y at least consistent with the last customer
 					this.add.tween(this[this.dialogLastCustomer]).to({x: this.RIGHT_OFFSCREEN_X}, {y: this.this.dialogLastCustomer.y}, Phaser.Easing.Linear.None, true);
 					//this sounds really ominous, but kill this customer....
@@ -232,7 +232,8 @@ Play.prototype = {
 					//say we're "done" with this customer
 					this.customerDonezo = true;
 				}
-				// create this new customer
+				// create this new customer with the customer prefab
+				  //passes in a string from dialogue to create customer
 				this.customer = new Customer(game, this.dialog[this.dialogConvo][this.dialogLine]['customer']);
 				game.add.existing(this.customer);
 			}
