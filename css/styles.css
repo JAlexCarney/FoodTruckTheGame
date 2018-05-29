@@ -3,3 +3,16 @@ body {
 	margin: 0px auto;
 	width: 1024px;
 }
+
+#game {
+	border: 5px solid #191970;
+	width: 1024px;
+}
+
+h1{
+	color: #add8e6;
+	font-family: Arial;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	text-align: center;
+}
