@@ -9,12 +9,16 @@ Play.prototype = {
 		// place assets and initialize variables
 		
 		// add audio
+			// ambient
 		this.ambientNoise = game.add.audio('ambientNoise');
-		//play ambient noise
-		this.ambientNoise.play('',0, .15, true);
-		
-		//load UIselect noise
+			//play ambient noise
+		this.ambientNoise.play('',0, .3, true);
+			//load UIselect noise
 		this.selectNoise = game.add.audio('select');
+			//load register noise
+		this.registerNoise = game.add.audio('register');
+			//load chop noise.
+		this.chopNoise = game.add.audio('chop');
 		
 		// enable physics
 		game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -102,16 +106,6 @@ Play.prototype = {
 		this.register = this.add.sprite(600, 75, 'atlas', 'cashRegister_closed');
 		game.physics.enable(this.register);
 		this.register.body.immovable = true;
-		
-			//back to menu 
-		var openMenu = function(){
-			game.state.start('Menu');
-			this.ambientNoise.destroy();
-			this.selectNoise.play('', 0, 1, false);
-		};
-		this.controls = game.add.sprite(750, -10,'atlas', 'button_menu');
-		this.controls.inputEnabled = true;
-		this.controls.events.onInputDown.add(openMenu, this);
 
 			// add an instance of the money prefab
 		this.money = new Money(game, 100, 200);
@@ -175,6 +169,7 @@ Play.prototype = {
 			if(chop && !(this.salmon.isHeldByRight || this.salmon.isHeldByLeft) && (this.knife.isHeldByRight || this.knife.isHeldByLeft)){
 				this.salmon.loadTexture('atlas', 'salmon_cut');
 				this.salmonIsChopped = true;
+				this.chopNoise.play();
 			}
 		}
 		
@@ -194,6 +189,7 @@ Play.prototype = {
 			this.register.loadTexture('atlas', 'cashRegister_open');
 			if(this.money.beingHeld == false){
 				this.money.kill();
+				this.registerNoise.play();
 			}
 		}else{
 			this.register.loadTexture('atlas', 'cashRegister_closed');

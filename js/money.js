@@ -14,11 +14,13 @@ var Money = function(game, x, y){
 	
 	// custom properties
 	this.beingHeld = false;
+	this.grabSound = game.add.audio('cashGrab');
 	
 	// make money clickable (grab and realese)
 	var grab = function() {
 		this.body.gravity.y = 0;
 		this.beingHeld = true;
+		this.grabSound.play();
 	}
 	this.events.onInputDown.add(grab, this);
 	

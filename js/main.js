@@ -2,9 +2,10 @@
 // resolution (1:2 rectangle)
 var game;
 var day;
+var hasSeenControls = false;
 
 window.onload = function(){
-	game = new Phaser.Game(1024, 1024, Phaser.AUTO);
+	game = new Phaser.Game(1024, 1024, Phaser.AUTO, 'game');
 	game.state.add('Preload', Preload);
 	game.state.add('Boot', Boot);
 	game.state.add('Menu', Menu);
@@ -42,10 +43,10 @@ var Preload = function(game){};
 Preload.prototype = {
 	preload: function() {
 		// set appropriate background color
-		game.stage.backgroundColor = "#ffffff";
+		game.stage.backgroundColor = "#000000";
 		
 		// display text
-		this.add.text(475, 300, 'Loading...', {fontSize: '32px', fill: 'black'});
+		this.add.text(475, 300, 'Loading...', {fontSize: '32px', fill: '#ffffff'});
 
 		// add preloader bar and set as preloader sprite (auto-crops sprite)
 		this.preloadBar = this.add.sprite(this.world.centerX-256, this.world.centerY-64,'load');
@@ -56,6 +57,8 @@ Preload.prototype = {
 		game.load.atlas('atlas', 'assets/img/spritesheet.png', 'assets/img/sprites.json');
 			// load menu backdrop
 		game.load.image('menuBackdrop', 'assets/img/menuBackdrop.png');
+			// load screen fade
+		game.load.image('fade', 'assets/img/fade.png');
 
 		//load audio files
 		  //ambient noise
@@ -64,6 +67,12 @@ Preload.prototype = {
 		game.load.audio('select', 'assets/audio/UIselect.ogg');
 		  // grab sound
 		game.load.audio('grab', 'assets/audio/grab.ogg');
+		  // cash register sound
+		game.load.audio('register', 'assets/audio/register.ogg');
+		  // chopping sound
+		game.load.audio('chop', 'assets/audio/chop.ogg');
+		  // paper crinkling sound
+		game.load.audio('cashGrab', 'assets/audio/cash.ogg');
 	},
 	
 	update: function() {
