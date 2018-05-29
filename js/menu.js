@@ -10,8 +10,12 @@ Menu.prototype = {
 		var startGame = function(){
 			//play select noise upon clicking button
 			this.selectNoise.play('', 0, 1, false);
-			// start play by first showing controls
+			// start play by first showing controls if they haven't been seen.
+			if(hasSeenControls){
+				game.state.start('Play');
+			}else{
 			game.state.start('Controls', true, false, true);
+			}
 		};
 		// place a button
 		this.start = game.add.sprite( 100, 300,'atlas', 'button_play');

@@ -4,10 +4,12 @@ Controls.prototype = {
 	
 	init: function(prePlay) {
 			this.isPrePlay = prePlay;
-			console.log(this.isPrePlay);
 	},
 	
 	create: function() {
+		// overide prePlayControls if player has seen controls already.
+		hasSeenControls = true;
+		
 		//load UIselect noise
 		this.selectNoise = game.add.audio('select');
 		
