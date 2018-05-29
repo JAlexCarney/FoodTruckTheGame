@@ -14,12 +14,15 @@ Controls.prototype = {
 		this.selectNoise = game.add.audio('select');
 		
 		//set background color of this stage to white
-		game.stage.backgroundColor = "#ffffff";
+		game.stage.backgroundColor = "#eeee11";
 		
 		//load controls assets from the atlas, including lined paper background
+		var bg = game.add.image(0, 0, 'atlas', 'paper');
+		bg.scale.setTo(1.5, 1.75);
+		bg.alpha = 0.9;
 		game.add.image(0, 0, 'atlas', 'mouse 1');
 		game.add.image(0, 512, 'atlas', 'controls 1');
-		game.add.image(0, 0, 'atlas', 'paper');
+		
 		
 		
 		// load divider
