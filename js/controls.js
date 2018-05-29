@@ -16,12 +16,11 @@ Controls.prototype = {
 		//set background color of this stage to white
 		game.stage.backgroundColor = "#ffffff";
 		
-		game.add.image(49, 610, 'atlas', 'wasd controls');
-		game.add.image(561, 610, 'atlas', 'ijkl controls');
-		game.add.image(0, 0, 'atlas', 'mouse ');
+		//load controls assets from the atlas, including lined paper background
+		game.add.image(0, 0, 'atlas', 'mouse 1');
+		game.add.image(0, 512, 'atlas', 'controls 1');
+		game.add.image(0, 0, 'atlas', 'paper');
 		
-		game.add.text(15, 450, 'The cook uses WASD to move the left paw and\nIJKL to move the right paw and uses E and U\nto pick up items.', {fill: '#000', font: '50px curior new'});
-		game.add.text(405, 300, 'The cashier clicks on\ncustomers to take their orders', {fill: '#000', font: '50px curior new'});
 		
 		// load divider
 		//doesn't need any physics, since it is just a visual to aid the players in understanding the splitscreen mechanics
