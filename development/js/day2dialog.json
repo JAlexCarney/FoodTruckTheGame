@@ -1,0 +1,89 @@
+[
+  [
+    {"customer": "bat", "dialog": "So I usually get a snack before my naps, and like"},
+    {"dialog": "I was in the mood for a fruit salad."},
+    {"dialog": " But I’ll go for a salmon roll instead."}
+  ],
+  [
+    {"dialog" : "Yawwwwn..."}
+    {"dialog": "I knew I should’ve brought my headphones."},
+  ],
+  [
+    {"dialog" : "Thanks!"},
+    {"dialog" : "I'll see you guys around.", "newCustomer": "true"}
+  ],
+  [
+    {"dialog" : "Yawwwwn...I'm gonna go take a nap."},
+    {"dialog" : "It'd be better than waiting around here.", "newCustomer": "true"}
+  ],
+
+ [
+   {"customer" : "bird", "dialog" : "Wow so this is the place boss was talking about"},
+   {"dialog" : "It's a real hoot!"},
+   {"dialog" : "..."},
+   {"dialog" : "Don't tell any owls I said that...."},
+   {"dialog" : "Usually I crave some lizard meat, but I'm down for some sashimi, please."}
+ ],
+ [
+   {"dialog" : "Yo, what's going on back there?"},
+   {"dialog" : "It's been a while..."}
+ ],
+ [
+   {"dialog" : "Thanks!"},
+   {"dialog" : "Here's hoping it's better than lizard meat!", "newCustomer" : "true"}
+ ],
+ [
+   {"dialog" : "Maaaaaaan"},
+   {"dialog" : "I’m hungry enough to go find my own lizards..."},
+   {"dialog" : "I'm out. ", "newCustomer" : "true"}
+ ],
+
+ [
+   {"customer" : "mouse", "dialog" : "So like"},
+   {"dialog" : "My IG followers loved the visual aesthetic of your bowl, so I'm back!"},
+   {"dialog" : "This time, I'll order some sashimi! Pretty please!"},
+   {"dialog" : "Emphasis on pretty."}
+ ],
+ [
+    {"dialog" : "Can you hurry up please?"},
+     {"dialog" : "I'm losing followers every minute you waste..."}
+ ],
+ [
+   {"dialog" : "Thanks! I can't wait to take a pic before I dig in.", "newCustomer": "true"}
+ ],
+ [
+    {"dialog" : "I’m so hungry that I’m giving your truck a half star review."},
+ ],
+
+
+ [
+   {"customer": "frog", "dialog" : "Okay, so yesterday, you didn’t have any flies..."},
+   {"dialog" : "But... would you happen to have any dragonflies?"},
+   {"dialog" : "No…? How about grasshoppers?"},
+   {"dialog" : "Dang, alright. I’ll have another salmon roll."},
+   {"dialog" : "Actually, make that two salmon rolls."}
+ ],
+ [
+   {"dialog" : "Typical of food to try and fly away..."},
+   {"dialog" : "Am I right or am I right?"}
+ ],
+ [
+   {"dialog" : "Hop hop hoorah! Food! ", "newCustomer": "true"},
+ ],
+ [
+   {"dialog" : "If the food wants to fly, it’s time to hop!"}
+ ]
+ [
+    {"customer": "axolotl", "dialog" : "Hello sir! I’m real hungry after baseball tonight!"},
+    {"dialog" : "I even hit a home run!"},
+    {"dialog" : "Can I please have a poke bowl and a salmon roll?"}
+  ],
+  [
+    {"dialog" : "It’s getting late..."},
+    {"dialog" : "I hope my mom doesn’t worry about where I am..."}
+  ],
+  [
+    {"dialog" : "I gotta hurry home now,"},
+    {"dialog" : "but I’ll eat this on the way!"}
+  ]
+]
