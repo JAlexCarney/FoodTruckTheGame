@@ -15,7 +15,7 @@
     {"dialog" : "I'm sorry that sounded more ominous than it sounded."}
   ],
   [
-     {"dialog": "Thanks."},
+    {"dialog": "Thanks."},
     {"dialog": "The office misses you guys by the way."},
     {"dialog": "I'll send them your way for lunch breaks"},
     {"dialog": "Keep the change and good luck."},
@@ -30,7 +30,9 @@
     {"dialog": "Well, how about a salmon roll?"}
   ],
   [
-    {"dialog": "Y'all better hop to it or I will. "},
+    {"dialog": "Y'all better hop to it or I will. "}
+  ],
+  [
     {"dialog": "Mmmm! Thanks!", "newCustomer": "true"}
   ],
   [
@@ -41,13 +43,16 @@
   [
     {"customer" : "mouse", "dialog": "So like, I'm lactose intolerant."},
     {"dialog" : "So like, do you guys have anything that's like uh"},
-    {"dialog" : "Organic, vegan, gluten free, cruelty free, but also like... tastes nice and savory?"},
+    {"dialog" : "Organic, vegan, gluten free, and cruelty free?"},
+    {"dialog": "but also like... actually tastes good and savory?"},
     {"dialog" : "Oh sweet you do!?"},
     {"dialog" : "Then I'll take that organic poke bowl"},
-    {"dialog" : "with extra gluten-free and cruelty-free sesame seeds!"}
+    {"dialog" : "with extra gluten and cruelty-free sesame seeds!"}
   ],
   [
-    {"dialog" : "If this takes any longer, I'll write an extremely long callout blog post on this establishment."},
+    {"dialog" : "If this takes any longer, I'll write an extremely long callout blog post on this establishment."}
+  ],
+  [
     {"dialog" : "Thanks! This will totally fit my food account Instagram feed!!","newCustomer": "true"}
   ],
   [
@@ -67,7 +72,9 @@
     {"dialog": "I'll take an order of sashimi please."}
   ],
   [
-    {"dialog": "Hurry up, I don't have all day..."},
+    {"dialog": "Hurry up, I don't have all day..."}
+  ],
+  [
     {"dialog": "Delicious!", "newCustomer" : "true"}
   ],
   [
@@ -82,7 +89,9 @@
     {"dialog": "So gimme 1 order of salmon sushi rolls please! Just don’t make ‘em too big!"}
   ],
   [
-    {"dialog" :" Hey can you guys please hurry? I have baseball practice soon."},
+    {"dialog" :" Hey can you guys please hurry? I have baseball practice soon."}
+  ],
+  [
     {"dialog": "Salmon? I know I asked for it, but thanks! My favorite!","newCustomer" : "true"}
   ],
   [
