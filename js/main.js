@@ -57,6 +57,12 @@ Preload.prototype = {
 			// load menu backdrop
 		game.load.image('menuBackdrop', 'assets/img/menuBackdrop.png');
 		
+		//load button for credits page
+		game.load.image('links', 'assets/img/links.png');
+		game.load.image('amanda chibi', 'assets/img/amanda chibi.png');
+		game.load.image('janel chibi', 'assets/img/janel chibi.png');
+		game.load.image('alex chibi', 'assets/img/alex chibi.png');
+		
 		//load audio files
 		  //ambient noise
 		game.load.audio('ambientNoise', 'assets/audio/tokyoSupermarket.ogg');
