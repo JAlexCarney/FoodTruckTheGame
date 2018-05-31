@@ -1,39 +1,66 @@
 [
-  [ {"customer" : "shark", "dialog" : "Oh, it’s been a while since I’ve last you guys."},
+  [
+    {"customer" : "shark", "dialog" : "Oh, it’s been a while since I’ve last you guys."},
     {"dialog": "I knew you guys quit with your resignation letters talking about"},
     {"dialog": "something about following your dreams???"},
     {"dialog": "Is that what they're called?"},
     {"dialog": "But I didn't think it'd be for this run down gig."},
-    {"dialog": "Anyways, get your old manager a poke bowl"},
+    {"dialog": "Anyways, get your old manager a poke bowl"}
+  ],
+
+  [
     {"dialog": "What's taking so long? I have a meeting in 10."},
     {"dialog": "If you guys don't hurry it up,"},
     {"dialog": "I won't be the only one swimming with the fishes."},
+    {"dialog" : "I'm sorry that sounded more ominous than it sounded."}
+  ],
+  [
     {"dialog": "Thanks."},
     {"dialog": "The office misses you guys by the way."},
     {"dialog": "I'll send them your way for lunch breaks"},
     {"dialog": "Keep the change and good luck."},
     {"dialog": "In this economy, you'll need it.", "newCustomer": "true"}
   ],
+
+
   [
     {"customer" : "frog", "dialog": "Y'all serve flies here?"},
     {"dialog": "No?"},
     {"dialog": "Oh.... Dang."},
-    {"dialog": "Well, how about a salmon roll?"},
-    {"dialog": "Y'all better hop to it or I will. "},
-    {"dialog": "Mmmm! Thanks!", "newCustomer": "true"},
+    {"dialog": "Well, how about a salmon roll?"}
+  ],
+  [
+    {"dialog": "Y'all better hop to it or I will. "}
+  ],
+  [
+    {"dialog": "Mmmm! Thanks!", "newCustomer": "true"}
+  ],
+  [
     {"dialog": "Hmph. Disappointing.", "newCustomer": "true"}
   ],
+
+
   [
     {"customer" : "mouse", "dialog": "So like, I'm lactose intolerant."},
     {"dialog" : "So like, do you guys have anything that's like uh"},
-    {"dialog" : "Organic, vegan, gluten free, cruelty free, but also like... tastes nice and savory?"},
+    {"dialog" : "Organic, vegan, gluten free, and cruelty free?"},
+    {"dialog": "but also like... actually tastes good and savory?"},
     {"dialog" : "Oh sweet you do!?"},
     {"dialog" : "Then I'll take that organic poke bowl"},
-    {"dialog" : "with extra gluten-free and cruelty-free sesame seeds!"},
-    {"dialog" : "If this takes any longer, I'll write an extremely long callout blog post on this establishment."},
-    {"dialog" : "Thanks! This will totally fit my food account Instagram feed!!","newCustomer": "true"},
+    {"dialog" : "with extra gluten and cruelty-free sesame seeds!"}
+  ],
+  [
+    {"dialog" : "If this takes any longer, I'll write an extremely long callout blog post on this establishment."}
+  ],
+  [
+    {"dialog" : "Thanks! This will totally fit my food account Instagram feed!!","newCustomer": "true"}
+  ],
+  [
     {"dialog" : "Wack out of 5 stars. Honestly.", "newCustomer": "true"}
   ],
+
+
+
   [
     {"customer" : "alpaca", "dialog": "Hay."},
     {"dialog": "Lemme get uhhhhh..."},
@@ -42,18 +69,32 @@
     {"dialog": "I got it..."},
     {"dialog": "I swear..."},
     {"dialog": "Uh..."},
-    {"dialog": "I'll take an order of sashimi please."},
-    {"dialog": "Hurry up, I don't have all day..."},
-    {"dialog": "Delicious!", "newCustomer" : "true"},
+    {"dialog": "I'll take an order of sashimi please."}
+  ],
+  [
+    {"dialog": "Hurry up, I don't have all day..."}
+  ],
+  [
+    {"dialog": "Delicious!", "newCustomer" : "true"}
+  ],
+  [
     {"dialog": "...Bye...", "newCustomer" : "true"}
   ],
+
+
   [
     {"customer" : "axolotl", "dialog" : "Hello sir!"},
     {"dialog" : "My mom tells me I can eat anything I want for lunch"},
     {"dialog": "...as long as I can get it to fit in my mouth!"},
-    {"dialog": "So gimme 1 order of salmon sushi rolls please! Just don’t make ‘em too big!"},
-    {"dialog" :" Hey can you guys please hurry? I have baseball practice soon."},
-    {"dialog": "Salmon? I know I asked for it, but thanks! My favorite!","newCustomer" : "true"},
+    {"dialog": "So gimme 1 order of salmon sushi rolls please! Just don’t make ‘em too big!"}
+  ],
+  [
+    {"dialog" :" Hey can you guys please hurry? I have baseball practice soon."}
+  ],
+  [
+    {"dialog": "Salmon? I know I asked for it, but thanks! My favorite!","newCustomer" : "true"}
+  ],
+  [
     {"dialog": "Sorry, but I have to go to practice now...", "newCustomer": "true"}
   ]
 
