@@ -19,6 +19,8 @@ var Play = function(game){
 	this.LETTER_TIMER = 10; // # of ms each letter takes to "type" onscreen
 	this.LETTER_TIMER_SLOW = 50; // a slow one to nerf the speed readers
 
+  this.ORDER_TIMER = 180000; //time limit to prepare an order; set to 3 minutes
+
 	//dialog variables specifically
 	this.dialogConvo = 0; //current "convo"
 	this.dialogLine = 0; //current line
@@ -38,6 +40,7 @@ var Play = function(game){
 	  //will have:
 		//timer to time an order
 		//variable that keeps track if they get it right (true) or wrong(false) ??
+		//variable to see if they got it in time ??
 };
 Play.prototype = {
 
@@ -65,12 +68,21 @@ Play.prototype = {
 		// load bottom
 			// background
 		this.add.sprite(0, 512, 'atlas', 'counter');
-			// cucumber
+			// salmon
+		//spawn salmon function
+		// var spawnSalmon = function() {
+		// 		game.add.sprite(400, 700, 'atlas', 'salmon_whole');
+		// 		game.physics.enable(this.salmon, Phaser.Physics.ARCADE);
+		// 		this.salmonIsChopped = false;
+		// 		this.salmon.anchor = new PIXI.Point(0.5, 0.5);
+		// 		this.salmon.scale.setTo(0.5);
+		// };
+		// this.salmon = spawnSalmon();
 		this.salmon = game.add.sprite(400, 700, 'atlas', 'salmon_whole');
-		game.physics.enable(this.salmon, Phaser.Physics.ARCADE);
-		this.salmonIsChopped = false;
-		this.salmon.anchor = new PIXI.Point(0.5, 0.5);
-		this.salmon.scale.setTo(0.5);
+			game.physics.enable(this.salmon, Phaser.Physics.ARCADE);
+			this.salmonIsChopped = false;
+			this.salmon.anchor = new PIXI.Point(0.5, 0.5);
+			this.salmon.scale.setTo(0.5);
 			// knife
 		this.knife = game.add.sprite(712, 700, 'atlas', 'knife');
 		game.physics.enable(this.knife, Phaser.Physics.ARCADE);
@@ -116,15 +128,17 @@ Play.prototype = {
 		this.add.sprite(600, 75, 'atlas', 'cashRegisterTempDisplay');
 		this.add.sprite(600, 75, 'atlas', 'cashRegister');
 
-			//back to menu
-		var openMenu = function(){
-			game.state.start('Menu');
-			this.ambientNoise.destroy();
-			this.selectNoise.play('', 0, 1, false);
-		};
-		this.controls = game.add.sprite(750, -10,'atlas', 'button_menu');
-		this.controls.inputEnabled = true;
-		this.controls.events.onInputDown.add(openMenu, this);
+    //disabling menu
+
+		// 	//back to menu
+		// var openMenu = function(){
+		// 	game.state.start('Menu');
+		// 	this.ambientNoise.destroy();
+		// 	this.selectNoise.play('', 0, 1, false);
+		// };
+		// this.controls = game.add.sprite(750, -10,'atlas', 'button_menu');
+		// this.controls.inputEnabled = true;
+		// this.controls.events.onInputDown.add(openMenu, this);
 
 			// add an instance of the money prefab
 		this.money = new Money(game, 100, 200);
@@ -271,5 +285,5 @@ Play.prototype = {
 			//set past speaker
 			this.dialogLastCustomer = this.customer;
 		}
-	} //end of text typing function
+	} //end of text typing function derived from nathan
 };

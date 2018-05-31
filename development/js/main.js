@@ -50,9 +50,10 @@ Preload.prototype = {
 			// load texture atlas
 		game.load.atlas('atlas', 'assets/img/spritesheet.png', 'assets/img/sprites.json');
 			// load menu backdrop
-		game.load.image('menuBackdrop', 'assets/img/menuBackdrop.png');
-      //load dialog JSON
+		game.load.image('menuBackdrop', 'assets/img/titleScreen.png');
+      //load dialog JSON file
 		game.load.text('dialog', 'js/day1dialog.json');
+
 
 		//load audio files
 		  //ambient noise
@@ -68,7 +69,6 @@ Preload.prototype = {
 		this.state.start('Menu');
 	}
 }
-// end of nathans dialog code addaption
 
 var Over = function(game){};
 Over.prototype = {
