@@ -1,0 +1,142 @@
+[
+  [
+    {"customer": "bird","dialog": "Hey, so I’m not about to become a regular around here or anything...", "newCustomer": "true"},
+    {"dialog": ""},
+    {"dialog": ""},
+    {"dialog": ""},
+    {"dialog": ""},
+    {"dialog": ""},
+
+  ],
+  [
+    {"dialog": ""},
+    {"dialog": ""},
+    {"dialog": ""},
+    {"dialog": ""},
+
+  ],
+  [
+    {"dialog": ""},
+    {"dialog": ""},
+    {"dialog": ""},
+    {"dialog": ""},
+
+  ],
+  [
+    {"dialog": ""},
+    {"dialog": ""},
+    {"dialog": ""},
+    {"dialog": ""},
+
+  ],
+
+
+
+  [
+    {"customer": "frog", "dialog": "So, here’s a fun fact about frogs...", "newCustomer": "true"},
+    {"dialog": "We can cough up our stomachs to clean ‘em and put ‘em back in"},
+    {"dialog": "Not to say your food's like filthy or anything"},
+    {"dialog": "I just thought you might find it cool."},
+    {"dialog": "No...?"},
+    {"dialog": "That’s okay..."},
+    {"dialog": "...I’d like a salmon roll and an order of sashimi"}
+  ],
+  [
+    {"dialog": "Hey, wanna know another fun fact while we wait???"},
+    {"dialog": "Did you know I can wash my intestines?"},
+    {"dialog": "Wanna see?"},
+    {"dialog": "No...?"},
+    {"dialog": "Okay..."}
+  ],
+  [
+    {"dialog": "Thanks!"}
+
+  ],
+  [
+    {"dialog": "I’ll take my talents somewhere they’re appreciated!"}
+  ],
+
+
+  [
+    {"customer": "bat", "dialog": "Good afternoon.", "newCustomer": "true"},
+    {"dialog": "Can I get three poke bowls?"},
+    {"dialog": "One for me and my... friends."}
+
+  ],
+  [
+    {"dialog": " My friends are getting hungry..."},
+    {"dialog": "And so am I."}
+
+  ],
+  [
+    {"dialog": "Mmm. Thanks! "},
+    {"dialog": "My friends?"},
+    {"dialog": "Uh, duh."},
+    {"dialog": "Me, myself, and I."},
+    {"dialog": "Take care!"}
+
+  ],
+  [
+    {"dialog": "We’re too hungry to keep waiting..."},
+    {"dialog": "We're gonna check out another place down the street"},
+    {"dialog": "We as in me, myself and I."}
+  ],
+
+
+
+  [
+    {"customer" : "axolotl", "dialog": "Hello sir!!", "newCustomer": "true"},
+    {"dialog": "I’m excited for our big game tomorrow!"},
+    {"dialog": "I hope you guys will be open so my mom can try some of your food!! "},
+    {"dialog": "I tell her about you guys all the time!!"},
+    {"dialog": "Anyways, I'll have a salmon roll please!"}
+
+  ],
+  [
+    {"dialog": "Hey sir,"},
+    {"dialog": "it’s getting a bit past my bedtime..."},
+    {"dialog": "so I might have to head home soon..."}
+
+  ],
+  [
+    {"dialog": "Thank you yet again, sir!"},
+    {"dialog": "See you after our big game tomorrow!"}
+
+  ],
+  [
+    {"dialog": "The game’s gonna be so big!"},
+    {"dialog": "So, I really need to leave and get sleep!"},
+    {"dialog": "Sorry, about leaving, but..."},
+    {"dialog": "Have a good night!"}
+  ],
+
+
+
+  [
+    {"customer": "shark", "dialog": "Rough week, huh?", "newCustomer": "true"},
+    {"dialog": "I can barely imagine."},
+    {"dialog": "You and me both, honestly."},
+    {"dialog": "I’ll take a poke bowl and an order of sashimi."}
+  ],
+  [
+    {"dialog": "You two alright back there?"}
+
+  ],
+  [
+    {"dialog": "You know, if this all falls apart,"},
+    {"dialog": "God forbid."},
+    {"dialog": "You’re both welcome back."},
+    {"dialog": "I know you guys are following dreams and stuff, but"},
+    {"dialog": "There’s no shame in saving up and giving this another shot in the future."}
+
+  ],
+  [
+    {"dialog": "Thanks. Keep the change."},
+    {"dialog": "You know, if this all falls apart,"},
+    {"dialog": "God forbid."},
+    {"dialog": "You’re both welcome back."},
+    {"dialog": "I know you guys are following dreams and stuff, but"},
+    {"dialog": "There’s no shame in saving up and giving this another shot in the future."}
+  ]
+
+]
