@@ -1,8 +1,11 @@
 // create the game object with a...
 // resolution (1:2 rectangle)
+
+//global variables
 var game;
 var day;
 var hasSeenControls = false;
+var hasSeenComic = false
 
 window.onload = function(){
 	game = new Phaser.Game(1024, 1024, Phaser.AUTO, 'foodtruck-game');

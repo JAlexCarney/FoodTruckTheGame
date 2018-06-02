@@ -50,10 +50,15 @@ Controls.prototype = {
 		this.selectNoise.play('', 0, 1, false);
 
 	},
-	//takes player to the start
+	//if player hasn't seen comic, take them to it
 	openStart: function() {
-		game.state.start('Play');
-		this.selectNoise.play('', 0, 1, false);
+		if(!hasSeenComic) {
+			game.state.start('Comic');
+			this.selectNoise.play('', 0, 1, false);
+		} else {
+			game.state.start('Play');
+			this.selectNoise.play('', 0, 1, false);
+		}
 
 	}
 }

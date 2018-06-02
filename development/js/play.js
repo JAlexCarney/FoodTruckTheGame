@@ -336,6 +336,10 @@ Play.prototype = {
 		this.ricePot.scale.setTo(0.6);
 		game.physics.enable(this.ricePot, Phaser.Physics.ARCADE);
 
+		// knife
+		this.knife = new Pickupable(game, 'knife', 712, 700);
+		game.add.existing(this.knife);
+
 	},
 	createPaws: function() {
 		// create player 2's paws
@@ -360,10 +364,6 @@ Play.prototype = {
 				// rice
 			this.rice = new Pickupable(game, 'rice_raw', 756, 800);
 			game.add.existing(this.rice);
-
-				// knife
-			this.knife = new Pickupable(game, 'knife', 712, 700);
-			game.add.existing(this.knife);
 
 	},
 	//sets up top screen. put here for code readability

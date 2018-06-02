@@ -28,13 +28,17 @@ Menu.prototype = {
 	startGame: function(){
 		//play select noise upon clicking button
 		this.selectNoise.play('', 0, 1, false);
-		// start play by first showing controls if they haven't been seen.
-		if(hasSeenControls){
-			game.state.start('Comic');
-		}else{
+		//showing controls if they haven't been seen.
+		if(!hasSeenControls){
+			game.state.start('Controls');
+		//show comic if haven't been seen
+	} else if (!hasSeenComic) {
 			//still take them there for now... lol
-		game.state.start('Comic', true, false, true);
-		}
+		  game.state.start('Comic', true, false, true);
+	  } else {
+			game.state.start('Play');
+	  }
+
 	},
 	//takes player to Controls screen
 	openControls: function() {
