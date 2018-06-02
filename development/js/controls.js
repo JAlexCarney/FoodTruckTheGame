@@ -50,7 +50,7 @@ Controls.prototype = {
 
 	},
 	openStart: function() {
-		game.state.start('Comic');
+		game.state.start('Play');
 		this.selectNoise.play('', 0, 1, false);
 
 	}
