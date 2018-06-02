@@ -1,11 +1,11 @@
 [
   [
-    {"customer" : "shark", "dialog" : "Oh, it’s been a while since I’ve last you guys."},
-    {"dialog": "I knew you guys quit with your resignation letters talking about"},
-    {"dialog": "something about following your dreams???"},
-    {"dialog": "Is that what they're called?"},
-    {"dialog": "But I didn't think it'd be for this run down gig."},
-    {"dialog": "Anyways, get your old manager a poke bowl"}
+    {"customer" : "shark", "dialog" : "Oh, it’s been a while since I’ve last you guys.", "function" : "this.spawnAllIngredients();"},
+    {"dialog" : "I knew you guys quit with your resignation letters talking about"},
+    {"dialog" : "something about following your dreams???"},
+    {"dialog" : "Is that what they're called?"},
+    {"dialog" : "But I didn't think it'd be for this run down gig."},
+    {"dialog" : "Anyways, get your old manager a poke bowl", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
   ],
 
   [
@@ -32,10 +32,10 @@
 
 
   [
-    {"customer" : "frog", "dialog": "Y'all serve flies here?",  "newCustomer": "true"},
+    {"customer" : "frog", "dialog": "Y'all serve flies here?",  "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
     {"dialog": "No?"},
     {"dialog": "Oh.... Dang."},
-    {"dialog": "Well, how about a salmon roll?"}
+    {"dialog": "Well, how about a salmon roll?",  "function" : "this.startOrderTimer(this.orderTime, 10000);"}
   ],
   [
     {"dialog": "Y'all better hop to it or I will. "}
@@ -49,13 +49,13 @@
 
 
   [
-    {"customer" : "mouse", "dialog": "So like, I'm lactose intolerant.",  "newCustomer": "true"},
+    {"customer" : "mouse", "dialog": "So like, I'm lactose intolerant.",  "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
     {"dialog" : "So like, do you guys have anything that's like uh"},
     {"dialog" : "Organic, vegan, gluten free, and cruelty free?"},
     {"dialog": "but also like... actually tastes good and savory?"},
     {"dialog" : "Oh sweet you do!?"},
     {"dialog" : "Then I'll take that organic poke bowl"},
-    {"dialog" : "with extra gluten and cruelty-free sesame seeds!"}
+    {"dialog" : "with extra gluten and cruelty-free sesame seeds!", "function" : "this.startOrderTimer();"}
   ],
   [
     {"dialog" : "If this takes any longer, I'll write an extremely long callout blog post on this establishment."}
@@ -70,14 +70,14 @@
 
 
   [
-    {"customer" : "alpaca", "dialog": "Hay.", "newCustomer": "true"},
+    {"customer" : "alpaca", "dialog": "Hay.", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
     {"dialog": "Lemme get uhhhhh..."},
     {"dialog": "Uhhhhhhhhhh..."},
     {"dialog": "No, I don't need a minute to look at the menu!"},
     {"dialog": "I got it..."},
     {"dialog": "I swear..."},
     {"dialog": "Uh..."},
-    {"dialog": "I'll take an order of sashimi please."}
+    {"dialog": "I'll take an order of sashimi please.", "function" : "this.startOrderTimer();"}
   ],
   [
     {"dialog": "Hurry up, I don't have all day..."}
@@ -91,10 +91,10 @@
 
 
   [
-    {"customer" : "axolotl", "dialog" : "Hello sir!" , "newCustomer": "true"},
+    {"customer" : "axolotl", "dialog" : "Hello sir!" , "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
     {"dialog" : "My mom tells me I can eat anything I want for lunch"},
     {"dialog": "...as long as I can get it to fit in my mouth!"},
-    {"dialog": "So gimme 1 order of salmon sushi rolls please! Just don’t make ‘em too big!"}
+    {"dialog": "So gimme 1 order of salmon sushi rolls please! Just don’t make ‘em too big!", "function" : "this.startOrderTimer();"}
   ],
   [
     {"dialog" :" Hey can you guys please hurry? I have baseball practice soon."}

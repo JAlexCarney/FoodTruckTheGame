@@ -10,6 +10,7 @@ window.onload = function(){
 	game.state.add('Boot', Boot);
 	game.state.add('Menu', Menu);
 	game.state.add('Controls', Controls);
+	game.state.add('Comic', Comic);
 	game.state.add('Play', Play);
 	game.state.add('Over', Over);
 	game.state.add('Credits', Credits);
@@ -57,9 +58,15 @@ Preload.prototype = {
 			// load menu backdrop
 		game.load.image('menuBackdrop', 'assets/img/titleScreen.png');
 		// load screen fade
-	game.load.image('fade', 'assets/img/fade.png');
-      //load dialog JSON file
+		game.load.image('fade', 'assets/img/fade.png');
+		  //load comic now
+		game.load.image('comic', 'assets/img/storyComic.png');
+      //load dialog JSON files
 		game.load.text('dialog', 'js/day1dialog.json');
+		game.load.text('dialog2', 'js/day2dialog.json');
+		game.load.text('dialog3', 'js/day3dialog.json');
+		game.load.text('dialog4', 'js/day4dialog.json');
+		game.load.text('dialog5', 'js/day5dialog.json');
 
 
 		//load audio files
