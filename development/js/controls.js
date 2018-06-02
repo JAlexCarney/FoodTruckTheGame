@@ -44,11 +44,13 @@ Controls.prototype = {
 			this.playButton.events.onInputDown.add(this.openStart, this);
 		}
 	},
+	//takes player back to menu
 	openMenu: function(){
 		game.state.start('Menu');
 		this.selectNoise.play('', 0, 1, false);
 
 	},
+	//takes player to the start
 	openStart: function() {
 		game.state.start('Play');
 		this.selectNoise.play('', 0, 1, false);
