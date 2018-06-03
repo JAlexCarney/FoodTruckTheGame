@@ -15,6 +15,8 @@ var Paw = function (game, isLeftHand, x, y){
 	this.overlap = false;
 	this.overlapObject = null;
 	this.heldObject = null;
+	this.fading = false;
+	
 	//load grab noise
 	this.grabNoise = game.add.audio('grab');
 	
@@ -134,7 +136,9 @@ Paw.prototype.update = function(){
 	if(this.y <= 620){
 		this.y = 620;
 	}
-	// keep paw on top of food
-	game.world.bringToTop(this);
+	// keep paw on top of food while not fading
+	if(!this.fading){
+		game.world.bringToTop(this);
+	}
 	this.overlap = false
 }

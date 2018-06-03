@@ -57,19 +57,14 @@ Preload.prototype = {
 		game.load.atlas('atlas', 'assets/img/spritesheet.png', 'assets/img/sprites.json');
 			// load menu backdrop
 		game.load.image('menuBackdrop', 'assets/img/menuBackdrop.png');
-<<<<<<< HEAD
 		
 		//load button for credits page
 		game.load.image('links', 'assets/img/links.png');
-		game.load.image('amanda chibi', 'assets/img/amanda chibi.png');
-		game.load.image('janel chibi', 'assets/img/janel chibi.png');
-		game.load.image('alex chibi', 'assets/img/alex chibi.png');
-		
-=======
+
 			// load screen fade
 		game.load.image('fade', 'assets/img/fade.png');
 
->>>>>>> 50197bc01865cd9c6c4384b19246d825a4bd31b7
+
 		//load audio files
 		  //ambient noise
 		game.load.audio('ambientNoise', 'assets/audio/tokyoSupermarket.ogg');

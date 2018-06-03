@@ -27,9 +27,9 @@ Credits.prototype = {
 		this.controls.inputEnabled = true;
 		this.controls.events.onInputDown.add(openMenu, this);
 		
-		game.add.image(700, 200, 'alex chibi');
-		game.add.image(700, 450, 'janel chibi');
-		game.add.image(700, 700, 'amanda chibi');
+		game.add.image(700, 200, 'atlas', 'alex chibi');
+		game.add.image(700, 450, 'atlas', 'janel chibi');
+		game.add.image(700, 700, 'atlas', 'amanda chibi');
 	
 		
 		//http://www.html5gamedevs.com/topic/9707-embedding-a-hyperlink/
