@@ -29,10 +29,44 @@ Night.prototype = {
 		//doesn't need any physics, since it is just a visual to aid the players in understanding the splitscreen mechanics
 		this.divider = this.add.sprite(0, 502, 'spritesheet', 'divider');
 		
+		//var money = game.rnd.intengerInRange(132, 571);
+		var money = Math.floor(Math.random() * 439) + 132;
+		
+		//set up dayName variable to display M-F 
+		var dayName = "Monday";
+		if (day == 2) { dayName = "Tuesday"; }
+		else if (day == 3) { dayName = "Wednesday"; }
+		else if (day == 4) {dayName = "Thursday"; }
+		else {dayName = "Friday"; }
+		
+		
 		//add text
-		this.txt = game.add.text(256, 256, "Day" + day + "You made money! Continue");
+		this.txtStyle = { font: 'bold 30px Courier New', fill: '#000000', align: "center",  boundsAlignH: "middle", boundsAlignV: "middle"};
+		this.txt = game.add.text(340, 15, dayName + "\nYou made $" + money, this.txtStyle);
 		this.txt.setTextBounds(30, 10, 290, 374);
 		this.txt.wordWrap = true;
 		this.txt.wordWrapWidth = 290;
+
+		
+		// make a menu button
+		var openMenu = function(){
+			game.state.start('Menu');
+			this.selectNoise.play('', 0, 1, false);
+			day++;
+		};
+		this.controls = game.add.sprite(240, 270, 'atlas', 'button_menu');
+		this.controls.inputEnabled = true;
+		this.controls.events.onInputDown.add(openMenu, this);
+		
+		
+		// make a continue button
+		var openMenu = function(){
+			game.state.start('Menu');
+			this.selectNoise.play('', 0, 1, false);
+			day++;
+		};
+		this.controls = game.add.sprite(540, 270, 'atlas', 'button_continue');
+		this.controls.inputEnabled = true;
+		this.controls.events.onInputDown.add(openMenu, this);
 			},
 }
