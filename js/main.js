@@ -60,10 +60,12 @@ Preload.prototype = {
 		
 		//load button for credits page
 		game.load.image('links', 'assets/img/links.png');
+		game.load.image('amanda chibi', 'assets/img/amanda chibi.png');
+		game.load.image('janel chibi', 'assets/img/janel chibi.png');
+		game.load.image('alex chibi', 'assets/img/alex chibi.png');
 
 			// load screen fade
 		game.load.image('fade', 'assets/img/fade.png');
-
 
 		//load audio files
 		  //ambient noise
@@ -82,7 +84,7 @@ Preload.prototype = {
 	
 	update: function() {
 		// wait for first ogg to properly decode
-		this.state.start('Menu');
+		this.state.start('Night');
 	} 
 }
 // end of nathans code addaption
