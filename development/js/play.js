@@ -1,3 +1,7 @@
+// cook's paws are temporarly going to be globals so they can be seen by the pickupables pre-fab
+var leftPaw;
+var rightPaw;
+
 var Play = function(game){
 	//Dialog System constants that will save my Life
 	//credit to Nathan's dialogue example from lecture
@@ -19,6 +23,8 @@ var Play = function(game){
 	this.LETTER_TIMER = 10; // # of ms each letter takes to "type" onscreen
 	this.LETTER_TIMER_SLOW = 50; // a slow one to nerf the speed readers
 
+  this.ORDER_TIMER = 180000; //time limit to prepare an order; set to 3 minutes
+
 	//dialog variables specifically
 	this.dialogConvo = 0; //current "convo"
 	this.dialogLine = 0; //current line
@@ -28,7 +34,8 @@ var Play = function(game){
 	this.dialogText = null; //actual dialog text
 	this.nextText = null; //prompt for player response
 	this.dialogClick = false; //detect player response
-	this.customerDonezo = false;//detect if a customer is Donezo
+	this.customerDonezo = false; //detect if a customer is Donezo
+	this.orderOnTime = false; //detect to see if player got order time
 
 	//x value to place characters offscreen to the right
 	  //y not here to keep consistent with a customer's y value
@@ -38,6 +45,7 @@ var Play = function(game){
 	  //will have:
 		//timer to time an order
 		//variable that keeps track if they get it right (true) or wrong(false) ??
+		//variable to see if they got it in time ??
 };
 Play.prototype = {
 
@@ -65,25 +73,41 @@ Play.prototype = {
 		// load bottom
 			// background
 		this.add.sprite(0, 512, 'atlas', 'counter');
-			// cucumber
-		this.salmon = game.add.sprite(400, 700, 'atlas', 'salmon_whole');
-		game.physics.enable(this.salmon, Phaser.Physics.ARCADE);
-		this.salmonIsChopped = false;
-		this.salmon.anchor = new PIXI.Point(0.5, 0.5);
-		this.salmon.scale.setTo(0.5);
-			// knife
-		this.knife = game.add.sprite(712, 700, 'atlas', 'knife');
-		game.physics.enable(this.knife, Phaser.Physics.ARCADE);
-		this.knife.anchor = new PIXI.Point(0.5, 0.5);
-		this.knife.scale.setTo(1.5);
+
+		// cutting board
+	this.board = this.add.sprite(256, 512, 'atlas', 'cutting board');
+	this.board.rotation = Math.PI / 2;
+
+		// Rice pot
+	this.ricePot = this.add.sprite(768, 522, 'atlas', 'pot_empty');
+	this.ricePot.scale.setTo(0.6);
+	game.physics.enable(this.ricePot, Phaser.Physics.ARCADE);
 
 		// create player 2's paws
 			// left paw
 		this.leftPaw = new Paw(game, true, 20,800);
 		game.add.existing(this.leftPaw);
+		leftPaw = this.leftPaw
 			// right Paw
 		this.rightPaw = new Paw(game, false, 720,800);
 		game.add.existing(this.rightPaw);
+		rightPaw = this.rightPaw
+
+		// seaweed
+	this.seaweed = new Pickupable(game, 'seaweed', 200, 800);
+	game.add.existing(this.seaweed);
+
+		// salmon
+	this.salmon = new Pickupable(game, 'salmon', 400, 700);
+	game.add.existing(this.salmon);
+
+		// rice
+	this.rice = new Pickupable(game, 'rice_raw', 756, 800);
+	game.add.existing(this.rice);
+
+		// knife
+	this.knife = new Pickupable(game, 'knife', 712, 700);
+	game.add.existing(this.knife);
 
 		// load top
 		this.add.sprite(0, 0, 'atlas', 'top screen');
@@ -112,19 +136,11 @@ Play.prototype = {
 		this.topCounter.body.setSize(1024, 64, 0, 64);
 		this.topCounter.body.immovable = true;
 
-			// add the register (currently decorative : P)
-		this.add.sprite(600, 75, 'atlas', 'cashRegisterTempDisplay');
-		this.add.sprite(600, 75, 'atlas', 'cashRegister');
-
-			//back to menu
-		var openMenu = function(){
-			game.state.start('Menu');
-			this.ambientNoise.destroy();
-			this.selectNoise.play('', 0, 1, false);
-		};
-		this.controls = game.add.sprite(750, -10,'atlas', 'button_menu');
-		this.controls.inputEnabled = true;
-		this.controls.events.onInputDown.add(openMenu, this);
+		// add the register (currently decorative : P)
+	this.add.sprite(600, 75, 'atlas', 'cashRegisterTempDisplay');
+	this.register = this.add.sprite(600, 75, 'atlas', 'cashRegister_closed');
+	game.physics.enable(this.register);
+	this.register.body.immovable = true;
 
 			// add an instance of the money prefab
 		this.money = new Money(game, 100, 200);
@@ -149,32 +165,85 @@ Play.prototype = {
 		var leftHitDivider = game.physics.arcade.collide(this.leftPaw, this.divider);
 		var rightHitDivider = game.physics.arcade.collide(this.rightPaw, this.divider);
 
+		// collide player with food
+			// seaweed
+		if(game.physics.arcade.overlap(this.seaweed, rightPaw)){
+			rightPaw.overlap = true;
+			rightPaw.overlapObject = this.seaweed;
+		}
+		if(game.physics.arcade.overlap(this.seaweed, leftPaw)){
+			leftPaw.overlap = true;
+			leftPaw.overlapObject = this.seaweed;
+		}
+			// rice
+		if(game.physics.arcade.overlap(this.rice, rightPaw)){
+			rightPaw.overlap = true;
+			rightPaw.overlapObject = this.rice;
+		}
+		if(game.physics.arcade.overlap(this.rice, leftPaw)){
+			leftPaw.overlap = true;
+			leftPaw.overlapObject = this.rice;
+		}
+			// salmon
+		if(game.physics.arcade.overlap(this.salmon, rightPaw)){
+			rightPaw.overlap = true;
+			rightPaw.overlapObject = this.salmon;
+		}
+		if(game.physics.arcade.overlap(this.salmon, leftPaw)){
+			leftPaw.overlap = true;
+			leftPaw.overlapObject = this.salmon;
+		}
+
 		// collide player two with knife
-		this.rightPaw.overlap = game.physics.arcade.overlap(this.knife, this.rightPaw);
-		this.leftPaw.overlap = game.physics.arcade.overlap(this.knife, this.leftPaw);
+		if(game.physics.arcade.overlap(this.knife, rightPaw)){
+			rightPaw.overlap = true;
+			rightPaw.overlapObject = this.knife;
+		}
+		if(game.physics.arcade.overlap(this.knife, leftPaw)){
+			leftPaw.overlap = true;
+			leftPaw.overlapObject = this.knife;
+		}
 
 		// collide knife with salmon
-		if(!this.salmonIsChopped && (this.rightPaw.isHolding || this.leftPaw.isHolding)){
+		if(!this.salmonIsChopped && (rightPaw.isHolding || leftPaw.isHolding)){
 			var chop = game.physics.arcade.overlap(this.salmon, this.knife);
-			if(chop){
+			if(chop && !(this.salmon.isHeldByRight || this.salmon.isHeldByLeft) && (this.knife.isHeldByRight || this.knife.isHeldByLeft)){
 				this.salmon.loadTexture('atlas', 'salmon_cut');
 				this.salmonIsChopped = true;
-				//play "chop" noise
-				this.chopNoise.play('', 0, 1, false);
+				this.chopNoise.play();
+			}
+		}
+
+		// collide rice with rice pot
+		if(!this.rice.isHeldByRight && !this.rice.isHeldByLeft){
+			if(game.physics.arcade.overlap(this.rice, this.ricePot)){
+				this.rice.kill();
+				this.ricePot.loadTexture('atlas', 'pot_rice');
 			}
 		}
 
 		// collide money with counter
 		game.physics.arcade.collide(this.topCounter, this.money);
 
-		// knife pick up mechanic
-		if(this.rightPaw.isHolding){
-			this.knife.x = this.rightPaw.x - 32;
-			this.knife.y = this.rightPaw.y - 100;
-		}else if(this.leftPaw.isHolding){
-			this.knife.x = this.leftPaw.x + 128 - 32;
-			this.knife.y = this.leftPaw.y - 100;
+		// money in register (on hover)
+		if(game.physics.arcade.overlap(this.register, this.money)){
+			this.register.loadTexture('atlas', 'cashRegister_open');
+			if(this.money.beingHeld == false){
+				this.money.kill();
+				this.registerNoise.play();
+			}
+		}else{
+			this.register.loadTexture('atlas', 'cashRegister_closed');
 		}
+
+		// // knife pick up mechanic
+		// if(this.rightPaw.isHolding){
+		// 	this.knife.x = this.rightPaw.x - 32;
+		// 	this.knife.y = this.rightPaw.y - 100;
+		// }else if(this.leftPaw.isHolding){
+		// 	this.knife.x = this.leftPaw.x + 128 - 32;
+		// 	this.knife.y = this.leftPaw.y - 100;
+		// }
 
 		//check for mouse click to progress through dialog
 		if(this.dialogClick && !this.dialogTyping) {
@@ -188,6 +257,7 @@ Play.prototype = {
 
 		//lock input while typing
 		this.isDialogTyping = true;
+		this.dialogBox.inputEnabled = false; //prevent clicks from interrupting dialogue
 
 		//also reset playerResponse to false
 		this.dialogClick = false;
@@ -226,8 +296,8 @@ Play.prototype = {
 					//take them off screen to the right
 					  //keep y at least consistent with the last customer
 					this.add.tween(this[this.dialogLastCustomer]).to({x: this.RIGHT_OFFSCREEN_X}, {y: this.this.dialogLastCustomer.y}, Phaser.Easing.Linear.None, true);
-					//this sounds really ominous, but kill this customer....
-					this.dialogLastCustomer.kill();
+					//this sounds really ominous, but destroy this customer....
+					this.dialogLastCustomer.destroy();
 
 					//say we're "done" with this customer
 					this.customerDonezo = true;
@@ -235,7 +305,11 @@ Play.prototype = {
 				// create this new customer with the customer prefab
 				  //passes in a string from dialogue to create customer
 				this.customer = new Customer(game, this.dialog[this.dialogConvo][this.dialogLine]['customer']);
-				game.add.existing(this.customer);
+				game.add.existing(this.customer)
+				  //reset us being "done" with a customer
+				this.customerDonezo = false;
+
+
 			}
 
 			//build dialogue
@@ -257,6 +331,8 @@ Play.prototype = {
 
 				//enable player input
 				this.dialogTyping = false;
+				this.dialogBox.inputEnabled = true;
+
 			}, this);
 
 			//set dialog bounds
@@ -271,5 +347,5 @@ Play.prototype = {
 			//set past speaker
 			this.dialogLastCustomer = this.customer;
 		}
-	} //end of text typing function
+	} //end of text typing function derived from nathan
 };
