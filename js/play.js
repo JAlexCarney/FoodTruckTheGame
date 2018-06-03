@@ -8,11 +8,15 @@ Play.prototype = {
 	create: function() {
 		// place assets and initialize variables
 		
+		// Add fade in
+		this.fade = new Fade(game, true);
+		game.add.existing(this.fade);
+		
 		// add audio
 			// ambient
 		this.ambientNoise = game.add.audio('ambientNoise');
 			//play ambient noise
-		this.ambientNoise.play('',0, .3, true);
+		this.ambientNoise.play('', 0, .3, true);
 			//load UIselect noise
 		this.selectNoise = game.add.audio('select');
 			//load register noise
