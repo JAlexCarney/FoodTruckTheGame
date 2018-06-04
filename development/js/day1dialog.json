@@ -19,7 +19,7 @@
     {"dialog": "The office misses you guys by the way."},
     {"dialog": "I'll send them your way for lunch breaks"},
     {"dialog": "Keep the change and good luck."},
-    {"dialog": "In this economy, you'll need it."}
+    {"dialog": "In this economy, you'll need it.",  "function" : "this.spawnMoney();"}
   ],
   [
     {"dialog": "Hey so."},
@@ -83,7 +83,7 @@
     {"dialog": "Hurry up, I don't have all day..."}
   ],
   [
-    {"dialog": "Delicious!"}
+    {"dialog": "Delicious!", "function" : "this.startOrderTimer();"}
   ],
   [
     {"dialog": "...Bye..."}
@@ -100,7 +100,7 @@
     {"dialog" :" Hey can you guys please hurry? I have baseball practice soon."}
   ],
   [
-    {"dialog": "Salmon? I know I asked for it, but thanks! My favorite!"}
+    {"dialog": "Salmon? I know I asked for it, but thanks! My favorite!", "function" : "this.startOrderTimer();"}
   ],
   [
     {"dialog": "Sorry, but I have to go to practice now..."}

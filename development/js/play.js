@@ -37,20 +37,17 @@ var Play = function(game){
 	this.customerDonezo = false; //detect if a customer is Donezo
 
 	//other dialogue to fit the modulus dialogue system mess around
-	this.pauseDialog = false; //pause dialogue call
+	this.pauseDialog = false; //keeps track if dialog calls are enabled
 	this.orderTime = 30000; //order timer temp set to 30 seconds
 	this.isRunningLate = false; //keeps track if late(half way passed order) dialogue was accessed
 	this.isOrderFinished = false; //keeps track if the player completed order (correctly)
 
-	// this.lateTimer = null; //will be used for determine if player is late
-	// this.finishedTimer = null; //will be used to time player
+	this.lateTimer = null; //will be used for determine if player is late
+	this.finishedTimer = null; //will be used to time player
 
 	//x value to place characters offscreen to the right
 	  //y values not here to keep consistent with a customer's y value
 	this.RIGHT_OFFSCREEN_X = 1400;
-
-	//TEST TIMER FOR PAUSING
-	this.pauseDialog = false; //pause dialogue call
 
 };
 Play.prototype = {
@@ -108,11 +105,6 @@ Play.prototype = {
 		//CREATE PAWS
 		this.createPaws();
 
-		//spawn ALL ingredients
-		//TODO: have other function to spawn some specific ingredients
-
-		//this.spawnAllIngredients();
-
 		//create top screen (if not all top screen elements)
 		this.createTopScreen();
 
@@ -123,10 +115,8 @@ Play.prototype = {
 		this.chopNoise = game.add.audio('grab');
 
 		//let the typing Commence
-		this.TypeText();
+		this.typeText();
 
-		//start the order timers with 30 seconds duration and 10 second delay
-		//this.startOrderTimer(this.orderTime, 10000);
 	},
 
 	update: function() {
@@ -181,8 +171,6 @@ Play.prototype = {
 				this.salmonIsChopped = true;
 				this.chopNoise.play();
 			}
-			//for now, set an order to be true if you.. chop the salmon
-			this.isOrderFinished = true; //keeps track if the player completed order (correctly)
 		}
 
 		// collide rice with rice pot
@@ -190,6 +178,9 @@ Play.prototype = {
 			if(game.physics.arcade.overlap(this.rice, this.ricePot)){
 				this.rice.kill();
 				this.ricePot.loadTexture('atlas', 'pot_rice');
+				//for now, set an order to be true if you.. put the rice in a pot
+				//this.isOrderFinished = true; //keeps track if the player completed order (correctly)
+				this.setOrderComplete();
 			}
 		}
 
@@ -207,24 +198,20 @@ Play.prototype = {
 			this.register.loadTexture('atlas', 'cashRegister_closed');
 		}
 
-		//TODO: CHECK if:
-		  //ORDER IS LATE
-				//setLate:
-			//ORDER FINISHED
-				//call ORDER COMPLETE
-			//ORDER NOT FINISHED
-				//setIncomplete
-
 		//check for mouse click to progress through dialog
-		if(this.dialogClick && !this.dialogTyping) {// !this.pauseDialog) {
-			this.TypeText();
+		if(this.dialogClick & !this.dialogTyping && !this.pauseDialog) {
+		this.typeText();
 		}
+
 
 	},
 
   // credits to Nathan Altice for the basis of this dialogue system code that this was
 	//heavily based off of
-	TypeText: function() {
+		//I'm so sorry the code looks so ugly I tried to use loops isntead and having
+		//some things in separate functions, but they would not work without sometihng
+		//goofy going on like a single letter displaying multiple times.
+	typeText: function() {
 
 		//lock input while typing
 		this.isDialogTyping = true;
@@ -237,19 +224,14 @@ Play.prototype = {
 		this.dialogText.text = '';
 		this.nextText.text = '';
 
-		//TODO: find proper dialogConvo
-		// make sure there are lines left to read in this convo, otherwise jump to next convo
-	if(this.dialogLine > this.dialog[this.dialogConvo].length-1) {
-		this.dialogLine = 0;
-		this.dialogConvo++;
-	}
-
-
-		//check if we're in a convo
+		//check if we're even in a convo
 		if(this.dialogConvo >= this.dialog.length) {
 			console.log('No more convos');
 			//TODO: proceed to night time state if done with all customers
-		} else {
+
+		//case of a customer greeting & ordering
+		} else if(this.dialogConvo % 4 === 0) {
+
 			//set current speaker
 			this.customer = this.dialog[this.dialogConvo][this.dialogLine]['customer'];
 
@@ -259,34 +241,36 @@ Play.prototype = {
 				if(this.lastCustomer) {
 
 					//take them off screen to the right
-					  //keep y consistent with the last customer
-					this.add.tween(this[this.lastCustomer].body).to({x: this.RIGHT_OFFSCREEN_X}, 500, Phaser.Easing.Linear.None, true);
+						//keep y consistent with the last customer
+					//this.add.tween(this[this.lastCustomer].body).to({x: this.RIGHT_OFFSCREEN_X}, 500, Phaser.Easing.Linear.None, true);
 					//this sounds really ominous, but destroy this customer....
-					//this.lastCustomer.kill();
+					this.lastCustomer.destroy();
 
 					//since nothing is working set them invisible bc god isn't real
-					//this.LastCustoner.visible = false;
+				 //this.lastCustomer.visible = false;
 
 					//say we're "done" with this customer
 					this.customerDonezo = true;
 
 				}
 				// create this new customer with the customer prefab
-				  //passes in a string from dialogue to create customer
+					//passes in a string from dialogue to create customer
 				 this.customer = new Customer(game, this.dialog[this.dialogConvo][this.dialogLine]['customer']);
 				game.add.existing(this.customer);
 
 				//this.add.tween(this[this.customer]).to({x: this.ONSCREEN_X}, {y: this.customer.body.y}, Phaser.Easing.Linear.None, true);
 
-				  //reset us being "done" with a customer
+					//reset us being "done" with a customer
 				this.customerDonezo = false;
 			}
 
-			//build dialogue
+		//build dialog
+		//proceed until we reach the end of the convo
+			//gets dialog text
 			this.dialogLines = this.dialog[this.dialogConvo][this.dialogLine]['dialog'];
 
 			//set up timer to iterate through each letter in dialog
-			  //will probably have a property in the dialog.json to switch timers
+				//TODO: have a property in the dialog.json to switch type pacing
 			let currentChar = 0;
 			this.textTimer = this.time.events.repeat(this.LETTER_TIMER, this.dialogLines.length, function() {
 				this.dialogText.text += this.dialogLines[currentChar]; //spell out the text
@@ -310,6 +294,50 @@ Play.prototype = {
 				eval(this.dialog[this.dialogConvo][this.dialogLine].function);
 			}
 
+			//set dialog bounds
+			this.dialogText.maxWidth = this.TEXT_MAX_WIDTH;
+			this.dialogText.setTextBounds(30, 10, 290, 374);
+			this.dialogText.wordWrap = true;
+			this.dialogText.wordWrapWIdth = this.TEXT_STYLE;
+
+			//increment dialog line
+			this.dialogLine += 1;
+
+			//set past customer
+			this.lastCustomer = this.customer;
+
+
+		//case if dialog is late
+	} else if (this.dialogConvo % 4 === 1 && this.runningLate) {
+	  //build dialog
+		//proceed until we reach the end of the convo
+			//gets dialog text
+			this.dialogLines = this.dialog[this.dialogConvo][this.dialogLine]['dialog'];
+
+			//set up timer to iterate through each letter in dialog
+				//TODO: have a property in the dialog.json to switch type pacing
+			let currentChar = 0;
+			this.textTimer = this.time.events.repeat(this.LETTER_TIMER, this.dialogLines.length, function() {
+				this.dialogText.text += this.dialogLines[currentChar]; //spell out the text
+				currentChar++; //increment letter by letter
+			}, this);
+
+			//once timer finished typing dialog for a line, show [...] prompt to go on
+			this.textTimer.timer.onComplete.addOnce(function() {
+				//show prompt for more text
+				this.nextText = this.add.text(this.NEXT_X, this.NEXT_Y, this.NEXT_TEXT);
+				this.nextText.anchor.setTo(1, 1);
+
+				//enable player input
+				this.dialogTyping = false;
+				this.dialogBox.inputEnabled = true;
+
+			}, this);
+
+			//if there's a function property in the dialogue, evaluate it
+			if(this.dialog[this.dialogConvo][this.dialogLine]['function'] != undefined) {
+				eval(this.dialog[this.dialogConvo][this.dialogLine].function);
+			}
 
 			//set dialog bounds
 			this.dialogText.maxWidth = this.TEXT_MAX_WIDTH;
@@ -318,12 +346,142 @@ Play.prototype = {
 			this.dialogText.wordWrapWIdth = this.TEXT_STYLE;
 
 			//increment dialog line
-			this.dialogLine++;
+			this.dialogLine += 1;
 
 			//set past customer
 			this.lastCustomer = this.customer;
+
+
+		//case if player gets order correct
+	} else if (this.dialogConvo % 4 === 2 && this.isOrderFinished) {
+
+
+		//building  Dialog
+			//gets dialog text
+			this.dialogLines = this.dialog[this.dialogConvo][this.dialogLine]['dialog'];
+
+			//set up timer to iterate through each letter in dialog
+				//TODO: have a property in the dialog.json to switch type pacing
+			let currentChar = 0;
+			this.textTimer = this.time.events.repeat(this.LETTER_TIMER, this.dialogLines.length, function() {
+				this.dialogText.text += this.dialogLines[currentChar]; //spell out the text
+				currentChar++; //increment letter by letter
+			}, this);
+
+			//once timer finished typing dialog for a line, show [...] prompt to go on
+			this.textTimer.timer.onComplete.addOnce(function() {
+				//show prompt for more text
+				this.nextText = this.add.text(this.NEXT_X, this.NEXT_Y, this.NEXT_TEXT);
+				this.nextText.anchor.setTo(1, 1);
+
+				//enable player input
+				this.dialogTyping = false;
+				this.dialogBox.inputEnabled = true;
+
+			}, this);
+
+			//if there's a function property in the dialogue, evaluate it
+			if(this.dialog[this.dialogConvo][this.dialogLine]['function'] != undefined) {
+				eval(this.dialog[this.dialogConvo][this.dialogLine].function);
+			}
+
+			//set dialog bounds
+			this.dialogText.maxWidth = this.TEXT_MAX_WIDTH;
+			this.dialogText.setTextBounds(30, 10, 290, 374);
+			this.dialogText.wordWrap = true;
+			this.dialogText.wordWrapWIdth = this.TEXT_STYLE;
+
+			//increment dialog line
+			this.dialogLine += 1;
+
+			//set past customer
+			this.lastCustomer = this.customer;
+
+		//case if player doesnt get order in on time
+	} else if (this.dialogConvo % 4 === 3 && !this.isOrderFinished && this.isRunningLate) {
+		//build dialog
+		//proceed until we reach the end of the convo
+			//gets dialog text
+			this.dialogLines = this.dialog[this.dialogConvo][this.dialogLine]['dialog'];
+
+			//set up timer to iterate through each letter in dialog
+				//TODO: have a property in the dialog.json to switch type pacing
+			let currentChar = 0;
+			this.textTimer = this.time.events.repeat(this.LETTER_TIMER, this.dialogLines.length, function() {
+				this.dialogText.text += this.dialogLines[currentChar]; //spell out the text
+				currentChar++; //increment letter by letter
+			}, this);
+
+			//once timer finished typing dialog for a line, show [...] prompt to go on
+			this.textTimer.timer.onComplete.addOnce(function() {
+				//show prompt for more text
+				this.nextText = this.add.text(this.NEXT_X, this.NEXT_Y, this.NEXT_TEXT);
+				this.nextText.anchor.setTo(1, 1);
+
+				//enable player input
+				this.dialogTyping = false;
+				this.dialogBox.inputEnabled = true;
+
+			}, this);
+
+			//if there's a function property in the dialogue, evaluate it
+			if(this.dialog[this.dialogConvo][this.dialogLine]['function'] != undefined) {
+				eval(this.dialog[this.dialogConvo][this.dialogLine].function);
+			}
+
+			//set dialog bounds
+			this.dialogText.maxWidth = this.TEXT_MAX_WIDTH;
+			this.dialogText.setTextBounds(30, 10, 290, 374);
+			this.dialogText.wordWrap = true;
+			this.dialogText.wordWrapWIdth = this.TEXT_STYLE;
+
+			//increment dialog line
+			this.dialogLine += 1;
+
+			//set past customer
+			this.lastCustomer = this.customer;
+
+	 } else {
+		//this is a case that shouldn't be reached tbh...
+		console.log('Error: This should not be reached in typeText()');
+	 }
+
+	 //when we reach end of either the greet or late conversation
+	 if( (this.dialogConvo % 4 === 0 && this.dialogLine > this.dialog[this.dialogConvo].length - 1) ||
+	 (this.dialogConvo % 4 === 1 && this.dialogLine > this.dialog[this.dialogConvo].length - 1)) {
+			//pause dialog
+			this.pauseDialog = true;
+
+			//reset lines
+			this.dialogLine = 0;
 		}
-	}, //end of text typing function derived from nathan
+
+		//when we reach end of the thank conversation
+		if( this.dialogConvo % 4 === 2 && this.dialogLine > this.dialog[this.dialogConvo].length - 1) {
+			//reset variables
+			this.isOrderFinished = false;
+			this.isRunningLate = false;
+			this.dialogLine = 0;
+
+			//proceed to next Customer
+			this.dialogConvo += 2;
+			//reset the line
+			this.dialogLine = 0;
+		}
+
+		//when we reach end of the unsuccessful conversation
+		if( this.dialogConvo % 4 === 3 && this.dialogLine > this.dialog[this.dialogConvo].length - 1) {
+			//reset variables
+			this.isOrderFinished = false;
+			this.isRunningLate = false;
+
+			//proceed to nextCustomer
+			this.dialogConvo += 1;
+			//reset the line
+			this.dialogLine = 0;
+		}
+
+ }, //end of text typing function derived from nathan
 
 	 //spawns cookware needed for bottom screen player
 		spawnCookware: function() {
@@ -351,20 +509,27 @@ Play.prototype = {
 		this.rightPaw = new Paw(game, false, 720,800);
 		game.add.existing(this.rightPaw);
 		rightPaw = this.rightPaw
-	}, //spawns all ingredients for the bottom screen
+
+	},
+	//spawns all ingredients for the bottom screen
 	spawnAllIngredients: function () {
 				// seaweed
 			this.seaweed = new Pickupable(game, 'seaweed', 200, 800);
 			game.add.existing(this.seaweed);
+			game.physics.enable(this.seaweed);
+			this.seaweed.enableBody = true;
 
 				// salmon
 			this.salmon = new Pickupable(game, 'salmon', 400, 700);
 			game.add.existing(this.salmon);
+			game.physics.enable(this.salmon);
+			this.seaweed.enableBody = true;
 
 				// rice
 			this.rice = new Pickupable(game, 'rice_raw', 756, 800);
 			game.add.existing(this.rice);
-
+			game.physics.enable(this.rice);
+			this.rice.enableBody = true;
 	},
 	//sets up top screen. put here for code readability
 	createTopScreen: function() {
@@ -398,11 +563,6 @@ Play.prototype = {
 	game.physics.enable(this.register);
 	this.register.body.immovable = true;
 
-			// add an instance of the money prefab
-		this.money = new Money(game, 100, 200);
-		game.add.existing(this.money);
-
-
 	},
 	//creates our divider to fake our "split screen"
 	createDivider: function() {
@@ -412,6 +572,27 @@ Play.prototype = {
 		this.divider.body.immovable = true;
 
 	},
+	// add an instance of the money prefab
+	spawnMoney: function() {
+		this.money = new Money(game, 100, 200);
+		game.add.existing(this.money);
+	},
+
+	//delete remaining ingredients in between customers
+	clearIngredients: function() {
+		//destroy remaining ingredients that may be leftover
+		if(this.seaweed != undefined){
+			this.seaweed.kill();
+		}
+
+		if(this.salmon != undefined) {
+			this.salmon.kill();
+		}
+
+		if(this.rice != undefined) {
+			this.rice.kill();
+		}
+	},
 	//starts the timer for the player to complete an order
 		//time: how much time allotted for an order
 		//delay:how much time before starting timers
@@ -419,114 +600,76 @@ Play.prototype = {
 	startOrderTimer: function(time, delay) {
 
 		//auto destroy timers
-		let lateTimer = game.time.create(true);
-		let finishedTimer = game.time.create(true);
+		this.lateTimer = game.time.create(true);
+		this.finishedTimer = game.time.create(true);
+
+		// //assign to state wide variables
+		// this.lateTimer = lateTimer;
+		// this.finishedTimer = finishedTimer;
 
 		//add events to these timers
 		//timer (delay, callback, context)
-		lateTimer.add((time / 2), this.setLate, this);
-		finishedTimer.add(time, this.setIncomplete, this);
+		this.lateTimer.add((time / 2), this.setLate, this);
+		this.finishedTimer.add(time, this.setIncomplete, this);
 
 		//start timers
-		lateTimer.start(delay);
-		finishedTimer.start(delay);
-
+		this.lateTimer.start(delay);
+		this.finishedTimer.start(delay);
 	},
   //functon that detects player response if click on dialog box
 	proceedDialog: function() {
 				this.dialogClick = true; //detect player response
-	}
-
-
-	//functions to check for status
+	},
+	//functions to check for order status
 	//on lateTimer completion, will call this and set the player as "late"
-	// setLate: function() {
- //
-	//  		// set player as running late
-	//  		this.isRunningLate = true;
- //
-	//  		// set to true
-	//  		this.pauseDialog = true;
- //
- // },
-	// //on finishTimer completion, will set order as incomplete
-	// setIncomplete: function() {
-	// 		//set order as incomplete to make sure :'/
-	// 		this.isOrderFinished = false;
-	//
-	// 		// set to true
-	// 		this.pauseDialog = true;
-	//
-	// },
-	// //in update, check if an order's correct and then call this to stay Safe
-	// orderComplete: function() {
-	// 		//set the order as finished
-	// 		this.isOrderFinished = true;
-	//
-	// 		// set to true
-	// 		this.pauseDialog = true;
-	// }
+	 setLate: function() {
+
+		 this.dialogConvo += 1;
+
+	  	//set player as running late
+	 		this.isRunningLate = true;
+
+	 		//unpause dialog
+	 		this.pauseDialog = false;
+
+			//call typeText
+			this.typeText();
+ },
+	//on finishTimer completion, will set order as incomplete
+	setIncomplete: function() {
+			//set order as incomplete
+			this.isOrderFinished = false;
+
+			//unpause dialog
+			this.pauseDialog = false;
+
+			//set correct dialogConvo when didn't finish
+			this.dialogConvo += 1;
+
+			//call typeText
+			this.typeText();
+
+	},
+	//in update, check if an order's correct and call this to set the order as true
+	setOrderComplete: function() {
+			//set the order as finished
+			this.isOrderFinished = true;
+
+			//unpause dialog
+			this.pauseDialog = false;
+
+			//set the correct dialogConvo when an order is complete
+			if(this.isRunningLate) {
+				this.dialogConvo += 1;
+			} else {
+				this.dialogConvo += 2;
+			}
+
+			//destroy timers
+			this.lateTimer.destroy();
+			this.finishedTimer.destroy();
+
+			//call typeText
+			this.typeText();
+	}
 };
-
-
-//for now, pause if reach end of:
-	//greet&order convo
-	//late convo
-//TODO:have order start function property at @ end of greet
-// 	var result = this.dialogConvo % 4;
-// 	if( (result === 0 && this.dialogLine > this.dialog[this.dialogConvo].length - 1) ||
-//    result === 1 && this.dialogLine > this.dialog[this.dialogConvo].length - 1) {
-// 	   this.pauseDialog = true; //pause future calls to dialogue until time elapses
-// } else {
-// 	console.log("no pause.");
-// }
-
-
-		//accessing new customer
-		// if(this.customerDonezo) {
-		//  var result = dialogConvo % 4;
-		//  if ( result === 2 ) {
-		// 		 dialogCovno += 2
-		//  } else{
-		// 	//assume they got Bad end
-		// 	dialogConvo += 1;
-		//  }
-		// 	//reset lines
-		//  this.dialogLine = 0;
-	 // }
-
-	 // jumping to proper conversation post new customer
-	 //TODO: if running late, increase convo by one
-	 // if(this.isRunningLate) {
-	 //
-	 // 	this.dialogConvo +=1; //increase convo by one
-	 // 	this.dialogLine = 0; //reset lines
-	 // }
-	 //
-	 // if (this.isOrderFinished) {
-	 //
-	 // 	//TODO: check if order is correct, proceed to "thanks" (3rd convo for customer)
-	 // 		//spawn money if do this
-	 // 			//if accessed "late", increment convo by one to get here
-	 // 		if(this.isRunningLate){
-	 // 			this.dialogConvo += 1;
-	 // 		} else {
-	 // 			this.dialogConvo += 2;
-	 // 	 }
-	 // 	 //reset lines
-	 // 	 this.dialogLine == 0;
-	 //  }
-	 //
-	 //  	//TODO: check if order never made it, proceed to "bye"(4th convo for customer)
-	 //   if (!this.isOrderFinished && this.isRunningLate){
-	 // 	 this.dialogConvo += 2;
-	 //  //reset lines
-	 //    this.dialogLine == 0;
-	 //  }
-	 //
-	 //  //case where order is unfinished
-	 //   if (!this.isOrderFinished && this.isRunningLate){
-	 // 	 this.dialogConvo += 2;
-	 //  //reset lines
-	 //    this.dialogLine == 0;
-	 //  }
