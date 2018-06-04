@@ -84,7 +84,7 @@ Preload.prototype = {
 	
 	update: function() {
 		// wait for first ogg to properly decode
-		this.state.start('Night');
+		this.state.start('Menu');
 	} 
 }
 // end of nathans code addaption
