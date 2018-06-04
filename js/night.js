@@ -16,6 +16,9 @@ Night.prototype = {
 		//day = game.rnd.integerInRange(1,8);
 		//console.log(day);
 		
+		// load select sound
+		this.selectNoise = game.add.audio('select');
+		
 		//check the day variable and use it to load the correct newspaper day sprite from the newspaper atlas
 		this.newspaper = this.add.sprite(0, 512, 'newspaper', 'newspaper' + day);
 		
@@ -54,7 +57,7 @@ Night.prototype = {
 			this.selectNoise.play('', 0, 1, false);
 			day++;
 		};
-		this.controls = game.add.sprite(240, 270, 'atlas', 'button_menu');
+		this.controls = game.add.sprite(220, 270, 'atlas', 'button_menu');
 		this.controls.inputEnabled = true;
 		this.controls.events.onInputDown.add(openMenu, this);
 		
@@ -65,7 +68,7 @@ Night.prototype = {
 			this.selectNoise.play('', 0, 1, false);
 			day++;
 		};
-		this.controls = game.add.sprite(540, 270, 'atlas', 'button_continue');
+		this.controls = game.add.sprite(500, 270, 'atlas', 'button_continue');
 		this.controls.inputEnabled = true;
 		this.controls.events.onInputDown.add(openMenu, this);
 			},
