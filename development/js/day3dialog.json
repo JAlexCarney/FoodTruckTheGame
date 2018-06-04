@@ -1,6 +1,6 @@
 [
   [
-    {"customer" : "bird", "dialog" : "I just happened to be gliding by..."},
+    {"customer" : "bird", "dialog" : "I just happened to be gliding by...", "newCustomer" : "true"},
     {"dialog" : "I could have caught some food on my way to the store, but..."},
     {"dialog" : "naahh..."},
     {"dialog" : "Not punk enough, ya feel?"},
@@ -10,17 +10,17 @@
     {"dialog" : "Man, the store isn’t gonna be open all day, you know."}
   ],
   [
-    {"dialog" : " Looks good. Thanks.", "newCustomer" : "true"}
+    {"dialog" : " Looks good. Thanks."}
   ],
   [
     {"dialog" : " Alright, I’ve got a nest that really needs some repairs."},
-    {"dialog" : "I’m going to the store before it closes.","newCustomer" : "true"}
+    {"dialog" : "I’m going to the store before it closes."}
   ],
 
 
 
   [
-    {"customer":"shark", "dialog" : "Good to see you two again."},
+    {"customer":"shark", "dialog" : "Good to see you two again.","newCustomer" : "true"},
     {"dialog" : "Thought I’d come by during my lunch break."},
     {"dialog" : "This place been treating you well?"},
     {"dialog" : "Decent customers?"},
@@ -37,18 +37,18 @@
   [
     {"dialog" : "Just as I expected from you two."},
     {"dialog" : "Thanks."},
-    {"dialog" : "I’ll swing by again.", "newCustomer": "true"}
+    {"dialog" : "I’ll swing by again."}
   ],
   [
     {"dialog" : "Sorry, I have to go now."},
     {"dialog" : "You know how the Boss is."},
-    {"dialog" : "See you around.", "newCustomer": "true"}
+    {"dialog" : "See you around."}
 
   ],
 
 
   [
-    {"customer":"axolotl", "dialog" : "Hello again sir!"},
+    {"customer":"axolotl", "dialog" : "Hello again sir!", "newCustomer": "true"},
     {"dialog" : "My mom gave me extra allowance this week!"},
     {"dialog" : "I’m gonna spend it on an action figure!!"},
     {"dialog" : "But I’m gonna spend food money on lunch."},
@@ -60,14 +60,14 @@
   ],
   [
     {"dialog" : "Thank you, sir!"},
-    {"dialog" : "Have a good day!!", "newCustomer": "true"}
+    {"dialog" : "Have a good day!!"}
   ],
   [
-    {"dialog" : "I think I’ll just head home and see if my mom is making an early dinner...", "newCustomer": "true"}
+    {"dialog" : "I think I’ll just head home and see if my mom is making an early dinner..."}
   ],
 
   [
-    {"customer":"bat","dialog" : "My echolocation told me you were serving food here at the park."},
+    {"customer":"bat","dialog" : "My echolocation told me you were serving food here at the park.", "newCustomer": "true"},
     {"dialog" : "I’ll take two orders of sashimi and one salmon roll."}
   ],
   [
@@ -79,17 +79,17 @@
   ],
   [
     {"dialog" : "Mmmm, smells good."},
-    {"dialog" : "Thanks!", "newCustomer": "true"}
+    {"dialog" : "Thanks!"}
 
   ],
   [
     {"dialog" : "You practically slowed down to a dead halt!"},
-    {"dialog" : " I’m gonna go find some live food!", "newCustomer": "true"}
+    {"dialog" : " I’m gonna go find some live food!"}
 
   ],
 
   [
-    {"customer":"alpaca","dialog" : "Oh, hay...."},
+    {"customer":"alpaca","dialog" : "Oh, hay....", "newCustomer": "true"},
     {"dialog" : "I remember you guys."},
     {"dialog": "And this truck..."},
     {"dialog": "And this location..."},
