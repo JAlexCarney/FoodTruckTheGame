@@ -27,11 +27,17 @@ var UIButton = function(game, type, x, y){
 	this.type = type;
 
 	var goToState = function(){
-		if(type != 'Continue'){
+		if(type == 'Menu' || type == 'Credits'){
 			game.state.start(type);
 			this.selectNoise.play('', 0, 1, false);
-		}else{
+		}else if(type == 'Continue'){
 			game.state.start('Play');
+		}else if(type == 'Controls'){
+			game.state.start(type);
+			this.selectNoise.play('', 0, 1, false);
+		}else if(type == 'Play'){
+			game.state.start(type);
+			this.selectNoise.play('', 0, 1, false);
 		}
 	};
 	
