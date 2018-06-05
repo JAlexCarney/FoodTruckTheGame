@@ -1,0 +1,129 @@
+[
+  [
+    {"customer": "bird","dialog": "Hey, so I’m not about to become a regular around here or anything...", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
+    {"dialog": "but last time I came by,"},
+    {"dialog": "nobody made fun of me for eating seeds."},
+    {"dialog": "That's actually happened to me before, y'know."},
+    {"dialog": "Like the time I had a sesame seed bagel"},
+    {"dialog": "or a poppy seed muffin"},
+    {"dialog": "or a bag of sunflower seeds."},
+    {"dialog": "Seeds got me messed up man."},
+    {"dialog": "Anyways."},
+    {"dialog": "So two orders of sashimi.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+  ],
+  [
+    {"dialog": "I swear, if you're putting seeds on my order..."}
+
+  ],
+  [
+    {"dialog": "Thanks",  "function" : "this.spawnMoney();"},
+    {"dialog": "You guys are the best.", "function" : "this.clearIngredients();"}
+  ],
+  [
+    {"dialog": "SEEDS."},
+    {"dialog": "SEEDS EVERYWHERE."},
+    {"dialog": "UGH."},
+    {"dialog": "DISGUSTING.", "function" : "this.clearIngredients();"}
+  ],
+
+
+  [
+    {"customer": "frog", "dialog": "So, here’s a fun fact about frogs...", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
+    {"dialog": "We can cough up our stomachs to clean ‘em and put ‘em back in"},
+    {"dialog": "Not to say your food's like filthy or anything"},
+    {"dialog": "I just thought you might find it cool."},
+    {"dialog": "No...?"},
+    {"dialog": "That’s okay..."},
+    {"dialog": "...I’d like a salmon roll and an order of sashimi", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+  ],
+  [
+    {"dialog": "Hey, wanna know another fun fact while we wait???"},
+    {"dialog": "Did you know I can wash my intestines?"},
+    {"dialog": "Wanna see?"},
+    {"dialog": "No...?"},
+    {"dialog": "Okay..."}
+  ],
+  [
+    {"dialog": "Thanks!",  "function" : "this.spawnMoney();"}
+  ],
+  [
+    {"dialog": "I’ll take my talents somewhere they’re appreciated!"}
+  ],
+
+
+  [
+    {"customer": "bat", "dialog": "Good afternoon.", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
+    {"dialog": "Can I get three poke bowls?"},
+    {"dialog": "One for me and my... friends.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+  ],
+  [
+    {"dialog": " My friends are getting hungry..."},
+    {"dialog": "And so am I."}
+  ],
+  [
+    {"dialog": "Mmm. Thanks! ",  "function" : "this.spawnMoney();"},
+    {"dialog": "My friends?"},
+    {"dialog": "Uh, duh."},
+    {"dialog": "Me, myself, and I."},
+    {"dialog": "Take care!", "function" : "this.clearIngredients();"}
+
+  ],
+  [
+    {"dialog": "We’re too hungry to keep waiting...", "function" : "this.clearIngredients();"},
+    {"dialog": "We're gonna check out another place down the street"},
+    {"dialog": "We as in me, myself and I."}
+  ],
+
+
+  [
+    {"customer" : "axolotl", "dialog": "Hello sir!!", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
+    {"dialog": "I’m excited for our big game tomorrow!"},
+    {"dialog": "I hope you guys will be open so my mom can try some of your food!! "},
+    {"dialog": "I tell her about you guys all the time!!"},
+    {"dialog": "Anyways, I'll have a salmon roll please!", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+
+  ],
+  [
+    {"dialog": "Hey sir,"},
+    {"dialog": "it’s getting a bit past my bedtime..."},
+    {"dialog": "so I might have to head home soon..."}
+
+  ],
+  [
+    {"dialog": "Thank you yet again, sir!",  "function" : "this.spawnMoney();"},
+    {"dialog": "See you after our big game tomorrow!", "function" : "this.clearIngredients();"}
+
+  ],
+  [
+    {"dialog": "The game’s gonna be so big!", "function" : "this.clearIngredients();"},
+    {"dialog": "So, I really need to leave and get sleep!"},
+    {"dialog": "Sorry, about leaving, but..."},
+    {"dialog": "Have a good night!"}
+  ],
+
+
+  [
+    {"customer": "shark", "dialog": "Rough week, huh?", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
+    {"dialog": "I can barely imagine."},
+    {"dialog": "You and me both, honestly."},
+    {"dialog": "I’ll take a poke bowl and an order of sashimi.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+  ],
+  [
+    {"dialog": "You two alright back there?"}
+  ],
+  [
+    {"dialog": "Thanks. Keep the change.",  "function" : "this.spawnMoney();"},
+    {"dialog": "You know, if this all falls apart,"},
+    {"dialog": "God forbid."},
+    {"dialog": "You’re both welcome back."},
+    {"dialog": "I know you guys are following dreams and stuff, but", "function" : "this.clearIngredients();"},
+    {"dialog": "There’s no shame in saving up and giving this another shot in the future."}
+  ],
+  [
+    {"dialog": "You know, if this all falls apart,", "function" : "this.clearIngredients();"},
+    {"dialog": "God forbid."},
+    {"dialog": "You’re both welcome back."},
+    {"dialog": "I know you guys are following dreams and stuff, but"},
+    {"dialog": "There’s no shame in saving up and giving this another shot in the future."}
+  ]
+]

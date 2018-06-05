@@ -53,9 +53,7 @@ Play.prototype = {
 	// place assets and initialize variables
 	create: function() {
 
-		    //for debug purposes:parse random days
-		  	//days 2, 4, & 5 don't work due to formatting errors
-			day = game.rnd.integerInRange(2,4);
+			//switch statement to load proper dialog JSON files
 			switch (day) {
 				case 1:
 					console.log(day);
@@ -80,10 +78,6 @@ Play.prototype = {
 				default:
 					console.log("this shouldn't be happening");
 			}
-		//TODO: switch statement for different files for different days
-
-			//parse dialog from JSON file
-		//this.dialog = JSON.parse(this.game.cache.getText('dialog'));
 
 		// add audio
 		this.ambientNoise = game.add.audio('ambientNoise');
