@@ -18,14 +18,14 @@
     {"dialog": "Thanks."},
     {"dialog": "The office misses you guys by the way."},
     {"dialog": "I'll send them your way for lunch breaks"},
-    {"dialog": "Keep the change and good luck."},
+    {"dialog": "Keep the change and good luck.", "function" : "this.clearIngredients();"},
     {"dialog": "In this economy, you'll need it.",  "function" : "this.spawnMoney();"}
   ],
   [
-    {"dialog": "Hey so."},
+    {"dialog": "Hey so I have to go."},
     {"dialog": "The office misses you guys by the way."},
     {"dialog": "I'll send them your way for lunch breaks"},
-    {"dialog": "Keep the change and good luck."},
+    {"dialog": "Good luck.", "function" : "this.clearIngredients();"},
     {"dialog": "In this economy, you'll need it."}
 
   ],
@@ -55,7 +55,7 @@
     {"dialog": "but also like... actually tastes good and savory?"},
     {"dialog" : "Oh sweet you do!?"},
     {"dialog" : "Then I'll take that organic poke bowl"},
-    {"dialog" : "with extra gluten and cruelty-free sesame seeds!", "function" : "this.startOrderTimer();"}
+    {"dialog" : "with extra gluten and cruelty-free sesame seeds!", "function" :"this.startOrderTimer(this.orderTime, 10000);"}
   ],
   [
     {"dialog" : "If this takes any longer, I'll write an extremely long callout blog post on this establishment."}
@@ -77,13 +77,13 @@
     {"dialog": "I got it..."},
     {"dialog": "I swear..."},
     {"dialog": "Uh..."},
-    {"dialog": "I'll take an order of sashimi please.", "function" : "this.startOrderTimer();"}
+    {"dialog": "I'll take an order of sashimi please.",  "function" : "this.startOrderTimer(this.orderTime, 10000);"}
   ],
   [
     {"dialog": "Hurry up, I don't have all day..."}
   ],
   [
-    {"dialog": "Delicious!", "function" : "this.startOrderTimer();"}
+    {"dialog": "Delicious!"}
   ],
   [
     {"dialog": "...Bye..."}
@@ -94,13 +94,13 @@
     {"customer" : "axolotl", "dialog" : "Hello sir!" , "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
     {"dialog" : "My mom tells me I can eat anything I want for lunch"},
     {"dialog": "...as long as I can get it to fit in my mouth!"},
-    {"dialog": "So gimme 1 order of salmon sushi rolls please! Just don’t make ‘em too big!", "function" : "this.startOrderTimer();"}
+    {"dialog": "So gimme 1 order of salmon sushi rolls please! Just don’t make ‘em too big!", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
   ],
   [
     {"dialog" :" Hey can you guys please hurry? I have baseball practice soon."}
   ],
   [
-    {"dialog": "Salmon? I know I asked for it, but thanks! My favorite!", "function" : "this.startOrderTimer();"}
+    {"dialog": "Salmon? I know I asked for it, but thanks! My favorite!"}
   ],
   [
     {"dialog": "Sorry, but I have to go to practice now..."}

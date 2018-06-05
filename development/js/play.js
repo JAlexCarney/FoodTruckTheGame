@@ -23,8 +23,6 @@ var Play = function(game){
 	this.LETTER_TIMER = 10; // # of ms each letter takes to "type" onscreen
 	this.LETTER_TIMER_SLOW = 50; // a slow one to nerf the speed readers
 
-  //this.ORDER_TIMER = //180000; //time limit to prepare an order; set to 3 minutes
-
 	//dialog variables specifically
 	this.dialogConvo = 0; //current "convo"
 	this.dialogLine = 0; //current line
@@ -36,14 +34,14 @@ var Play = function(game){
 	this.dialogClick = false; //detect player response
 	this.customerDonezo = false; //detect if a customer is Donezo
 
-	//other dialogue to fit the modulus dialogue system mess around
+	//other dialog variables to help pace dialog and how i access some conversations
 	this.pauseDialog = false; //keeps track if dialog calls are enabled
 	this.orderTime = 30000; //order timer temp set to 30 seconds
 	this.isRunningLate = false; //keeps track if late(half way passed order) dialogue was accessed
 	this.isOrderFinished = false; //keeps track if the player completed order (correctly)
 
 	this.lateTimer = null; //will be used for determine if player is late
-	this.finishedTimer = null; //will be used to time player
+	this.finishedTimer = null; //will be used to time player overall
 
 	//x value to place characters offscreen to the right
 	  //y values not here to keep consistent with a customer's y value
@@ -198,12 +196,10 @@ Play.prototype = {
 			this.register.loadTexture('atlas', 'cashRegister_closed');
 		}
 
-		//check for mouse click to progress through dialog
+		//check for mouse click and if dialog calls are paused to progress through dialog
 		if(this.dialogClick & !this.dialogTyping && !this.pauseDialog) {
 		this.typeText();
 		}
-
-
 	},
 
   // credits to Nathan Altice for the basis of this dialogue system code that this was
@@ -242,11 +238,14 @@ Play.prototype = {
 
 					//take them off screen to the right
 						//keep y consistent with the last customer
-					//this.add.tween(this[this.lastCustomer].body).to({x: this.RIGHT_OFFSCREEN_X}, 500, Phaser.Easing.Linear.None, true);
-					//this sounds really ominous, but destroy this customer....
-					this.lastCustomer.destroy();
+					//this.add.tween(this[this.lastCustomer]).to({x: this.RIGHT_OFFSCREEN_X}, 500, Phaser.Easing.Linear.None, true);
+
+					//this sounds really ominous, but destroy this last customer...
+						//edit: idk why this isn't working
+					this.lastCustomer.kill();
 
 					//since nothing is working set them invisible bc god isn't real
+						//edit: this isn't even working either
 				 //this.lastCustomer.visible = false;
 
 					//say we're "done" with this customer
@@ -258,6 +257,7 @@ Play.prototype = {
 				 this.customer = new Customer(game, this.dialog[this.dialogConvo][this.dialogLine]['customer']);
 				game.add.existing(this.customer);
 
+				//was supposed to tween them on screen but not working either...
 				//this.add.tween(this[this.customer]).to({x: this.ONSCREEN_X}, {y: this.customer.body.y}, Phaser.Easing.Linear.None, true);
 
 					//reset us being "done" with a customer
@@ -270,7 +270,6 @@ Play.prototype = {
 			this.dialogLines = this.dialog[this.dialogConvo][this.dialogLine]['dialog'];
 
 			//set up timer to iterate through each letter in dialog
-				//TODO: have a property in the dialog.json to switch type pacing
 			let currentChar = 0;
 			this.textTimer = this.time.events.repeat(this.LETTER_TIMER, this.dialogLines.length, function() {
 				this.dialogText.text += this.dialogLines[currentChar]; //spell out the text
@@ -308,7 +307,9 @@ Play.prototype = {
 
 
 		//case if dialog is late
-	} else if (this.dialogConvo % 4 === 1 && this.runningLate) {
+	} else if (this.dialogConvo % 4 === 1 && this.isRunningLate) {
+		//console.log("Was able to reach the correct late case");
+
 	  //build dialog
 		//proceed until we reach the end of the convo
 			//gets dialog text
@@ -354,7 +355,6 @@ Play.prototype = {
 
 		//case if player gets order correct
 	} else if (this.dialogConvo % 4 === 2 && this.isOrderFinished) {
-
 
 		//building  Dialog
 			//gets dialog text
@@ -442,7 +442,7 @@ Play.prototype = {
 			this.lastCustomer = this.customer;
 
 	 } else {
-		//this is a case that shouldn't be reached tbh...
+		//this is a case that shouldn't be reached at ALL but having it as an error catcher
 		console.log('Error: This should not be reached in typeText()');
 	 }
 
@@ -603,10 +603,6 @@ Play.prototype = {
 		this.lateTimer = game.time.create(true);
 		this.finishedTimer = game.time.create(true);
 
-		// //assign to state wide variables
-		// this.lateTimer = lateTimer;
-		// this.finishedTimer = finishedTimer;
-
 		//add events to these timers
 		//timer (delay, callback, context)
 		this.lateTimer.add((time / 2), this.setLate, this);
@@ -620,6 +616,7 @@ Play.prototype = {
 	proceedDialog: function() {
 				this.dialogClick = true; //detect player response
 	},
+
 	//functions to check for order status
 	//on lateTimer completion, will call this and set the player as "late"
 	 setLate: function() {
@@ -644,7 +641,7 @@ Play.prototype = {
 			this.pauseDialog = false;
 
 			//set correct dialogConvo when didn't finish
-			this.dialogConvo += 1;
+			this.dialogConvo += 2;
 
 			//call typeText
 			this.typeText();
