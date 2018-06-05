@@ -85,19 +85,3 @@ Preload.prototype = {
 	} 
 }
 // end of nathans code addaption
-
-var Over = function(game){};
-Over.prototype = {
-
-	preload: function() {
-		// load assets into cache
-	},
-
-	create: function() {
-		// place assets
-	},
-
-	update: function() {
-		// run game loop
-	}
-}

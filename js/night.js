@@ -52,24 +52,13 @@ Night.prototype = {
 
 		
 		// make a menu button
-		var openMenu = function(){
-			game.state.start('Menu');
-			this.selectNoise.play('', 0, 1, false);
-			day++;
-		};
-		this.controls = game.add.sprite(220, 270, 'atlas', 'button_menu');
-		this.controls.inputEnabled = true;
-		this.controls.events.onInputDown.add(openMenu, this);
+		this.menu = new UIButton(game, 'Menu', 220, 270);
+		game.add.existing(this.menu);
 		
 		
 		// make a continue button
-		var openMenu = function(){
-			game.state.start('Menu');
-			this.selectNoise.play('', 0, 1, false);
-			day++;
-		};
-		this.controls = game.add.sprite(500, 270, 'atlas', 'button_continue');
-		this.controls.inputEnabled = true;
-		this.controls.events.onInputDown.add(openMenu, this);
-			},
+		this.cont = new UIButton(game, 'Continue', 500, 270);
+		game.add.existing(this.cont);
+	
+	},
 }

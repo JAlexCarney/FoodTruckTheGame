@@ -1,5 +1,5 @@
-var Over = function(game){};
 
+var Over = function(game){};
 Over.prototype = {
 
 	preload: function () {
@@ -7,6 +7,10 @@ Over.prototype = {
 		game.load.image('game over comic', 'assets/img/game over comic.png');
 	},
 	create: function () {
+		
+		// load select sound
+		this.selectNoise = game.add.audio('select');
+		
 		//place game over comic to cover entire screen w/ origin at top left
 		this.add.sprite(0, 0, 'game over comic');
 		
