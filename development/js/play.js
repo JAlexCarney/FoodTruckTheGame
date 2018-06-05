@@ -54,31 +54,36 @@ Play.prototype = {
 	create: function() {
 
 		    //for debug purposes:parse random days
-		  	//days 2, 4, & 5 don't work due to formatting erros
-			// day = 1;// game.rnd.integerInRange(1,5);
-			// switch (day) {
-			// 	case 1:
-			// 		this.dialog = JSON.parse(this.game.cache.getText('dialog'));
-			// 		break;
-			// 	case 2:
-			// 		this.dialog = JSON.parse(this.game.cache.getText('dialog2'));
-			// 		break;
-			// 	case 3:
-			// 		this.dialog = JSON.parse(this.game.cache.getText('dialog3'));
-			// 		break;
-			// 	case 4:
-			// 		this.dialog = JSON.parse(this.game.cache.getText('dialog4'));
-			// 		break;
-			// 	case 5:
-			// 		this.dialog = JSON.parse(this.game.cache.getText('dialog5'));
-			// 		break;
-			// 	default:
-			// 		console.log("this shouldn't be happening");
-			// }
+		  	//days 2, 4, & 5 don't work due to formatting errors
+			day = game.rnd.integerInRange(2,4);
+			switch (day) {
+				case 1:
+					console.log(day);
+					this.dialog = JSON.parse(this.game.cache.getText('dialog'));
+					break;
+				case 2:
+					console.log(day);
+					this.dialog = JSON.parse(this.game.cache.getText('dialog2'));
+					break;
+				case 3:
+					console.log(day);
+					this.dialog = JSON.parse(this.game.cache.getText('dialog3'));
+					break;
+				case 4:
+					console.log(day);
+					this.dialog = JSON.parse(this.game.cache.getText('dialog4'));
+					break;
+				case 5:
+					console.log(day);
+					this.dialog = JSON.parse(this.game.cache.getText('dialog5'));
+					break;
+				default:
+					console.log("this shouldn't be happening");
+			}
 		//TODO: switch statement for different files for different days
 
 			//parse dialog from JSON file
-		this.dialog = JSON.parse(this.game.cache.getText('dialog'));
+		//this.dialog = JSON.parse(this.game.cache.getText('dialog'));
 
 		// add audio
 		this.ambientNoise = game.add.audio('ambientNoise');

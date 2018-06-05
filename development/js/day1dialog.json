@@ -41,10 +41,10 @@
     {"dialog": "Y'all better hop to it or I will. "}
   ],
   [
-    {"dialog": "Mmmm! Thanks!"}
+    {"dialog": "Mmmm! Thanks!",  "function" : "this.spawnMoney();"}
   ],
   [
-    {"dialog": "Hmph. Disappointing."}
+    {"dialog": "Hmph. Disappointing.", "function" : "this.clearIngredients();"}
   ],
 
 
@@ -61,7 +61,7 @@
     {"dialog" : "If this takes any longer, I'll write an extremely long callout blog post on this establishment."}
   ],
   [
-    {"dialog" : "Thanks! This will totally fit my food account Instagram feed!!"}
+    {"dialog" : "Thanks! This will totally fit my food account Instagram feed!!",  "function" : "this.spawnMoney();"}
   ],
   [
     {"dialog" : "Wack out of 5 stars. Honestly."}
@@ -83,7 +83,7 @@
     {"dialog": "Hurry up, I don't have all day..."}
   ],
   [
-    {"dialog": "Delicious!"}
+    {"dialog": "Delicious!",  "function" : "this.spawnMoney();"}
   ],
   [
     {"dialog": "...Bye..."}
@@ -100,10 +100,10 @@
     {"dialog" :" Hey can you guys please hurry? I have baseball practice soon."}
   ],
   [
-    {"dialog": "Salmon? I know I asked for it, but thanks! My favorite!"}
+    {"dialog": "Salmon? I know I asked for it, but thanks! My favorite!",  "function" : "this.spawnMoney();"}
   ],
   [
-    {"dialog": "Sorry, but I have to go to practice now..."}
+    {"dialog": "Sorry, but I have to go to practice now...", "function" : "this.clearIngredients();"}
   ]
 
 ]
