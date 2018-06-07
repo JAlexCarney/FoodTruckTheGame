@@ -1,0 +1,134 @@
+[
+  [
+      {"customer" : "mouse", "dialog": "Don't get a big head about me being back.", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
+      {"dialog" : "There’s just been a stagnation of new restaurants that are Insta-worthy."},
+      {"dialog" : "I'm like forced to retread old ground."},
+      {"dialog" : "It’s like running on a wheel"},
+      {"dialog" : "Sisyphus style where it like never ends"},
+      {"dialog" : "but also I'm like not even one of those bougie hamsters."},
+      {"dialog" : "Anywaaaaaaaays"},
+      {"dialog" : "I want a poke bowl."},
+      {"dialog" : "Extra salmon.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+  ],
+  [
+    {"dialog": "Clock’s ticking..."}
+  ],
+  [
+    {"dialog" : "If I bothered to use hastags,", "function" : "this.clearIngredients();"},
+    {"dialog" : "I would probably hashtag this as Cool.",  "function" : "this.spawnMoney();"}
+  ],
+  [
+    {"dialog" : "The quality of your food isn’t worth my time.", "function" : "this.clearIngredients();"},
+    {"dialog" : "I’m going back to the vintage Gouda Diner."}
+  ],
+
+
+  [
+    {"customer": "bat", "dialog": "Hi", "newCustomer" : "true", "function" : "this.spawnAllIngredients();"},
+    {"dialog" : "Long time no see."},
+    {"dialog" : "Yup."},
+    {"dialog" : "It’s me."},
+    {"dialog" : "Oh... you don’t remember?"},
+    {"dialog" : "That’s okay..."},
+    {"dialog" : "I’d like two orders of sashimi...", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+  ],
+  [
+    {"dialog" : "Hmph."},
+    {"dialog" : "This is toooootally fine."},
+    {"dialog" : "Take allllll the time you need..."}
+  ],
+  [
+    {"dialog" : "Thanks... I guess...",  "function" : "this.spawnMoney();"},
+    {"dialog" : "If I came back more often, would you guys remember me then?", "function" : "this.clearIngredients();"}
+  ],
+  [
+    {"dialog" : "First you forget one of your most valuable customers", "function" : "this.clearIngredients();"},
+    {"dialog" : "then you don’t even serve them!"},
+    {"dialog" : "THE AUDACITY"}
+  ],
+
+
+  [
+    {"customer": "alpaca", "dialog": "Haaay.", "newCustomer" : "true", "function" : "this.spawnAllIngredients();"},
+    {"dialog": "I reeaaaally like your stall."},
+    {"dialog": "Old fashioned."},
+    {"dialog": "Rustic."},
+    {"dialog": "Smells like rice."},
+    {"dialog": "You feel me?"},
+    {"dialog": "Anyways,"},
+    {"dialog": "Gimme some rice."},
+    {"dialog": "A whole bowl of rice."},
+    {"dialog": "That's right."},
+    {"dialog": "Just rice."},
+    {"dialog": "R"},
+    {"dialog": "I"},
+    {"dialog": "C"},
+    {"dialog": "E."},
+    {"dialog": "In a bowl."},
+    {"dialog": "A rice bowl.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+  ],
+  [
+    {"dialog": "Dang."},
+    {"dialog": "That's some sloooow rice cooking action going on."}
+  ],
+  [
+    {"dialog": "Mmmm.", "function" : "this.spawnMoney();"},
+    {"dialog": "Rice.", "function" : "this.clearIngredients();"}
+  ],
+  [
+    {"dialog": "Hay....", "function" : "this.clearIngredients();"},
+    {"dialog": "So that field over there is giving free grass...."},
+    {"dialog" : "Laaaater."}
+  ],
+
+
+  [
+    {"customer": "bird", "dialog": "I've had a terrible day today.", "newCustomer" : "true", "function" : "this.spawnAllIngredients();"},
+    {"dialog": "Some kids threw seeds on the ground in front of me."},
+    {"dialog": "Trying to rile me up."},
+    {"dialog": "Awful."},
+    {"dialog": "Anyways, I want nothing to do with seeds today."},
+    {"dialog": "I want three orders of sashimi."},
+    {"dialog": "Yeah. Just rice and salmon."},
+    {"dialog": "No seeds anywhere in sight.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+  ],
+  [
+    {"dialog": "You better not be putting seeds on my food!"}
+  ],
+  [
+    {"dialog": "Thanks.", "function" : "this.spawnMoney();"},
+    {"dialog": "Perfectly seedless.",  "function" : "this.clearIngredients();"}
+  ],
+  [
+    {"dialog": "You are putting seeds on my food, aren’t you?", "function" : "this.clearIngredients();"},
+    {"dialog": "Everybody's out here betraying me!"},
+    {"dialog": "I'm fed up with this world!"},
+    {"dialog": "and I didn't even get fed!"},
+    {"dialog": "I'm leaving!"}
+  ],
+
+
+  [
+    {"customer": "frog", "dialog": "Ribbit.", "newCustomer" : "true", "function" : "this.spawnAllIngredients();"},
+    {"dialog": "Ribbit."},
+    {"dialog": "Ribbit."},
+    {"dialog": "Sorry, got the hiccups."},
+    {"dialog": "Got it bad."},
+    {"dialog": "Anyways, can I have a poke bowl and a salmon roll?", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+  ],
+  [
+    {"dialog": "Ribbit...."},
+    {"dialog": "Y'all good back there?"},
+    {"dialog": "Ribbit..."}
+  ],
+  [
+    {"dialog": "Ribbit...",  "function" : "this.spawnMoney();"},
+    {"dialog": "Thanks"}
+
+  ],
+  [
+    {"dialog": "Ribbit...", "function" : "this.clearIngredients();"},
+    {"dialog": "Gotta hop along..."},
+    {"dialog": "These hiccups won't stop themselves"}
+  ]
+]
