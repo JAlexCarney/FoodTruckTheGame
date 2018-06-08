@@ -1,98 +1,100 @@
 [
   [
     {"customer" : "bat", "dialog" : "So I usually get a snack before my naps, and like", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
-    {"dialog" : "I was in the mood for a fruit salad."},
-    {"dialog": "But I’ll go for a salmon roll instead.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer" : "bat", "dialog" : "I was in the mood for a fruit salad."},
+    {"customer" : "bat", "dialog": "But I’ll go for a salmon roll instead.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
   ],
 
   [
-    {"dialog" : "Yawwwwn..."},
-    {"dialog": "I knew I should’ve brought my headphones."}
+    {"customer" : "bat", "dialog" : "Yawwwwn..."},
+    {"customer" : "bat", "dialog": "I knew I should’ve brought my headphones."}
   ],
   [
-    {"dialog" : "Thanks!", "function" : "this.clearIngredients();"},
-    {"dialog" : "I'll see you guys around.",  "function" : "this.spawnMoney();"}
+    {"customer" : "bat", "dialog" : "Thanks!", "function" : "this.clearIngredients();"},
+    {"customer" : "bat", "dialog" : "I'll see you guys around.",  "function" : "this.spawnMoney();"}
   ],
   [
-    {"dialog" : "Yawwwwn...I'm gonna go take a nap.", "function" : "this.clearIngredients();"},
-    {"dialog" : "It'd be better than waiting around here for nothing."}
+    {"customer" : "bat", "dialog" : "Yawwwwn...I'm gonna go take a nap.", "function" : "this.clearIngredients();"},
+    {"customer" : "bat", "dialog" : "It'd be better than waiting around here for nothing."}
   ],
 
  [
    {"customer" : "bird", "dialog" : "Wow so this is the place boss was talking about", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
-   {"dialog" : "It's a real hoot!"},
-   {"dialog" : "..."},
-   {"dialog" : "Don't tell any owls I said that...."},
-   {"dialog" : "Usually I crave some lizard meat, but I'm down for some sashimi, please.",  "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+   {"customer" : "bird", "dialog" : "It's a real hoot!"},
+   {"customer" : "bird", "dialog" : "..."},
+   {"customer" : "bird", "dialog" : "Don't tell any owls I said that...."},
+   {"customer" : "bird", "dialog" : "Usually I crave some lizard meat, but I'm down for some sashimi, please.",  "function" : "this.startOrderTimer(this.orderTime, 10000);"}
  ],
  [
-   {"dialog" : "Yo, what's going on back there?"},
-   {"dialog" : "It's been a while..."}
+   {"customer" : "bird", "dialog" : "Yo, what's going on back there?"},
+   {"customer" : "bird", "dialog" : "It's been a while..."}
  ],
  [
-   {"dialog" : "Thanks!", "function" : "this.clearIngredients();"},
-   {"dialog" : "Here's hoping it's better than lizard meat!",  "function" : "this.spawnMoney();"}
+   {"customer" : "bird", "dialog" : "Thanks!", "function" : "this.clearIngredients();"},
+   {"customer" : "bird", "dialog" : "Here's hoping it's better than lizard meat!",  "function" : "this.spawnMoney();"}
  ],
  [
-   {"dialog" : "Maaaaaaan"},
-   {"dialog" : "I’m hungry enough to go find my own lizards...", "function" : "this.clearIngredients();"},
-   {"dialog" : "I'm out. "}
+   {"customer" : "bird", "dialog" : "Maaaaaaan"},
+   {"customer" : "bird", "dialog" : "I’m hungry enough to go find my own lizards...", "function" : "this.clearIngredients();"},
+   {"customer" : "bird", "dialog" : "I'm out. "}
  ],
 
 
 
  [
    {"customer" : "mouse", "dialog" : "So like", "newCustomer" : "true"},
-   {"dialog" : "My IG followers loved the visual aesthetic of your bowl, so I'm back!"},
-   {"dialog" : "This time, I'll order some sashimi! Pretty please!"},
-   {"dialog" : "Emphasis on pretty.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+   {"customer" : "mouse", "dialog" : "My IG followers loved the visual aesthetic of your bowl, so I'm back!"},
+   {"customer" : "mouse", "dialog" : "This time, I'll order some sashimi! Pretty please!"},
+   {"customer" : "mouse", "dialog" : "Emphasis on pretty.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
  ],
  [
-    {"dialog" : "Can you hurry up please?"},
-     {"dialog" : "I'm losing followers every minute you waste..."}
+    {"customer" : "mouse", "dialog" : "Can you hurry up please?"},
+    {"customer" : "mouse", "dialog" : "I'm losing followers every minute you waste..."}
  ],
  [
-   {"dialog" : "Thanks! I can't wait to take a pic before I dig in.",  "function" : "this.spawnMoney();"}
+   {"customer" : "mouse", "dialog" : "Thanks!",  "function" : "this.clearIngredients();"},
+   {"customer" : "mouse", "dialog" : "I can't wait to take a pic before I dig in.",  "function" : "this.spawnMoney();"}
  ],
  [
-    {"dialog" : "I’m so hungry that I’m giving your truck a half star review.", "function" : "this.clearIngredients();"}
+  {"customer" : "mouse", "dialog" : "I’m so hungry that I’m giving your truck a half star review.", "function" : "this.clearIngredients();"}
  ],
 
 
  [
    {"customer": "frog", "dialog" : "Okay, so yesterday, you didn’t have any flies...", "newCustomer" : "true"},
-   {"dialog" : "But... would you happen to have any dragonflies?"},
-   {"dialog" : "No…? How about grasshoppers?"},
-   {"dialog" : "Dang, alright. I’ll have another salmon roll."},
-   {"dialog" : "Actually, make that two salmon rolls.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+   {"customer": "frog", "dialog" : "But... would you happen to have any dragonflies?"},
+   {"customer": "frog", "dialog" : "No…? How about grasshoppers?"},
+   {"customer": "frog", "dialog" : "Dang, alright. I’ll have another salmon roll."},
+   {"customer": "frog", "dialog" : "Actually, make that two salmon rolls.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
  ],
  [
-   {"dialog" : "Typical of food to try and fly away..."},
-   {"dialog" : "Am I right or am I right?"}
+   {"customer": "frog", "dialog" : "Typical of food to try and fly away..."},
+   {"customer": "frog", "dialog" : "Am I right or am I right?"}
  ],
  [
-   {"dialog" : "Hop hop hoorah! Food!",  "function" : "this.spawnMoney();"}
+   {"customer": "frog", "dialog" : "Hop hop hoorah!", "function" : "this.clearIngredients();"},
+   {"customer": "frog", "dialog" : "Food!",  "function" : "this.spawnMoney();"}
  ],
  [
-   {"dialog" : "If the food wants to fly, it’s time to hop outta here!", "function" : "this.clearIngredients();"}
+   {"customer": "frog", "dialog" : "If the food wants to fly, it’s time to hop outta here!", "function" : "this.clearIngredients();"}
  ],
 
   [
     {"customer": "axolotl", "dialog" : "Hello sir! I’m real hungry after baseball tonight!", "newCustomer": "true"},
-    {"dialog" : "I even hit a home run!"},
-    {"dialog" : "Can I please have a poke bowl and a salmon roll?", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer": "axolotl", "dialog" : "I even hit a home run!"},
+    {"customer": "axolotl", "dialog" : "Can I please have a poke bowl and a salmon roll?", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
   ],
   [
-    {"dialog" : "It’s getting late..."},
-    {"dialog" : "I hope my mom doesn’t worry about where I am..."}
+    {"customer": "axolotl", "dialog" : "It’s getting late..."},
+    {"customer": "axolotl", "dialog" : "I hope my mom doesn’t worry about where I am..."}
   ],
   [
-    {"dialog" : "I gotta hurry home now,"},
-    {"dialog" : "but thanks! I'll eat this on the way home!",  "function" : "this.spawnMoney();"}
+    {"customer": "axolotl", "dialog" : "I gotta hurry home now,", "function" : "this.clearIngredients();"},
+    {"customer": "axolotl", "dialog" : "but thanks! I'll eat this on the way home!",  "function" : "this.spawnMoney();"}
 
   ],
   [
-    {"dialog" : "I gotta hurry home now,", "function" : "this.clearIngredients();"},
-    {"dialog" : "but I’ll stop by after practice another time!"}
+    {"customer": "axolotl", "dialog" : "I gotta hurry home now,", "function" : "this.clearIngredients();"},
+    {"customer": "axolotl", "dialog" : "but I’ll stop by after practice another time!"}
   ]
 ]

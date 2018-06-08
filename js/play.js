@@ -26,7 +26,6 @@ var Play = function(game){
 	this.dialogConvo = 0; //current "convo"
 	this.dialogLine = 0; //current line
 	this.customer = null; //current customer
-	this.lastCustomer = null; //last customer
 	this.isDialogTyping = false; //lock player input while text is being typed out
 	this.dialogText = null; //actual dialog text
 	this.nextText = null; //prompt for player response
@@ -122,7 +121,6 @@ Play.prototype = {
 	},
 
 	update: function() {
-		console.log(this.customer);
 	
 		// collide player two with split screen divider
 		var leftHitDivider = game.physics.arcade.collide(this.leftPaw, this.divider);
@@ -234,18 +232,15 @@ Play.prototype = {
 		//case of a customer greeting & ordering
 		} else if(this.dialogConvo % 4 === 0) {
 
-			//set current speaker
-			this.customer = this.dialog[this.dialogConvo][this.dialogLine]['customer'];
-
 			//if there's going to be a new customer
 			if(this.dialog[this.dialogConvo][this.dialogLine]['newCustomer']) {
-				console.log(this.lastCustomer);
+				console.log(this.customer);
 				//and if last customer exists
-				if(this.lastCustomer){
-					console.log(this.lastCustomer);
+				if(this.customer){
 					//this sounds really ominous, but destroy this last customer...
 						//edit: idk why this isn't working
-					this.lastCustomer.kill();
+					console.log("Get Rekted Son!");
+					this.customer.kill();
 
 					//say we're "done" with this customer
 					this.customerDonezo = true;
@@ -254,11 +249,8 @@ Play.prototype = {
 					
 				// create this new customer with the customer prefab
 					//passes in a string from dialogue to create customer
-				 this.customer = new Customer(game, this.dialog[this.dialogConvo][this.dialogLine]['customer']);
-				game.add.existing(this.customer);
+				this.customerInit(this.dialog[this.dialogConvo][this.dialogLine]['customer']);
 				
-				//set past customer
-				this.lastCustomer = this.customer;
 
 				//was supposed to tween them on screen but not working either...
 				//this.add.tween(this[this.customer]).to({x: this.ONSCREEN_X}, {y: this.customer.body.y}, Phaser.Easing.Linear.None, true);
@@ -540,8 +532,7 @@ Play.prototype = {
 		this.nextText = this.add.text(this.NEXT_X, this.NEXT_Y, '', this.TEXT_STYLE);
 
 		// //create first customer
-		 this.customer = new Customer(game, this.dialog[this.dialogConvo][this.dialogLine]['customer']);
-		 game.add.existing(this.customer);
+		this.customerInit(this.dialog[this.dialogConvo][this.dialogLine]['customer']);
 
 			// add the counter
 		this.topCounter = this.add.sprite(0, 384, 'atlas', 'topCounter');
@@ -660,5 +651,23 @@ Play.prototype = {
 
 			//call typeText
 			this.typeText();
+	},
+	// make customer
+	customerInit: function(type) {
+		if(type === 'alpaca'){
+			this.customer = this.add.sprite(0, 0, 'atlas', 'customer_alpaca');
+		}else if(type === 'bird'){
+			this.customer = this.add.sprite(0, 72, 'atlas', 'customer_bird');
+		}else if(type === 'frog'){
+			this.customer = this.add.sprite(0, 112, 'atlas', 'customer_frog');
+		}else if(type === 'axolotl'){
+			this.customer = this.add.sprite(0, 132, 'atlas', 'customer_axolotl');
+		}else if(type === 'bat'){
+			this.customer = this.add.sprite(0, 42, 'atlas', 'customer_bat');
+		}else if(type === 'shark'){
+			this.customer = this.add.sprite(0, -8, 'atlas', 'customer_shark');
+		}else if(type === 'mouse'){
+			this.customer = this.add.sprite(0, 162, 'atlas', 'customer_mouse');
+		}
 	}
 };
