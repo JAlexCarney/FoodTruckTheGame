@@ -1,0 +1,52 @@
+customer_bird,0,0,256,312
+customer_frog,513,1881,256,272
+customer_mouse,801,291,256,222
+divider,1759,2624,1024,20
+divider_dotted,513,2154,1024,20
+janel chibi,801,771,211,157
+knife,801,929,156,310
+money_paper,1568,2520,127,64
+paper,0,442,800,600
+alex chibi,1139,1526,155,160
+amanda chibi,1538,2263,192,200
+button_continue,1058,1282,256,128
+button_continue_hover,995,1727,256,128
+button_controls,1027,1881,256,128
+button_controls_hover,1284,1881,256,128
+button_credits,257,313,256,128
+button_credits_hover,770,1881,256,128
+button_menu,738,1727,256,128
+button_menu_hover,801,1240,256,128
+button_play,0,313,256,128
+button_play_hover,1311,2520,256,128
+cashRegisterTempDisplay,1344,1127,414,414
+CookPawClosed,801,514,256,256
+CookPawOpen,257,0,256,256
+cucumber_whole,1025,2182,350,80
+customer_alpaca,1058,554,256,384
+customer_axolotl,1344,1542,256,252
+customer_bat,1058,939,256,342
+customer_shark,1058,161,256,392
+cutting board,1025,2263,512,256
+pot_empty,2180,1937,420,330
+salmon_cut,1058,0,285,160
+salmon_whole,1025,2520,285,160
+rice(isolated),2130,2268,450,340
+sushiRoll_cut,770,2010,616,114
+topCounter,0,1397,1024,128
+bowl_empty,1759,2268,370,355
+cashRegister_closed,1344,0,414,414
+controls 1,1759,1009,1024,512
+mouse 1,1759,0,1024,502
+plate,0,1043,735,353
+pot_rice,1759,1937,420,330
+seaweed,738,1526,400,200
+bowl_rice,1344,415,370,355
+bowl_salmon,2174,1522,370,355
+bowl_seeds,1344,771,370,355
+cashRegister_open,1759,1522,414,414
+rice bag,0,1881,512,300
+sushiRoll_plate,0,1526,737,354
+counter,0,2182,1024,512
+top screen,1759,503,1023,505
+TextBox,801,0,256,290
