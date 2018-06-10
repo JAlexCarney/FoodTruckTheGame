@@ -16,6 +16,9 @@ Night.prototype = {
 		//day = game.rnd.integerInRange(1,8);
 		//console.log(day);
 		
+		// set backgroundColor as black
+		game.stage.backgroundColor = "#000000";
+		
 		// load select sound
 		this.selectNoise = game.add.audio('select');
 		
@@ -36,8 +39,8 @@ Night.prototype = {
 		var money = Math.floor(Math.random() * 439) + 132;
 		
 		//set up dayName variable to display M-F 
-		var dayName = "Monday";
-		if (day == 2) { dayName = "Tuesday"; }
+		if(day == 1){ var dayName = "Monday"; }
+		else if (day == 2) { dayName = "Tuesday"; }
 		else if (day == 3) { dayName = "Wednesday"; }
 		else if (day == 4) {dayName = "Thursday"; }
 		else {dayName = "Friday"; }
@@ -63,13 +66,13 @@ Night.prototype = {
 		
 		
 		// make a continue button
-		var openMenu = function(){
-			game.state.start('Menu');
+		var openPlay = function(){
 			this.selectNoise.play('', 0, 1, false);
 			day++;
+			game.state.start('Play');
 		};
 		this.controls = game.add.sprite(500, 270, 'atlas', 'button_continue');
 		this.controls.inputEnabled = true;
-		this.controls.events.onInputDown.add(openMenu, this);
-			},
+		this.controls.events.onInputDown.add(openPlay, this);
+		},
 }
