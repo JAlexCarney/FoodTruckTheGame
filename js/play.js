@@ -560,10 +560,10 @@ Play.prototype = {
 			//if both rice is cooked & salmon is cut, create sashimi when overlapped
 			if(this.riceIsCooked && this.salmonIsChopped && game.physics.arcade.overlap(this.salmon, this.rice)) {
 				console.log('sashimi overlap worked');
+				this.sashimi = new Pickupable(game, 'sashimi', this.rice.x, this.rice.y);//create sashimi
+				game.add.existing(this.sashimi);
 				this.rice.kill(); //kill individual assets
 				this.salmon.kill();
-				this.sashimi = new Pickupable(game, 'sashimi', 530, 750);//create sashimi
-				game.add.existing(this.sashimi);
 				this.sashimiReady = true; //ready to be plated
 				//check if player puts food on plate
 			} else if (this.sashimiReady && game.physics.arcade.overlap(this.sashimi, this.plate)) {
