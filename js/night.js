@@ -21,6 +21,10 @@ Night.prototype = {
 		
 		// load select sound
 		this.selectNoise = game.add.audio('select');
+		//load newspaper crinkle sound
+		this.newspaperNoise = game.add.audio('newspaper');
+		//load night ambient sound
+		this.ambientNight = game.add.audio('ambientNight');
 		
 		//check the day variable and use it to load the correct newspaper day sprite from the newspaper atlas
 		this.newspaper = this.add.sprite(0, 512, 'newspaper', 'newspaper' + day);
@@ -74,5 +78,9 @@ Night.prototype = {
 		this.controls = game.add.sprite(500, 270, 'atlas', 'button_continue');
 		this.controls.inputEnabled = true;
 		this.controls.events.onInputDown.add(openPlay, this);
-		},
+		
+		//play newspaper crinkle at beginning of night time state, and night ambient noise
+		this.newspaperNoise.play();
+		this.ambientNight.play('', 0, 1.5, true);
+		}
 }

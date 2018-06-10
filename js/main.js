@@ -89,6 +89,12 @@ Preload.prototype = {
 		game.load.audio('chop', 'assets/audio/chop.ogg');
 		  // paper crinkling sound
 		game.load.audio('cashGrab', 'assets/audio/cash.ogg');
+		 // alarm sound
+		game.load.audio('alarm', 'assets/audio/alarm.ogg');
+		 // newspaper crinkle sound
+		game.load.audio('newspaper', 'assets/audio/newspaper close short.ogg');
+		 // night time ambient noise sound
+		game.load.audio('ambientNight', 'assets/audio/Hiroo Street.ogg');
 	},
 	
 	update: function() {

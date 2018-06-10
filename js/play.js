@@ -25,6 +25,10 @@ Play.prototype = {
 	// place assets and initialize variables
 	create: function() {
 
+		// fade in
+		this.fade = new Fade(game, true);
+		game.add.existing(this.fade);
+	
 		//dialog variables
 		this.dialogConvo = 0; //current "convo"
 		this.dialogLine = 0; //current line
@@ -85,8 +89,9 @@ Play.prototype = {
 		this.ambientNoise = game.add.audio('ambientNoise'); // add audio
 		this.ambientNoise.play('',0, .25, true); //play ambient noise
 		this.selectNoise = game.add.audio('select'); //load UIselect noise
-		this.registerNoise = game.add.audio('register');	//load registar noise
+		this.registerNoise = game.add.audio('register');//load registar noise
 		this.chopNoise = game.add.audio('grab'); //load "chop" noise
+		this.alarmNoise = game.add.audio('alarm'); //load alarm morning noise
 
 		game.physics.startSystem(Phaser.Physics.ARCADE); 	// enable physics
 
@@ -100,6 +105,11 @@ Play.prototype = {
 		this.createTopScreen();//create top screen (if not all top screen elements)
 		this.createDivider(); // load divider between 2 screens
 		this.typeText(); 	//let the typing Commence
+		
+		if( day != 1 ) {
+			//play alarmNoise at the start of state
+			this.alarmNoise.play();
+		}
 	},
 
 	update: function() {
