@@ -1,25 +1,22 @@
 [
   [
-    {"customer" : "alpaca", "dialog": "Hay.", "newCustomer": "true", "function" : "this.isOrderFinished = false;"},
-    {"customer" : "alpaca", "dialog": "Lemme get uhhhhh..."},
-    {"customer" : "alpaca", "dialog": "Uhhhhhhhhhh..."},
-    {"customer" : "alpaca", "dialog": "No, I don't need a minute to look at the menu!"},
-    {"customer" : "alpaca", "dialog": "I got it..."},
-    {"customer" : "alpaca", "dialog": "I swear..."},
-    {"customer" : "alpaca", "dialog": "Uh...", "function": "this.setOrderType('sashimi');"},
-    {"customer" : "alpaca", "dialog": "I'll take an order of sashimi please.", "function" : "this.createOrder();"}
+    {"customer" : "frog", "dialog": "Y'all serve flies here?",  "newCustomer": "true"},
+    {"customer" : "frog", "dialog": "No?"},
+    {"customer" : "frog", "dialog": "Y'all serve sushi????"},
+    {"customer" : "frog", "dialog": "Oh.... Dang.", "function": "this.setOrderType('sushiRoll');"},
+    {"customer" : "frog", "dialog": "Well, uh how about a salmon roll?", "function" : "this.createOrder();"}
   ],
   [
-    {"customer" : "alpaca", "dialog": "Hurry up, I don't have all day..."}
-  ],
-  [ {"customer" : "alpaca", "dialog": "Thaaaaanks", "function": "this.clearIngredients();"},
-    {"customer" : "alpaca", "dialog": "It looks delicious!",  "function" : "this.spawnMoney();"}
+    {"customer" : "frog", "dialog": "Y'all better hop to it or I will."}
   ],
   [
-    {"customer" : "alpaca", "dialog": "...Bye...",  "function" : "this.clearIngredients();"}
+    {"customer" : "frog", "dialog": "Mmmm!",  "function" : "this.clearIngredients();"},
+    {"customer" : "frog", "dialog":" Thanks!",  "function" : "this.spawnMoney();"}
+  ],
+  [
+    {"customer" : "frog", "dialog": "Hmph. Disappointing.", "function" : "this.clearIngredients();"}
   ],
 
-  
   [
     {"customer" : "shark", "dialog" : "Oh, it’s been a while since I’ve last you guys.",  "newCustomer": "true"},
     {"customer" : "shark", "dialog" : "I knew you guys quit with resignation letters talking about"},
@@ -52,31 +49,32 @@
   ],
 
   [
-    {"customer" : "frog", "dialog": "Y'all serve flies here?",  "newCustomer": "true"},
-    {"customer" : "frog", "dialog": "No?"},
-    {"customer" : "frog", "dialog": "Oh.... Dang.", "function": "this.setOrderType('sushiRoll');"},
-    {"customer" : "frog", "dialog": "Well, how about a salmon roll?", "function" : "this.createOrder();"}
+    {"customer" : "alpaca", "dialog": "Hay.", "newCustomer": "true", "function" : "this.isOrderFinished = false;"},
+    {"customer" : "alpaca", "dialog": "Lemme get uhhhhh..."},
+    {"customer" : "alpaca", "dialog": "Uhhhhhhhhhh..."},
+    {"customer" : "alpaca", "dialog": "No, I don't need a minute to look at the menu!"},
+    {"customer" : "alpaca", "dialog": "I got it..."},
+    {"customer" : "alpaca", "dialog": "I swear..."},
+    {"customer" : "alpaca", "dialog": "Uh...", "function": "this.setOrderType('sashimi');"},
+    {"customer" : "alpaca", "dialog": "I'll take an order of sashimi please.", "function" : "this.createOrder();"}
   ],
   [
-    {"customer" : "frog", "dialog": "Y'all better hop to it or I will."}
+    {"customer" : "alpaca", "dialog": "Hurry up, I don't have all day..."}
+  ],
+  [ {"customer" : "alpaca", "dialog": "Thaaaaanks", "function": "this.clearIngredients();"},
+    {"customer" : "alpaca", "dialog": "It looks delicious!",  "function" : "this.spawnMoney();"}
   ],
   [
-    {"customer" : "frog", "dialog": "Mmmm!",  "function" : "this.clearIngredients();"},
-    {"customer" : "frog", "dialog":" Thanks!",  "function" : "this.spawnMoney();"}
+    {"customer" : "alpaca", "dialog": "...Bye...",  "function" : "this.clearIngredients();"}
   ],
-  [
-    {"customer" : "frog", "dialog": "Hmph. Disappointing.", "function" : "this.clearIngredients();"}
-  ],
-
 
   [
     {"customer" : "mouse", "dialog": "So like, I'm lactose intolerant.",  "newCustomer": "true"},
     {"customer" : "mouse", "dialog" : "So like, do you guys have anything that's like uh"},
     {"customer" : "mouse", "dialog" : "Organic, vegan, gluten free, and cruelty free?"},
     {"customer" : "mouse", "dialog": "but also like... actually tastes good and savory?"},
-    {"customer" : "mouse", "dialog" : "Oh sweet you do!?"},
-    {"customer" : "mouse", "dialog" : "Then I'll take that organic poke bowl", "function": "this.setOrderType('pokeBowl');"},
-    {"customer" : "mouse", "dialog" : "with extra gluten and cruelty-free sesame seeds!", "function" : "this.createOrder();"}
+    {"customer" : "mouse", "dialog" : "Oh sweet you do!?", "function": "this.setOrderType('pokeBowl');"},
+    {"customer" : "mouse", "dialog" : "Then I'll take that organic poke bowl", "function" : "this.createOrder();"}
   ],
   [
     {"customer" : "mouse", "dialog" : "If this takes any longer, I'll write an extremely long callout blog post on this establishment."}

@@ -1,14 +1,14 @@
 [
   [
-      {"customer" : "mouse", "dialog": "Don't get a big head about me being back.", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
+      {"customer" : "mouse", "dialog": "Don't get a big head about me being back.", "newCustomer": "true"},
       {"customer" : "mouse", "dialog" : "There’s just been a stagnation of new restaurants that are Insta-worthy."},
       {"customer" : "mouse", "dialog" : "I'm like forced to retread old ground."},
       {"customer" : "mouse", "dialog" : "It’s like running on a wheel"},
       {"customer" : "mouse", "dialog" : "Sisyphus style where it like never ends"},
       {"customer" : "mouse", "dialog" : "but also I'm like not even one of those bougie hamsters."},
       {"customer" : "mouse", "dialog" : "Anywaaaaaaaays"},
-      {"customer" : "mouse", "dialog" : "I want a poke bowl."},
-      {"customer" : "mouse", "dialog" : "Extra salmon.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+      {"customer" : "mouse", "dialog" : "I want another poke bowl.", "function": "this.setOrderType('pokeBowl');"},
+      {"customer" : "mouse", "dialog" : "With that same salmon goodness.", "function" : "this.createOrder();"}
   ],
   [
     {"customer" : "mouse", "dialog": "Clock’s ticking..."}
@@ -24,13 +24,13 @@
 
 
   [
-    {"customer": "bat", "dialog": "Hi", "newCustomer" : "true", "function" : "this.spawnAllIngredients();"},
+    {"customer": "bat", "dialog": "Hi", "newCustomer" : "true"},
     {"customer": "bat", "dialog" : "Long time no see."},
     {"customer": "bat", "dialog" : "Yup."},
     {"customer": "bat", "dialog" : "It’s me."},
     {"customer": "bat", "dialog" : "Oh... you don’t remember?"},
-    {"customer": "bat", "dialog" : "That’s okay..."},
-    {"customer": "bat", "dialog" : "I’d like two orders of sashimi...", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer": "bat", "dialog" : "That’s okay...", "function": "this.setOrderType('sashimi');"},
+    {"customer": "bat", "dialog" : "I’d like an order of sashimi...", "function" : "this.createOrder();"}
   ],
   [
     {"customer": "bat", "dialog" : "Hmph."},
@@ -38,8 +38,8 @@
     {"customer": "bat", "dialog" : "Take allllll the time you need..."}
   ],
   [
-    {"customer": "bat", "dialog" : "Thanks... I guess...",  "function" : "this.spawnMoney();"},
-    {"customer": "bat", "dialog" : "If I came back more often, would you guys remember me then?", "function" : "this.clearIngredients();"}
+    {"customer": "bat", "dialog" : "Thanks... I guess...","function" : "this.clearIngredients();"},
+    {"customer": "bat", "dialog" : "If I came back more often, would you guys remember me then?", "function" : "this.spawnMoney();"}
   ],
   [
     {"customer": "bat", "dialog" : "First you forget one of your most valuable customers", "function" : "this.clearIngredients();"},
@@ -49,7 +49,7 @@
 
 
   [
-    {"customer": "alpaca", "dialog": "Haaay.", "newCustomer" : "true", "function" : "this.spawnAllIngredients();"},
+    {"customer": "alpaca", "dialog": "Haaay.", "newCustomer" : "true"},
     {"customer": "alpaca", "dialog": "I reeaaaally like your stall."},
     {"customer": "alpaca", "dialog": "Old fashioned."},
     {"customer": "alpaca", "dialog": "Rustic."},
@@ -64,16 +64,16 @@
     {"customer": "alpaca", "dialog": "I"},
     {"customer": "alpaca", "dialog": "C"},
     {"customer": "alpaca", "dialog": "E."},
-    {"customer": "alpaca", "dialog": "In a bowl."},
-    {"customer": "alpaca", "dialog": "A rice bowl.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer": "alpaca", "dialog": "In a bowl.", "function": "this.setOrderType('riceBowl');"},
+    {"customer": "alpaca", "dialog": "A rice bowl.", "function" : "this.createOrder();"}
   ],
   [
     {"customer": "alpaca", "dialog": "Dang."},
-    {"customer": "alpaca", "dialog": "That's some sloooow rice cooking action going on."}
+    {"customer": "alpaca", "dialog": "That's some reaaaaal sloooow rice cooking action going on."}
   ],
   [
-    {"customer": "alpaca", "dialog": "Mmmm.", "function" : "this.spawnMoney();"},
-    {"customer": "alpaca", "dialog": "Rice.", "function" : "this.clearIngredients();"}
+    {"customer": "alpaca", "dialog": "Mmmm.", "function" : "this.clearIngredients();"},
+    {"customer": "alpaca", "dialog": "Rice.", "function" : "this.spawnMoney();"}
   ],
   [
     {"customer": "alpaca", "dialog": "Hay....", "function" : "this.clearIngredients();"},
@@ -83,24 +83,25 @@
 
 
   [
-    {"customer": "bird", "dialog": "I've had a terrible day today.", "newCustomer" : "true", "function" : "this.spawnAllIngredients();"},
+    {"customer": "bird", "dialog": "I've had a terrible day today.", "newCustomer" : "true"},
     {"customer": "bird", "dialog": "Some kids threw seeds on the ground in front of me."},
     {"customer": "bird", "dialog": "Trying to rile me up."},
     {"customer": "bird", "dialog": "Awful."},
     {"customer": "bird", "dialog": "Anyways, I want nothing to do with seeds today."},
-    {"customer": "bird", "dialog": "I want three orders of sashimi."},
+    {"customer": "bird", "dialog": "I want an order of sashimi.", "function": "this.setOrderType('sashimi');"},
     {"customer": "bird", "dialog": "Yeah. Just rice and salmon."},
-    {"customer": "bird", "dialog": "No seeds anywhere in sight.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer": "bird", "dialog": "No seeds anywhere in sight please."},
+    {"customer": "bird", "dialog": "I beg of you.", "function" : "this.createOrder();"}
   ],
   [
     {"customer": "bird", "dialog": "You better not be putting seeds on my food!"}
   ],
   [
-    {"customer": "bird", "dialog": "Thanks.", "function" : "this.spawnMoney();"},
-    {"customer": "bird", "dialog": "Perfectly seedless.",  "function" : "this.clearIngredients();"}
+    {"customer": "bird", "dialog": "Thanks.", "function" : "this.clearIngredients();"},
+    {"customer": "bird", "dialog": "Perfectly seedless.", "function" : "this.spawnMoney();"}
   ],
   [
-    {"customer": "bird", "dialog": "You are putting seeds on my food, aren’t you?", "function" : "this.clearIngredients();"},
+    {"customer": "bird", "dialog": "You're putting seeds on my food, aren’t you?", "function" : "this.clearIngredients();"},
     {"customer": "bird", "dialog": "Everybody's out here betraying me!"},
     {"customer": "bird", "dialog": "I'm fed up with this world!"},
     {"customer": "bird", "dialog": "and I didn't even get fed!"},
@@ -109,12 +110,12 @@
 
 
   [
-    {"customer": "frog", "dialog": "Ribbit.", "newCustomer" : "true", "function" : "this.spawnAllIngredients();"},
+    {"customer": "frog", "dialog": "Ribbit.", "newCustomer" : "true"},
     {"customer": "frog", "dialog": "Ribbit."},
     {"customer": "frog", "dialog": "Ribbit."},
     {"customer": "frog", "dialog": "Sorry, got the hiccups."},
-    {"customer": "frog", "dialog": "Got it bad."},
-    {"customer": "frog", "dialog": "Anyways, can I have a poke bowl and a salmon roll?", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer": "frog", "dialog": "Got it bad.", "function": "this.setOrderType('pokeBowl');"},
+    {"customer": "frog", "dialog": "Anyways, can I have a poke bowl?", "function" : "this.createOrder();"}
   ],
   [
     {"customer": "frog", "dialog": "Ribbit...."},
@@ -122,8 +123,8 @@
     {"customer": "frog", "dialog": "Ribbit..."}
   ],
   [
-    {"customer": "frog", "dialog": "Ribbit...",  "function" : "this.spawnMoney();"},
-    {"customer": "frog", "dialog": "Thanks", "function" : "this.clearIngredients();"}
+    {"customer": "frog", "dialog": "Ribbit...", "function" : "this.clearIngredients();"},
+    {"customer": "frog", "dialog": "Thanks", "function" : "this.spawnMoney();"}
 
   ],
   [

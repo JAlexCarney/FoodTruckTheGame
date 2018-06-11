@@ -1,21 +1,21 @@
 var Money = function(game, x, y){
 	// give money prefab properties of a sprite
 	Phaser.Sprite.call(this, game, x, y, 'atlas', 'money_paper');
-	
+
 	// give money physics
 	game.physics.enable(this, Phaser.Physics.ARCADE);
 	this.anchor = new PIXI.Point(0.5, 0.5);
 	this.body.collideWorldBounds = true;
 	this.body.gravity.y = 300;
 	this.inputEnabled = true;
-	
+
 	// resize it
 	this.scale.setTo(1.5);
-	
+
 	// custom properties
 	this.beingHeld = false;
 	this.grabSound = game.add.audio('cashGrab');
-	
+
 	// make money clickable (grab and realese)
 	var grab = function() {
 		this.body.gravity.y = 0;
@@ -23,7 +23,7 @@ var Money = function(game, x, y){
 		this.grabSound.play();
 	}
 	this.events.onInputDown.add(grab, this);
-	
+
 	var release = function() {
 		this.body.gravity.y = 300;
 		this.beingHeld = false;
@@ -45,5 +45,10 @@ Money.prototype.update = function(){
 	}
 	// make money always apear on top
 	game.world.bringToTop(this);
-	
+
+	//handles if money goes beyond below the counter
+	  //....in a silly way though
+	if(this.y > 475) {
+		this.body.velocity.y = -10;
+  }
 }

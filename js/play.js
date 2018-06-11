@@ -16,7 +16,6 @@ var Play = function(game){
 	this.NEXT_X = 450; //next prompt x position
 	this.NEXT_Y = 310; //next prompt y position
 	this.LETTER_TIMER = 10; // # of ms each letter takes to "type" onscreen
-	this.LETTER_TIMER_SLOW = 50; // a slow one to nerf the speed readers
 
 	this.RICE_TIMER = 5000; //amt of time rice needs to cook for now 5 seconds
 };
@@ -28,7 +27,7 @@ Play.prototype = {
 		// fade in
 		this.fade = new Fade(game, true);
 		game.add.existing(this.fade);
-	
+
 		//dialog variables
 		this.dialogConvo = 0; //current "convo"
 		this.dialogLine = 0; //current line
@@ -52,6 +51,7 @@ Play.prototype = {
 		this.riceIsCooked = false;
 		this.salmonIsChopped = false;
 		this.orderType = ''; //for checking what type of order is there
+		this.riceBowlOrder = false; //check if customer ordered rice bowl
 		this.riceInBowl = false; //for poke bowl
 		this.pokeBowlOrder = false; //check if customer ordered a poke bowl
 		this.pokeBowlReady = false; //check if the poke bowl order is ready to plate
@@ -66,7 +66,7 @@ Play.prototype = {
 		this.sushiRollReady = false; //check if sushi roll is ready for plating
 		this.sushiRollPlated = false; //sushi roll is ready for customer
 
-			//switch statement to load proper dialog JSON files
+			//switch statement to load proper dialog JSON files depending on day
 			switch (day) {
 				case 1:
 					this.dialog = JSON.parse(this.game.cache.getText('dialog'));
@@ -84,12 +84,12 @@ Play.prototype = {
 					this.dialog = JSON.parse(this.game.cache.getText('dialog5'));
 					break;
 				default:
-					console.log("this shouldn't be happening");
+				  //case that shouldn't be reached
 			}
 		this.ambientNoise = game.add.audio('ambientNoise'); // add audio
 		this.ambientNoise.play('',0, .25, true); //play ambient noise
 		this.selectNoise = game.add.audio('select'); //load UIselect noise
-		this.registerNoise = game.add.audio('register');//load registar noise
+		this.registerNoise = game.add.audio('register');	//load registar noise
 		this.chopNoise = game.add.audio('grab'); //load "chop" noise
 		this.alarmNoise = game.add.audio('alarm'); //load alarm morning noise
 
@@ -105,11 +105,11 @@ Play.prototype = {
 		this.createTopScreen();//create top screen (if not all top screen elements)
 		this.createDivider(); // load divider between 2 screens
 		this.typeText(); 	//let the typing Commence
-		
-		if( day != 1 ) {
-			//play alarmNoise at the start of state
-			this.alarmNoise.play();
-		}
+
+		//play alarmNoise at the start of state
+ 		if( day != 1 ) {
+ 			this.alarmNoise.play();
+ 		}
 	},
 
 	update: function() {
@@ -119,28 +119,28 @@ Play.prototype = {
 		this.checkPawCollisions(); 	//handles food and paw collisions
 		this.checkKnifeCollisions(); 		//handles knife collissions
 		this.checkRicePotCollision(); 	// collide rice with rice pot
-
 		game.physics.arcade.collide(this.topCounter, this.money); // collide money with counter
 
-		// money in register (on hover)
+		//check if the money hovers over the register
 		if(game.physics.arcade.overlap(this.register, this.money)){
-			this.register.loadTexture('atlas', 'cashRegister_open');
-			if(this.money.beingHeld == false){
-				this.money.kill();
-				this.registerNoise.play();
-				//unpause dialog
-				this.pauseDialog = false;
+			this.register.loadTexture('atlas', 'cashRegister_open'); //open the register on hover
+			if(this.money.beingHeld == false){ //if putting money in register,
+				this.money.kill(); //get rid of money
+				this.registerNoise.play(); //play sound
+				this.pauseDialog = false; //unpause dialog
 			}
 		}else{
 			this.register.loadTexture('atlas', 'cashRegister_closed');
 		}
-		//check on these if the order is not finished
-		if(!this.orderIsFinished) {
-			this.checkPokeBowl();  //check pokeBowlOrder
-			this.checkSashimi();   //check sashimiOrder
-			this.checkSushiRoll(); //check sushiRoll order
-		}
 
+		//if order isn't finished already, call checking functions
+			if(!this.isOrderFinished) {
+				//check which type it is before even calling check function
+				if(this.riceBowlOrder) {this.checkRiceBowl(); }//check riceOrder
+				if(this.sashimiOrder)  {this.checkSashimi(); } //check sashimiOrder
+				if(this.pokeBowlOrder)  {this.checkPokeBowl(); } //check pokeBowlOrder
+				if(this.sushiRollOrder) {this.checkSushiRoll(); }//check sushiRoll order
+			}
 
 		//check for mouse click and if dialog calls are paused to progress through dialog
 		if(this.dialogClick & !this.dialogTyping && !this.pauseDialog) {
@@ -161,6 +161,8 @@ Play.prototype = {
 	 this.ipadScreen.bringToTop();
 	 this.register.bringToTop();
 	 this.dialogText.bringToTop();
+	 leftPaw.bringToTop();
+	 rightPaw.bringToTop();
 	 this.divider.bringToTop();
  },
 	// create player 2's paws
@@ -189,8 +191,8 @@ Play.prototype = {
 		game.physics.enable(this.topCounter);
 		this.topCounter.body.setSize(1024, 64, 0, 64);
 		this.topCounter.body.immovable = true;
-		// add the register (currently decorative : P)
-	this.ipadScreen = this.add.sprite(600, 75, 'atlas', 'cashRegisterTempDisplay');
+		// add the register
+	this.ipadScreen = this.add.sprite(620, 90, 'registerAtlas', 'ipad screen');
 	this.register = this.add.sprite(600, 75, 'atlas', 'cashRegister_closed');
 	game.physics.enable(this.register);
 	this.register.body.immovable = true;
@@ -227,7 +229,7 @@ Play.prototype = {
 			this.customer = this.add.sprite(0, 162, 'atlas', 'customer_mouse');
 			break;
 		default:
-				console.log("customerInit error: this shouldn't be reached");
+				//case that shouldn't be reached
 		}
   },
 	//spawns cookware needed for bottom screen player
@@ -270,8 +272,8 @@ Play.prototype = {
 	 //once timer finished typing dialog for a line, show [...] prompt to go on
 	 this.textTimer.timer.onComplete.addOnce(function() {
 		 //show prompt for more text
-		 this.nextText = this.add.text(this.NEXT_X, this.NEXT_Y, this.NEXT_TEXT);
-		 this.nextText.anchor.setTo(1, 1);
+			 this.nextText = this.add.text(this.NEXT_X, this.NEXT_Y, this.NEXT_TEXT);
+			 this.nextText.anchor.setTo(1, 1);
 		 //enable player input
 		 this.dialogTyping = false;
 		 this.dialogBox.inputEnabled = true;
@@ -283,8 +285,6 @@ Play.prototype = {
 	 //some things in separate functions, but they would not work without sometihng
 	 //goofy going on like a single letter displaying multiple times.
  typeText: function() {
-	 //generic typetext call
-	 console.log(this.isOrderFinished);
 	 //lock input while typing
 	 this.isDialogTyping = true;
 	 this.dialogBox.inputEnabled = false; //prevent clicks from interrupting dialogue
@@ -297,14 +297,15 @@ Play.prototype = {
 	 this.nextText.text = '';
 
 	 //check if we're even in a convo
+	 	//if at end of all customers, go to night state
 	 if(this.dialogConvo >= this.dialog.length) {
-		 console.log('No more convos');
-		 //TODO: proceed to night time state if done with all customers
-
+		 this.fade.isFadingOut = true;
+		 this.ambientNoise.fadeOut(2000); //fade out sound
+		this.ambientNoise.stop(); //stop ambient sound
+		game.state.start('Night'); //start night state
 	 //case of a customer greeting & ordering
  } else {
 		if(this.dialogConvo % 4 === 0) {
-			console.log('Before new customer ' + this.isOrderFinished);
 	 //if there's going to be a new customer
 	 if(this.dialog[this.dialogConvo][this.dialogLine]['newCustomer']) {
 		 //and if last customer exists
@@ -315,8 +316,6 @@ Play.prototype = {
 		 //create new customer
 		 this.customerInit(this.dialog[this.dialogConvo][this.dialogLine]['customer']);
 		 this.isOrderFinished = false;
-		 console.log('Made new customer');
-		 console.log(this.isOrderFinished);
 }
 	 //build dialog until we reach the end of the convo
 		 //get the text from json
@@ -331,7 +330,7 @@ Play.prototype = {
 
 		 this.setDialogBounds(); //set dialog bounds
 		 this.dialogLine += 1; //increment dialog line
-		 this.lastCustomer = this.customer; 	//set past customer
+		 this.lastCustomer = this.customer; //set past customer
 
 	 //case if dialog is late
  } else if (this.dialogConvo % 4 === 1 && this.isRunningLate) {
@@ -387,8 +386,7 @@ Play.prototype = {
 		 this.lastCustomer = this.customer;
 
 	} else {
-	 //this is a case that shouldn't be reached at ALL but having it as an error catcher
-	 console.log('Error: This should not be reached in typeText()');
+	 //this is a case that shouldn't be reached at ALL
 	}
 
 	//when we reach end of either the greet or late conversation
@@ -451,9 +449,9 @@ Play.prototype = {
  	//spawns sushi roll ingredients
  	spawnSushiRollIngredients: function() {
  		this.spawnPlate(); 	//plate
+		this.spawnSeaweed(); //seaweed
  		this.spawnRice(); //rice
  		this.spawnSalmon(); //salmon
- 		this.spawnSeaweed(); //seaweed
  		this.bringEverythingToTop();
  	},
 
@@ -487,12 +485,21 @@ Play.prototype = {
 			this.plate.scale.setTo(.75, .75);
 			game.add.existing(this.plate);
 			game.physics.enable(this.plate);
-			this.plate.enableBody = false;
+			this.plate.enableBody = true;
+		},
+		spawnSushiRoll: function() {
+			this.sushiRoll = new Pickupable(game, 'sushiRoll', 550, 700);
+			game.add.existing(this.sushiRoll);
+			//game.physics.enable(this.sushiRoll);
+			//this.sushiRoll.enableBody = true;
 		},
 
 		//function that deletes remaining ingredients in between customers
 		//also reset some variables to prepare for next customer
 		clearIngredients: function() {
+			//reset iPadscreen
+			this.ipadScreen.loadTexture('registerAtlas', 'ipad screen');
+
 			//clear off remaning food assets on screen
 			if(this.seaweed != undefined)			{this.seaweed.kill();}
 			if(this.salmon != undefined) 			{this.salmon.kill();}
@@ -502,10 +509,11 @@ Play.prototype = {
 			if(this.sashimi != undefined) 		{this.sashimi.kill();}
 			if(this.sushiRoll != undefined) 	{this.sushiRoll.kill();}
 
-			//reset most variables
+			//reset variables
 			this.ricePot.loadTexture('atlas', 'pot_empty');	//reset rice pot texture
 			this.salmonIsChopped = false;
 			this.riceIsCooked = false;
+			this.riceBowlOrder = false;
 			this.salmonIsChopped = false;
 			this.orderType = '';
 			this.riceInBowl = false;
@@ -523,18 +531,29 @@ Play.prototype = {
 			this.sushiRollPlated = false;
 		},
  //------------------------ CHECK ORDER FUNCTIONS -----------------------------
- //TODO: account for combo
-		//will probably have special combo cases
+ //TODO: account for combo orders
+ 		//will probably have separate special combo cases(?)
+	checkRiceBowl: function() {
+ 		//checks to see if rice bowl was ordered
+		if(!this.isOrderFinished && this.orderType === 'riceBowl' && this.riceBowlOrder) {
+			//check if rice is cooked & overlap with bowl
+				if(this.riceIsCooked && game.physics.arcade.overlap(this.rice, this.bowl)) {
+						this.rice.kill(); //kill rice
+						this.bowl.loadTexture('atlas','bowl_rice');//reload bowl texture
+						this.riceInBowl = true; //set ready
+						this.isOrderFinished = true;
+						this.setOrderComplete();
+				}
+		}
+	},
+
 	//for now, only checks to see if the pokebowl is the only one ordered
 	//check to see if poke bowl (if only ordered) is ready
  	checkPokeBowl: function() {
 		//checks to see if a poke bowl was even ordered
-		if(!this.orderIsFinished && this.orderType === 'pokeBowl' && this.pokeBowlOrder) {
-			console.log('riceIsCooked ' + this.riceIsCooked);
-			console.log('rice + bowl overlap' + game.physics.arcade.overlap(this.rice, this.bowl));
+		if(!this.isOrderFinished && this.orderType === 'pokeBowl' && this.pokeBowlOrder) {
 			//check if rice is cooked & overlap with the bowl
 			if(this.riceIsCooked && game.physics.arcade.overlap(this.rice, this.bowl)){
-				console.log('poke bowl overlap worked');
 				//kill the rice & set bowl texture
 				this.rice.kill();
 				this.bowl.loadTexture('atlas','bowl_rice');
@@ -547,7 +566,7 @@ Play.prototype = {
 				this.pokeBowlReady = true;
 				this.pokeBowlPlated = true;//set as plated & ready
  		  } else if (this.pokeBowlPlated) {
-				this.orderIsFinished = true; //set order complete  to prevent dialog errors
+				this.isOrderFinished = true; //set order complete  to prevent dialog errors
 				this.setOrderComplete();
 			}
 		}
@@ -555,60 +574,69 @@ Play.prototype = {
 	//checks to see if sashimi is ready
 		//for now: only accounts for when there's solo sashimi order
 	checkSashimi: function() {
-		//console.log('checking sashimi');
-		if(!this.orderIsFinished && this.orderType === 'sashimi' && this.sashimiOrder){
+		if(!this.isOrderFinished && this.orderType === 'sashimi' && this.sashimiOrder){
 			//if both rice is cooked & salmon is cut, create sashimi when overlapped
 			if(this.riceIsCooked && this.salmonIsChopped && game.physics.arcade.overlap(this.salmon, this.rice)) {
-				console.log('sashimi overlap worked');
-				this.sashimi = new Pickupable(game, 'sashimi', this.rice.x, this.rice.y);//create sashimi
-				game.add.existing(this.sashimi);
-				this.rice.kill(); //kill individual assets
-				this.salmon.kill();
+				this.salmon.kill(); //kill individual assets
+				this.rice.loadTexture('atlas', 'sashimi');
 				this.sashimiReady = true; //ready to be plated
 				//check if player puts food on plate
-			} else if (this.sashimiReady && game.physics.arcade.overlap(this.sashimi, this.plate)) {
-				this.sashimi.kill(); //kill sashimi asset
+			} else if (this.sashimiReady && game.physics.arcade.overlap(this.rice, this.plate)) {
+				this.rice.kill(); //kill sashimi asset
 				this.plate.loadTexture('atlas', 'sashimi ( with plate)')//reload plate texture
 				this.sashimiPlated = true; //set as plated
+
 			} else if (this.sashimiPlated) {
-				this.orderIsFinished = true; //set order complete to prevent dialog errors
+				this.isOrderFinished = true; //set order complete to prevent dialog errors
 				this.setOrderComplete();
 			}
 		}
-		//console.log('couldnt check sashimi or overlaps did not work');
 	},
 	//check to see if sushi roll is ready if it was ordered
 		//only accounts for when there's solo sushi roll order
 		//for now:
-				//no rice collision
 				//no knife cutting
 	checkSushiRoll: function() {
-
-		if(!this.orderIsFinished && this.orderType === 'sushiRollOrder' && this.sushiRollOrder) {
+		if(!this.isOrderFinished && this.orderType === 'sushiRoll' && this.sushiRollOrder) {
 			//check if rice is cooked
 			if(this.riceIsCooked && game.physics.arcade.overlap(this.rice, this.seaweed)) {
-				console.log('sushi roll not detecting rice & seedweed collision')
 				this.rice.kill(); //kill rice
 				this.seaweed.loadTexture('atlas','rice_on_seaweed'); //update seaweed
+				this.seaweed.scale.setTo(.65);
 				this.riceOnNori = true; //set that rice is on nori
-			} else if (this.riceOnNori && this.salmonIsChopped && game.physics.arcade.overlap(this.seaweed, this.salmon)) {
-				console.log('sushi roll: not detecting rice & salmon detection')
+	} //if rice is on nori & overlap salmon, put on seaweed
+				else if (this.riceOnNori && this.salmonIsChopped && game.physics.arcade.overlap(this.seaweed, this.salmon)) {
 				this.salmon.kill(); //kill salmon
-				this.seaweed.loadTexture('atlas','sushi roll(unrolled)');//reload seaweed texture
+				this.seaweed.loadTexture('atlas','sushi roll(unrolled)'); //reload seaweed texture
+				this.seaweed.scale.setTo(.7);
+				//adjust its offset...
 				this.salmonOnNori = true; //set that salmon is on the seaweed
-			} else if (this.salmonOnNori && (rightPaw.isHolding && leftPaw.isHolding)) {
-				this.seaweed.kill()//kill seaweed
-					//for now, say it's cut
-				this.sushiRoll = new Pickupable(game, 'sushiRoll', 600, 750);
-				game.add.existing(this.sushiRoll);
-				this.sushiRollReady = true; //ready for plating,
-			} else if (this.sushiRollReady && game.physics.arcade.overlap(this.sushiRoll, this.plate)) {
-				this.sushiRoll.kill(); //kill sushi roll
+				//if one paw holds the unwrapped roll, "roll" it
+			} else if (!this.sushiRollReady && this.salmonOnNori && (this.seaweed.isHeldByRight || this.seaweed.isHeldByLeft)) {
+				this.seaweed.loadTexture('atlas', 'sushi_roll_uncut');
+				this.seaweed.scale.setTo(.65);
+				//this.seaweed.kill(); //kill seaweed
+				//this.spawnSushiRoll();
+				this.sushiRolled = true; //set as rolled
+
+				//if the roll isnt already ready for plating & rolled
+			} else if (!this.sushiRollReady && this.sushiRolled) {
+					//check for overlap between roll and knife
+					var cut = game.physics.arcade.overlap(this.seaweed, this.knife);
+					if(cut && (this.knife.isHeldByLeft || this.knife.isHeldByRight)) {
+						this.chopNoise.play();
+						this.seaweed.loadTexture('atlas', 'sushiRoll_cut'); //load texture for sushi roll
+						this.sushiRollReady = true; //ready for plating
+					}
+			} //if ready to plate & collides with plate,
+			 else if (this.sushiRollReady && game.physics.arcade.overlap(this.seaweed, this.plate)) {
+				this.seaweed.kill();
+				//this.sushiRoll.kill(); //kill sushi roll
 				this.plate.loadTexture('atlas', 'sushiRoll_plate'); //reload plate texture to have sashimi
 				this.sushiRollPlated = true; //set as plated
 			} else if (this.sushiRollPlated) {
 				//set order as plated & finished
-				this.orderIsFinished = true;
+				this.isOrderFinished = true;
 				this.setOrderComplete();
 			} else {
 				//do nothing
@@ -631,30 +659,74 @@ Play.prototype = {
 		 case 'sushiRoll':
 			 this.orderType = 'sushiRoll';
 			 break;
+		 case 'riceBowl':
+		   this.orderType = 'riceBowl';
 		 default:
-			 console.log('setOrderType error: neither of the 3 typical cases')
 	 }
  },
  	//for determining which order to check for in update,
  	//spawning their ingredients, and starting the order timer
-	//TODO: change time/delay depending on day
  	createOrder: function() {
  		switch (this.orderType) {
  			case 'pokeBowl':
  					this.pokeBowlOrder = true;
- 					this.spawnPokeIngredients(); //spawn specific ingredients needed
- 					this.startOrderTimer((this.orderTime * 2), 30000); //start timer; 30 sec delay
+					//have a "handicap" to ease in the first 2 days
+					if(day === 1 || day === 2) {
+						this.ipadScreen.loadTexture('registerAtlas', 'rec_poke');
+						this.spawnPokeIngredients(); //spawn specific ingredients needed
+						this.startOrderTimer((this.orderTime * 2), 30000); //start timer; 30 sec delay
+					} else { //make it slightly "harder" for days 3-5
+						this.ipadScreen.loadTexture('registerAtlas', 'fin_poke')//don't display steps
+						this.spawnAllIngredients();
+						var delay = 30000;
+						if(delay > 0) { //decrease delay
+							delay -= 15000;
+						}
+						this.startOrderTimer((this.orderTime * 1.5), delay); //start timer; delay will decrease per day
+					}
  					break;
  		 case 'sashimi':
  					this.sashimiOrder = true;
- 					this.spawnSashimiIngredients();
- 					this.startOrderTimer(this.orderTime, 30000);
+					//make it slightly easier first 2 days
+					if(day === 1 || day === 2) {
+						this.ipadScreen.loadTexture('registerAtlas', 'rec_sashimi');
+						this.spawnSashimiIngredients(); //spawn specific ingredients needed
+						this.startOrderTimer(this.orderTime, 50000);
+					//make it slightly harder as game progresses
+					} else {
+						this.ipadScreen.loadTexture('registerAtlas', 'fin_sashimi')//display what full order is
+						this.spawnAllIngredients();
+						var delay = 45000;
+						if(delay > 0) { //decrease delay
+							delay -= 15000;
+						}
+							this.startOrderTimer(this.orderTime, delay);
+					}
  					break;
  			case 'sushiRoll':
  				this.sushiRollOrder = true;
- 				this.spawnSushiRollIngredients();
- 				this.startOrderTimer((this.orderTime * 2), 30000);
+				//slightly easier for first 2 days
+				if(day === 1 || day === 2) {
+					this.ipadScreen.loadTexture('registerAtlas', 'rec_roll');
+					this.spawnSushiRollIngredients(); //spawn specific ingredients
+					this.startOrderTimer((this.orderTime * 2), 45000);
+				} else {
+					this.ipadScreen.loadTexture('registerAtlas', 'fin_roll')//display what full order is
+					this.spawnAllIngredients();
+					var delay = 45000;
+					if(delay > 0) { //decrease delay
+						delay -= 15000;
+					}
+					this.startOrderTimer(this.orderTime * 2, delay);
+				}
  				break;
+				case 'riceBowl':
+				//for now, since this is only ordered once on day 4
+					//won't have an if statement
+				this.riceBowlOrder = true;
+				this.ipadScreen.loadTexture('registerAtlas', 'fin_rice');
+				this.spawnPokeIngredients();
+				this.startOrderTimer((this.orderTime * .75), 50000);
  			default:
 			  //should not be reached
  		}
@@ -781,8 +853,9 @@ Play.prototype = {
 			leftPaw.overlapObject = this.knife;
 		}
 	},
+	//checks if rice collides with the pot
 	checkRicePotCollision: function() {
-		if(this.rice != undefined) {
+		if(this.rice != undefined && !this.riceIsCooked) {
 			if(!this.rice.isHeldByRight && !this.rice.isHeldByLeft){
 				if(game.physics.arcade.overlap(this.rice, this.ricePot)){
 					this.rice.kill();

@@ -1,8 +1,8 @@
 [
   [
-    {"customer" : "bat", "dialog" : "So I usually get a snack before my naps, and like", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
-    {"customer" : "bat", "dialog" : "I was in the mood for a fruit salad."},
-    {"customer" : "bat", "dialog": "But I’ll go for a salmon roll instead.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer" : "bat", "dialog" : "So I usually get a snack before my naps, and like", "newCustomer": "true"},
+    {"customer" : "bat", "dialog" : "I was in the mood for a fruit salad.", "function": "this.setOrderType('sushiRoll');"},
+    {"customer" : "bat", "dialog": "But I’ll go for a salmon roll instead.", "function" : "this.createOrder();"}
   ],
 
   [
@@ -19,11 +19,28 @@
   ],
 
  [
-   {"customer" : "bird", "dialog" : "Wow so this is the place boss was talking about", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
+   {"customer" : "mouse", "dialog" : "So like", "newCustomer" : "true"},
+   {"customer" : "mouse", "dialog" : "My IG followers loved the visual aesthetic of your bowl, so I'm back!"},
+   {"customer" : "mouse", "dialog" : "This time, I'll order some sashimi! Pretty please!", "function": "this.setOrderType('sashimi');"},
+   {"customer" : "mouse", "dialog" : "Emphasis on pretty.", "function" : "this.createOrder();"}
+ ],
+ [
+    {"customer" : "mouse", "dialog" : "Can you hurry up please?"},
+    {"customer" : "mouse", "dialog" : "I'm losing followers every minute you waste..."}
+ ],
+ [
+   {"customer" : "mouse", "dialog" : "Thanks!",  "function" : "this.clearIngredients();"},
+   {"customer" : "mouse", "dialog" : "I can't wait to take a pic before I dig in.",  "function" : "this.spawnMoney();"}
+ ],
+ [
+  {"customer" : "mouse", "dialog" : "I’m so hungry that I’m giving your truck a half star review.", "function" : "this.clearIngredients();"}
+ ],
+ [
+   {"customer" : "bird", "dialog" : "Wow so this is the place boss was talking about", "newCustomer": "true"},
    {"customer" : "bird", "dialog" : "It's a real hoot!"},
    {"customer" : "bird", "dialog" : "..."},
-   {"customer" : "bird", "dialog" : "Don't tell any owls I said that...."},
-   {"customer" : "bird", "dialog" : "Usually I crave some lizard meat, but I'm down for some sashimi, please.",  "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+   {"customer" : "bird", "dialog" : "Don't tell any owls I said that....", "function": "this.setOrderType('sashimi');"},
+   {"customer" : "bird", "dialog" : "Usually I crave some lizard meat, but I'm down for some sashimi, please.", "function" : "this.createOrder();"}
  ],
  [
    {"customer" : "bird", "dialog" : "Yo, what's going on back there?"},
@@ -42,30 +59,11 @@
 
 
  [
-   {"customer" : "mouse", "dialog" : "So like", "newCustomer" : "true"},
-   {"customer" : "mouse", "dialog" : "My IG followers loved the visual aesthetic of your bowl, so I'm back!"},
-   {"customer" : "mouse", "dialog" : "This time, I'll order some sashimi! Pretty please!"},
-   {"customer" : "mouse", "dialog" : "Emphasis on pretty.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
- ],
- [
-    {"customer" : "mouse", "dialog" : "Can you hurry up please?"},
-    {"customer" : "mouse", "dialog" : "I'm losing followers every minute you waste..."}
- ],
- [
-   {"customer" : "mouse", "dialog" : "Thanks!",  "function" : "this.clearIngredients();"},
-   {"customer" : "mouse", "dialog" : "I can't wait to take a pic before I dig in.",  "function" : "this.spawnMoney();"}
- ],
- [
-  {"customer" : "mouse", "dialog" : "I’m so hungry that I’m giving your truck a half star review.", "function" : "this.clearIngredients();"}
- ],
-
-
- [
    {"customer": "frog", "dialog" : "Okay, so yesterday, you didn’t have any flies...", "newCustomer" : "true"},
    {"customer": "frog", "dialog" : "But... would you happen to have any dragonflies?"},
    {"customer": "frog", "dialog" : "No…? How about grasshoppers?"},
-   {"customer": "frog", "dialog" : "Dang, alright. I’ll have another salmon roll."},
-   {"customer": "frog", "dialog" : "Actually, make that two salmon rolls.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+   {"customer": "frog", "dialog" : "Dang, alright. I’ll have another salmon roll.", "function": "this.setOrderType('sushiRoll');"},
+   {"customer": "frog", "dialog" : "Love me them rolls.", "function" : "this.createOrder();"}
  ],
  [
    {"customer": "frog", "dialog" : "Typical of food to try and fly away..."},
@@ -80,9 +78,9 @@
  ],
 
   [
-    {"customer": "axolotl", "dialog" : "Hello sir! I’m real hungry after baseball tonight!", "newCustomer": "true"},
-    {"customer": "axolotl", "dialog" : "I even hit a home run!"},
-    {"customer": "axolotl", "dialog" : "Can I please have a poke bowl and a salmon roll?", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer": "axolotl", "dialog" : "Hello sir! I’m reeeeaaaally hungry after baseball tonight!", "newCustomer": "true"},
+    {"customer": "axolotl", "dialog" : "I even hit a home run!", "function": "this.setOrderType('pokeBowl');"},
+    {"customer": "axolotl", "dialog" : "Can I please have a poke bowl?", "function" : "this.createOrder();"}
   ],
   [
     {"customer": "axolotl", "dialog" : "It’s getting late..."},

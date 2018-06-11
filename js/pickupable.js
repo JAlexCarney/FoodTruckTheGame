@@ -40,9 +40,8 @@ var Pickupable = function(game, type, x, y){
 		// physics
 		game.physics.enable(this, Phaser.Physics.ARCADE);
 		this.anchor = new PIXI.Point(0.5, 0.5);
+		this.scale.setTo(1.5);
 
-		// properties
-			//N/A
 	} else if (type == 'bowl'){
 		// constructor
 		Phaser.Sprite.call(this, game, x, y, 'atlas', 'bowl_empty');
@@ -93,15 +92,17 @@ var Pickupable = function(game, type, x, y){
 
 		//physics
 		game.physics.enable(this, Phaser.Physics.ARCADE);
+		this.enableBody = true;
 		this.scale.setTo(0.7);
 		this.anchor = new PIXI.Point(0.5, 0.5);
 
 	} else if (type == 'sushiRoll') {
 		//construct
-		Phaser.Sprite.call(this, game, x, y, 'atlas', 'sushiRoll_cut');
+		Phaser.Sprite.call(this, game, x, y, 'atlas', 'sushi_roll_uncut');
 
 		game.physics.enable(this, Phaser.Physics.ARCADE);
-		this.scale.setTo(0.7);
+		this.enableBody = true;
+		this.scale.setTo(0.8);
 		this.anchor = new PIXI.Point(0.5, 0.5);
 	}
 	this.type = type;

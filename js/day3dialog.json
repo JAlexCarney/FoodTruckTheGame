@@ -1,10 +1,10 @@
 [
   [
-    {"customer" : "bird", "dialog" : "I just happened to be gliding by...", "newCustomer" : "true", "function" : "this.spawnAllIngredients();"},
-    {"customer" : "bird", "dialog" : "I could have caught some food on my way to the store, but..."},
+    {"customer" : "bird", "dialog" : "I just happened to be gliding by...", "newCustomer" : "true"},
+    {"customer" : "bird", "dialog" : "I could've caught some food on my way to the store, but..."},
     {"customer" : "bird", "dialog" : "naahh..."},
-    {"customer" : "bird", "dialog" : "Not punk enough, ya feel?"},
-    {"customer" : "bird", "dialog" : "Anyway, get me a salmon roll please. And a bowl of rice.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer" : "bird", "dialog" : "Not punk enough, ya feel?", "function": "this.setOrderType('sushiRoll');"},
+    {"customer" : "bird", "dialog" : "Anyway, get me a salmon roll please.", "function" : "this.createOrder();"}
   ],
   [
     {"customer" : "bird", "dialog" : "Man, the store isn’t gonna be open all day, you know."}
@@ -19,13 +19,13 @@
   ],
 
   [
-    {"customer":"shark", "dialog" : "Good to see you two again.","newCustomer" : "true", "function" : "this.spawnAllIngredients();"},
+    {"customer":"shark", "dialog" : "Good to see you two again.","newCustomer" : "true"},
     {"customer":"shark", "dialog" : "Thought I’d come by during my lunch break."},
     {"customer":"shark", "dialog" : "This place been treating you well?"},
     {"customer":"shark", "dialog" : "Decent customers?"},
     {"customer":"shark", "dialog" : "Well, we still miss you back at corporate."},
-    {"customer":"shark", "dialog" : "Since that poke bowl was pretty good on Monday,"},
-    {"customer":"shark", "dialog" : "I’ll have two this time.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer":"shark", "dialog" : "Since that poke bowl was pretty good on Monday,", "function": "this.setOrderType('pokeBowl');"},
+    {"customer":"shark", "dialog" : "I’ll have another for today.", "function" : "this.createOrder();"}
 
   ],
   [
@@ -35,8 +35,8 @@
   ],
   [
     {"customer":"shark", "dialog" : "Just as I expected from you two.","function" : "this.clearIngredients();"},
-    {"customer":"shark", "dialog" : "Thanks.",  "function" : "this.spawnMoney();"},
-    {"customer":"shark", "dialog" : "I’ll swing by again."}
+    {"customer":"shark", "dialog" : "Thanks."},
+    {"customer":"shark", "dialog" : "I’ll swing by again.",  "function" : "this.spawnMoney();"}
   ],
   [
     {"customer":"shark", "dialog" : "Sorry, I have to go now."},
@@ -46,27 +46,27 @@
 
 
   [
-    {"customer":"axolotl", "dialog" : "Hello again sir!", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
+    {"customer":"axolotl", "dialog" : "Hello again sir!", "newCustomer": "true"},
     {"customer":"axolotl", "dialog" : "My mom gave me extra allowance this week!"},
     {"customer":"axolotl", "dialog" : "I’m gonna spend it on an action figure!!"},
-    {"customer":"axolotl", "dialog" : "But I’m gonna spend food money on lunch."},
-    {"customer":"axolotl", "dialog" : "Can I try the sashimi this time?", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer":"axolotl", "dialog" : "But I’m gonna spend food money on lunch.", "function": "this.setOrderType('sashimi');"},
+    {"customer":"axolotl", "dialog" : "Can I try the sashimi this time?", "function" : "this.createOrder();"}
   ],
   [
     {"customer":"axolotl", "dialog" : "Excuse me, sir..."},
     {"customer":"axolotl", "dialog" : "Where’s my lunch...?"}
   ],
   [
-    {"customer":"axolotl", "dialog" : "Thank you, sir!",  "function" : "this.spawnMoney();"},
-    {"customer":"axolotl", "dialog" : "Have a good day!!", "function" : "this.clearIngredients();"}
+    {"customer":"axolotl", "dialog" : "Thank you, sir!", "function" : "this.clearIngredients();"},
+    {"customer":"axolotl", "dialog" : "Have a good day!!",  "function" : "this.spawnMoney();"}
   ],
   [
     {"customer":"axolotl", "dialog" : "I think I’ll just head home and see if my mom is making an early dinner...", "function" : "this.clearIngredients();"}
   ],
 
   [
-    {"customer":"bat", "dialog" : "My echolocation told me you were serving food here at the park.", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
-    {"customer":"bat", "dialog" : "I’ll take two orders of sashimi and one salmon roll.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer":"bat", "dialog" : "My echolocation told me you were serving food here at the park.", "newCustomer": "true", "function": "this.setOrderType('sushiRoll');"},
+    {"customer":"bat", "dialog" : "I’ll take a salmon roll.", "function" : "this.createOrder();"}
   ],
   [
     {"customer":"bat", "dialog" : "I can hear the chef moving slowly..."},
@@ -76,8 +76,8 @@
     {"customer":"bat", "dialog" : "I hear my stomach growling."}
   ],
   [
-    {"customer":"bat", "dialog" : "Mmmm, smells good.", "function" : "this.spawnMoney();"},
-    {"customer":"bat", "dialog" : "Thanks!", "function" : "this.clearIngredients();"}
+    {"customer":"bat", "dialog" : "Mmmm, smells good.", "function" : "this.clearIngredients();"},
+    {"customer":"bat", "dialog" : "Thanks!",  "function" : "this.spawnMoney();"}
   ],
   [
     {"customer":"bat", "dialog" : "You practically slowed down to a dead halt!", "function" : "this.clearIngredients();"},
@@ -85,23 +85,23 @@
   ],
 
   [
-    {"customer":"alpaca", "dialog" : "Oh, hay....", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
+    {"customer":"alpaca", "dialog" : "Oh, hay....", "newCustomer": "true"},
     {"customer":"alpaca", "dialog" : "I remember you guys."},
     {"customer":"alpaca", "dialog": "And this truck..."},
     {"customer":"alpaca", "dialog": "And this location..."},
     {"customer":"alpaca", "dialog": "Huh..."},
     {"customer":"alpaca", "dialog": "Swear I’ve been here before..."},
     {"customer":"alpaca", "dialog": "Anyways uh..."},
-    {"customer":"alpaca", "dialog": "I’m really hungry today."},
-    {"customer":"alpaca", "dialog": "I’d like three orders of salmon rolls.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer":"alpaca", "dialog": "I’m really hungry today.", "function": "this.setOrderType('pokeBowl');"},
+    {"customer":"alpaca", "dialog": "I’d like a poke bowl.", "function" : "this.createOrder();"}
   ],
   [
     {"customer":"alpaca", "dialog": "Does chopping things really take this long?"},
     {"customer":"alpaca", "dialog": "J e e z."}
   ],
   [
-    {"customer":"alpaca", "dialog": "Thaaaaanks.",  "function" : "this.spawnMoney();"},
-    {"customer":"alpaca", "dialog": "Have a good day.", "function" : "this.clearIngredients();"}
+    {"customer":"alpaca", "dialog": "Thaaaaanks." ,"function" : "this.clearIngredients();"},
+    {"customer":"alpaca", "dialog": "Have a good day.", "function" : "this.spawnMoney();"}
   ],
   [
     {"customer":"alpaca", "dialog": "Uhhhhhhh"},

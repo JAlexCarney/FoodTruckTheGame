@@ -1,23 +1,23 @@
 [
   [
-    {"customer": "bird", "dialog": "Hey, so I’m not about to become a regular around here or anything...", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
+    {"customer": "bird", "dialog": "Hey, so I’m not about to become a regular around here or anything...", "newCustomer": "true"},
     {"customer": "bird", "dialog": "but last time I came by,"},
-    {"customer": "bird", "dialog": "nobody made fun of me for eating seeds."},
-    {"customer": "bird", "dialog": "That's actually happened to me before, y'know."},
+    {"customer": "bird", "dialog": "Nobody made fun of me for eating seeds before."},
+    {"customer": "bird", "dialog": "That's actually happened to me, y'know."},
     {"customer": "bird", "dialog": "Like the time I had a sesame seed bagel"},
     {"customer": "bird", "dialog": "or a poppy seed muffin"},
     {"customer": "bird", "dialog": "or a bag of sunflower seeds."},
     {"customer": "bird", "dialog": "Seeds got me messed up man."},
-    {"customer": "bird", "dialog": "Anyways."},
-    {"customer": "bird", "dialog": "So two orders of sashimi.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer": "bird", "dialog": "Anyways.You remember what I got yesterday?", "function": "this.setOrderType('sashimi');"},
+    {"customer": "bird", "dialog": "I'll take that.", "function" : "this.createOrder();"}
   ],
   [
     {"customer": "bird", "dialog": "I swear, if you're putting seeds on my order..."}
 
   ],
   [
-    {"customer": "bird", "dialog": "Thanks",  "function" : "this.spawnMoney();"},
-    {"customer": "bird", "dialog": "You guys are the best.", "function" : "this.clearIngredients();"}
+    {"customer": "bird", "dialog": "Thanks", "function" : "this.clearIngredients();"},
+    {"customer": "bird", "dialog": "You guys are the best.",  "function" : "this.spawnMoney();"}
   ],
   [
     {"customer": "bird", "dialog": "SEEDS."},
@@ -28,13 +28,13 @@
 
 
   [
-    {"customer": "frog", "dialog": "So, here’s a fun fact about frogs...", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
+    {"customer": "frog", "dialog": "So, here’s a fun fact about frogs...", "newCustomer": "true"},
     {"customer": "frog", "dialog": "We can cough up our stomachs to clean ‘em and put ‘em back in"},
     {"customer": "frog", "dialog": "Not to say your food's like filthy or anything"},
     {"customer": "frog", "dialog": "I just thought you might find it cool."},
     {"customer": "frog", "dialog": "No...?"},
-    {"customer": "frog", "dialog": "That’s okay..."},
-    {"customer": "frog", "dialog": "...I’d like a salmon roll and an order of sashimi", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer": "frog", "dialog": "That’s okay...", "function": "this.setOrderType('sushiRoll');"},
+    {"customer": "frog", "dialog": "...I’d like a salmon roll please...", "function" : "this.createOrder();"}
   ],
   [
     {"customer": "frog", "dialog": "Hey, wanna know another fun fact while we wait???"},
@@ -44,8 +44,8 @@
     {"customer": "frog", "dialog": "Okay..."}
   ],
   [
-    {"customer": "frog", "dialog": "Thanks!",  "function" : "this.spawnMoney();"},
-    {"customer": "frog", "dialog": "See you guys around!", "function" : "this.clearIngredients();"}
+    {"customer": "frog", "dialog": "Thanks!", "function" : "this.clearIngredients();"},
+    {"customer": "frog", "dialog": "See you guys around!", "function" : "this.spawnMoney();"}
   ],
   [
     {"customer": "frog", "dialog": "I’ll take my talents somewhere they’re appreciated!"}
@@ -53,20 +53,20 @@
 
 
   [
-    {"customer": "bat", "dialog": "Good afternoon.", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
-    {"customer": "bat", "dialog": "Can I get three poke bowls?"},
-    {"customer": "bat", "dialog": "One for me and my... friends.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer": "bat", "dialog": "Good afternoon.", "newCustomer": "true"},
+    {"customer": "bat", "dialog": "Can I get a biiiig pokebowl please?", "function": "this.setOrderType('pokeBowl');"},
+    {"customer": "bat", "dialog": "One for me and my... friends.", "function" : "this.createOrder();"}
   ],
   [
     {"customer": "bat", "dialog": " My friends are getting hungry..."},
     {"customer": "bat", "dialog": "And so am I."}
   ],
   [
-    {"customer": "bat", "dialog": "Mmm. Thanks! ",  "function" : "this.spawnMoney();"},
+    {"customer": "bat", "dialog": "Mmm. Thanks! ", "function" : "this.clearIngredients();"},
     {"customer": "bat", "dialog": "My friends?"},
     {"customer": "bat", "dialog": "Uh, duh."},
     {"customer": "bat", "dialog": "Me, myself, and I."},
-    {"customer": "bat", "dialog": "Take care!", "function" : "this.clearIngredients();"}
+    {"customer": "bat", "dialog": "Take care!",  "function" : "this.spawnMoney();"}
 
   ],
   [
@@ -77,11 +77,11 @@
 
 
   [
-    {"customer" : "axolotl", "dialog": "Hello sir!!", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
+    {"customer" : "axolotl", "dialog": "Hello sir!!", "newCustomer": "true"},
     {"customer" : "axolotl", "dialog": "I’m excited for our big game tomorrow!"},
     {"customer" : "axolotl", "dialog": "I hope you guys will be open so my mom can try some of your food!! "},
-    {"customer" : "axolotl", "dialog": "I tell her about you guys all the time!!"},
-    {"customer" : "axolotl", "dialog": "Anyways, I'll have a salmon roll please!", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer" : "axolotl", "dialog": "I tell her about you guys all the time!!", "function": "this.setOrderType('sushiRoll');"},
+    {"customer" : "axolotl", "dialog": "Anyways, I'll have a salmon roll please!", "function" : "this.createOrder();"}
 
   ],
   [
@@ -91,8 +91,8 @@
 
   ],
   [
-    {"customer" : "axolotl", "dialog": "Thank you yet again, sir!",  "function" : "this.spawnMoney();"},
-    {"customer" : "axolotl", "dialog": "See you after our big game tomorrow!", "function" : "this.clearIngredients();"}
+    {"customer" : "axolotl", "dialog": "Thank you yet again, sir!",  "function" : "this.clearIngredients();"},
+    {"customer" : "axolotl", "dialog": "See you after our big game tomorrow!",  "function" : "this.spawnMoney();"}
 
   ],
   [
@@ -104,21 +104,21 @@
 
 
   [
-    {"customer": "shark", "dialog": "Rough week, huh?", "newCustomer": "true", "function" : "this.spawnAllIngredients();"},
+    {"customer": "shark", "dialog": "Rough week, huh?", "newCustomer": "true"},
     {"customer": "shark", "dialog": "I can barely imagine."},
-    {"customer": "shark", "dialog": "You and me both, honestly."},
-    {"customer": "shark", "dialog": "I’ll take a poke bowl and an order of sashimi.", "function" : "this.startOrderTimer(this.orderTime, 10000);"}
+    {"customer": "shark", "dialog": "You and me both, honestly.", "function": "this.setOrderType('pokeBowl');"},
+    {"customer": "shark", "dialog": "Amyways, I’ll take a poke bowl.", "function" : "this.createOrder();"}
   ],
   [
     {"customer": "shark", "dialog": "You two alright back there?"}
   ],
   [
-    {"customer": "shark", "dialog": "Thanks. Keep the change.",  "function" : "this.spawnMoney();"},
+    {"customer": "shark", "dialog": "Thanks. Keep the change."},
     {"customer": "shark", "dialog": "You know, if this all falls apart,"},
     {"customer": "shark", "dialog": "God forbid."},
     {"customer": "shark", "dialog": "You’re both welcome back."},
     {"customer": "shark", "dialog": "I know you guys are following dreams and stuff, but", "function" : "this.clearIngredients();"},
-    {"customer": "shark", "dialog": "There’s no shame in saving up and giving this another shot in the future."}
+    {"customer": "shark", "dialog": "There’s no shame in saving up and giving this another shot in the future.",  "function" : "this.spawnMoney();"}
   ],
   [
     {"customer": "shark", "dialog": "You know, if this all falls apart,", "function" : "this.clearIngredients();"},

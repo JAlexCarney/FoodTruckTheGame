@@ -6,7 +6,7 @@ Credits.prototype = {
 		//load UIselect noise
 		this.selectNoise = game.add.audio('select');
 		
-		//set background color of this stage to black
+		//set background color of this stage to white
 		game.stage.backgroundColor = "#000000";
 		
 		//text box
